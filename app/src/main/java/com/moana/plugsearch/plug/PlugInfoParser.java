@@ -25,7 +25,7 @@ public class PlugInfoParser extends BaseParser {
 
     @Override
     public void parseDummy() {
-        mContext.getContentResolver().delete(mUri, PlugProvider.FIELD_ID + "!=", new String[]{"0"});
+        mContext.getContentResolver().delete(mUri, PlugProvider.FIELD_ID + "     !=?", new String[]{"0"});
 
         ContentValues values = new ContentValues();
         values.put(PlugProvider.FIELD_ID, "fake".hashCode());
@@ -33,7 +33,7 @@ public class PlugInfoParser extends BaseParser {
         values.put(PlugProvider.FIELD_PLUG_ADDRESS, "市政北七路87號");
         values.put(PlugProvider.FIELD_LAT, 24.1675157);
         values.put(PlugProvider.FIELD_LNG, 120.6372358);
-        values.put(PlugProvider.FIELD_PLUG_PHOTO, "https://lh6.googleusercontent.com/-J35qRe6_ZYg/V69Sf7Bn3rI/AAAAAAAABUw/oxfxdxeAfXcxrebMVl2mnE9BNIkBqn28gCLIB/s454-k-no/");
+        values.put(PlugProvider.FIELD_PLUG_PHOTO, "https://p1-news.hfcdn.com/p1-news/NjE0NzM0bmV3cw,,/89f535b0aae4da55.jpg");
 
         mContext.getContentResolver().insert(mUri, values);
         mContext.getContentResolver().notifyChange(mUri, null);

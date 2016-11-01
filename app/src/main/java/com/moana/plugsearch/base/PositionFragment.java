@@ -39,12 +39,12 @@ public abstract class PositionFragment extends BroadcastFragment {
     }
 
     public void addIntentFilter(IntentFilter filter) {
-        filter.addAction(BroadCastConst.ACTION_GET_LOCATION);
+        filter.addAction(ConstantDef.ACTION_GET_LOCATION);
     }
 
     public void onReceiveBroadcast(String action, Intent intent) {
-        if (action.contentEquals(BroadCastConst.ACTION_GET_LOCATION)) {
-            Location location = intent.getParcelableExtra(BroadCastConst.ARG_LOCATION);
+        if (action.contentEquals(ConstantDef.ACTION_GET_LOCATION)) {
+            Location location = intent.getParcelableExtra(ConstantDef.ARG_LOCATION);
             onPositionGet(location);
         }
     }

@@ -24,7 +24,7 @@ public class PlugProvider extends BaseContentProvider{
 
     private class PlugDatabase extends SQLiteOpenHelper {
 
-        private final static int _DBVersion = 1;
+        private final static int _DBVersion = 2;
         private final static String _DBName = "plug.db";
 
         public PlugDatabase(Context context) {
@@ -38,8 +38,8 @@ public class PlugProvider extends BaseContentProvider{
                     + FIELD_PLUG_NAME + " TEXT, "
                     + FIELD_PLUG_ADDRESS + " TEXT, "
                     + FIELD_PLUG_PHOTO + " TEXT, "
-                    + FIELD_LAT + " FLOAT, "
-                    + FIELD_LNG + " FLOAT "
+                    + FIELD_LAT + " TEXT, "
+                    + FIELD_LNG + " TEXT "
                     + ");");
         }
 

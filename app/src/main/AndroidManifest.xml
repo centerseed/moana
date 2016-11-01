@@ -39,7 +39,7 @@
 
         <activity
             android:name=".map.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
 
         <provider
             android:name=".plug.PlugProvider"
@@ -47,6 +47,11 @@
             android:exported="false"
             android:label="@string/title_weather_plug"
             android:syncable="true" />
+
+        <activity
+            android:name=".plug.PlugInfoActivity"
+            android:label="@string/title_activity_plug_info"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
