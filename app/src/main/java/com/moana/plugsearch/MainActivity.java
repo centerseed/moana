@@ -84,14 +84,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         Fragment f = null;
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_map) {
             f = new MapsFragment();
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
         }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content_main, f).commit();

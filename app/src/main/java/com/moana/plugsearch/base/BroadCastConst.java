@@ -1,5 +1,9 @@
 package com.moana.plugsearch.base;
 
 public class BroadCastConst {
-    public static final String GET_LOCATION = "com.moana.plugsearch.GET_LOCATION";
+    //Action
+    public static final String ACTION_GET_LOCATION = "com.moana.plugsearch.GET_LOCATION";
+
+    //Arguments
+    public static final String ARG_LOCATION = "com.moana.plugsearch.ARG_LOCATION";
 }

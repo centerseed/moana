@@ -2,6 +2,8 @@ package com.moana.plugsearch.base;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -9,18 +11,14 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.View;
 
-import com.google.android.gms.maps.SupportMapFragment;
-import com.moana.plugsearch.R;
-
-
-public class PositionFragment extends Fragment {
+public abstract class PositionFragment extends BroadcastFragment {
     public static int REQUEST_GET_LOCATION_PREMISSION = 10000;
 
     LocationManager mLocationManager;
+
+    protected abstract void onPositionGet(Location location);
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -40,15 +38,20 @@ public class PositionFragment extends Fragment {
         mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
     }
 
+    public void addIntentFilter(IntentFilter filter) {
+        filter.addAction(BroadCastConst.ACTION_GET_LOCATION);
+    }
+
+    public void onReceiveBroadcast(String action, Intent intent) {
+        if (action.contentEquals(BroadCastConst.ACTION_GET_LOCATION)) {
+            Location location = intent.getParcelableExtra(BroadCastConst.ARG_LOCATION);
+            onPositionGet(location);
+        }
+    }
+
     LocationListener locationListener = new LocationListener() {
         public void onLocationChanged(Location location) {
-            Log.d("location", location.toString());
 
-
-            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                return;
-            }
-            mLocationManager.removeUpdates(locationListener);
         }
 
         public void onStatusChanged(String provider, int status, Bundle extras) {
