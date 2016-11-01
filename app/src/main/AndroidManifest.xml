@@ -40,6 +40,13 @@
         <activity
             android:name=".map.MapsActivity"
             android:label="@string/title_activity_maps"></activity>
+
+        <provider
+            android:name=".plug.PlugProvider"
+            android:authorities="@string/auth_provider_plug"
+            android:exported="false"
+            android:label="@string/title_weather_plug"
+            android:syncable="true" />
     </application>
 
 </manifest>

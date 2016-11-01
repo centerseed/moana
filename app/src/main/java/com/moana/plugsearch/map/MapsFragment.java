@@ -24,15 +24,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.moana.plugsearch.R;
 import com.moana.plugsearch.base.PositionFragment;
+import com.moana.plugsearch.plug.PlugProvider;
+import com.moana.plugsearch.sync.PlugSyncer;
 
 public class MapsFragment extends PositionFragment implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
     public MapsFragment() {
-        // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,8 +53,17 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        if (mMap != null) {
+            PlugSyncer.with(getContext()).getPlugInfos();
+        }
+    }
+
+    @Override
     protected Uri getProviderUri() {
-        return null;
+        return PlugProvider.getProviderUri(getString(R.string.auth_provider_plug), PlugProvider.TABLE_PLUG);
     }
 
     @Override
@@ -67,6 +76,8 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         }
         mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
+
+        PlugSyncer.with(getContext()).getPlugInfos();
     }
 
     private void moveToDummyPosition() {
