@@ -27,6 +27,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.moana.plugsearch.R;
 import com.moana.plugsearch.base.ConstantDef;
 import com.moana.plugsearch.base.PositionFragment;
@@ -110,7 +111,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         Location location = new Location("");
         location.setLatitude(24.122771);
         location.setLongitude(120.651540);
-        moveCamera(8, location);
+        moveCamera(12, location);
     }
 
     private void moveCamera(float zoom, Location location) {
@@ -155,6 +156,8 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
 
     @Override
     public void onInfoWindowLongClick(Marker marker) {
+        if (mCurrPosition == null) return;
+
         LatLng dest = marker.getPosition();
         String url = getDirectionsUrl(mCurrPosition, dest);
 
@@ -172,7 +175,16 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String json = response.body().string();
-                Log.d("OKHTTP", json);
+
+                final PolylineOptions options = MapDirectionHelper.drawDirection(getActivity(), json);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mMap != null) {
+                            mMap.addPolyline(options);
+                        }
+                    }
+                });
             }
         });
     }

@@ -36,6 +36,9 @@ public abstract class PositionFragment extends BroadcastFragment {
             return;
         }
         mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+
+        final Location lastLocation = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        if (lastLocation != null) onPositionGet(lastLocation);
     }
 
     public void addIntentFilter(IntentFilter filter) {
