@@ -1,5 +1,7 @@
 package com.moana.plugsearch.plug;
 
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,9 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
+
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,14 +18,12 @@ import android.widget.ImageView;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.moana.plugsearch.R;
+import com.moana.plugsearch.base.BroadcastActivity;
 import com.moana.plugsearch.base.ConstantDef;
-import com.moana.plugsearch.base.ContentActivity;
-import com.moana.plugsearch.map.MapsFragment;
 import com.squareup.picasso.Picasso;
 
-public class PlugInfoActivity extends ContentActivity {
-
-    LatLng mLatlng;
+public class PlugInfoActivity extends BroadcastActivity {
+    
     String mSnippet;
     ImageView mScrollImage;
 
@@ -49,6 +47,21 @@ public class PlugInfoActivity extends ContentActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    @Override
+    protected void addIntentFilter(IntentFilter filter) {
+
+    }
+
+    @Override
+    protected void onReceiveBroadcast(String action, Intent intent) {
+
+    }
+
+    @Override
+    protected void onNetworkFail(String fail) {
+
     }
 
     @Override

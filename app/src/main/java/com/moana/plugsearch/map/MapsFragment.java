@@ -29,6 +29,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.moana.plugsearch.R;
+import com.moana.plugsearch.base.AsyncCallback;
 import com.moana.plugsearch.base.ConstantDef;
 import com.moana.plugsearch.base.PositionFragment;
 import com.moana.plugsearch.plug.PlugInfoActivity;
@@ -83,6 +84,11 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
             Location lastLocation = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             mCurrPosition = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
         }
+    }
+
+    @Override
+    public void onNetworkFail(String fail) {
+
     }
 
     @Override
@@ -161,16 +167,11 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         LatLng dest = marker.getPosition();
         String url = getDirectionsUrl(mCurrPosition, dest);
 
-        OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(url)
                 .build();
-        Call call = client.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
+        Call call = mClient.newCall(request);
+        call.enqueue(new AsyncCallback(getContext()) {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
