@@ -1,22 +1,20 @@
-package com.moana.plugsearch.base;
-
+package com.moana.carsharing.base;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Bundle;
 
 import okhttp3.OkHttpClient;
 
-abstract public class BroadcastFragment extends ContentFragment {
-
+public abstract class BroadcastActivity extends ContentActivity {
     protected BroadcastReceiver receiver;
-    protected IntentFilter filter;
     protected OkHttpClient mClient = new OkHttpClient();
 
     @Override
-    public void onStart() {
-        super.onStart();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         receiver = new BroadcastReceiver() {
             @Override
@@ -36,22 +34,22 @@ abstract public class BroadcastFragment extends ContentFragment {
     }
 
     @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
         IntentFilter intentFilter = new IntentFilter();
 
         intentFilter.addAction(ConstantDef.NETWORK_FAIL);
         addIntentFilter(intentFilter);
-        getContext().registerReceiver(receiver, intentFilter);
+        registerReceiver(receiver, intentFilter);
     }
 
     @Override
-    public void onPause() {
+    protected void onPause() {
         super.onPause();
-        getContext().unregisterReceiver(receiver);
+        unregisterReceiver(receiver);
     }
 
-    public abstract void addIntentFilter(IntentFilter filter);
-    public abstract void onReceiveBroadcast(String action, Intent intent);
-    public abstract void onNetworkFail(String fail);
+    protected abstract void addIntentFilter(IntentFilter filter);
+    protected abstract void onReceiveBroadcast(String action, Intent intent);
+    protected abstract void onNetworkFail(String fail);
 }

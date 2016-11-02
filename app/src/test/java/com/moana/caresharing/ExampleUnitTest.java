@@ -1,4 +1,4 @@
-package com.moana.plugsearch;
+package com.moana.caresharing;
 
 import org.junit.Test;
 

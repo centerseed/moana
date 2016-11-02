@@ -1,12 +1,12 @@
-package com.moana.plugsearch.plug;
+package com.moana.carsharing.plug;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.moana.plugsearch.base.BaseContentProvider;
+import com.moana.carsharing.base.BaseContentProvider;
 
-public class PlugProvider extends BaseContentProvider{
+public class PlugProvider extends BaseContentProvider {
 
     public final static String TABLE_PLUG = "_table_plug";
 

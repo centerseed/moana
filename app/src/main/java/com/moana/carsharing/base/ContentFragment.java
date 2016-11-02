@@ -1,31 +1,32 @@
-package com.moana.plugsearch.base;
+package com.moana.carsharing.base;
 
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
-public abstract class ContentActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public abstract class ContentFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     protected Uri mUri;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         mUri = getProviderUri();
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         if (mUri != null)
-            getSupportLoaderManager().initLoader(0, null, this);
+            getLoaderManager().initLoader(0, null, this);
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         if (mUri != null)
             getLoaderManager().destroyLoader(0);
@@ -33,7 +34,7 @@ public abstract class ContentActivity extends AppCompatActivity implements Loade
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        CursorLoader cl = new CursorLoader(this);
+        CursorLoader cl = new CursorLoader(getActivity());
         cl.setUri(mUri);
         return cl;
     }

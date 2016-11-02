@@ -1,17 +1,14 @@
-package com.moana.plugsearch.sync;
+package com.moana.carsharing.sync;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.PolylineOptions;
-import com.moana.plugsearch.R;
-import com.moana.plugsearch.base.AsyncCallback;
-import com.moana.plugsearch.map.MapDirectionHelper;
-import com.moana.plugsearch.plug.PlugInfoParser;
-import com.moana.plugsearch.plug.PlugProvider;
+import com.moana.carsharing.R;
+import com.moana.carsharing.base.AsyncCallback;
+import com.moana.carsharing.plug.PlugInfoParser;
+import com.moana.carsharing.plug.PlugProvider;
 
 import java.io.IOException;
 

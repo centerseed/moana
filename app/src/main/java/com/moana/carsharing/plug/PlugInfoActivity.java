@@ -1,4 +1,4 @@
-package com.moana.plugsearch.plug;
+package com.moana.carsharing.plug;
 
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 
@@ -16,10 +15,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.moana.plugsearch.R;
-import com.moana.plugsearch.base.BroadcastActivity;
-import com.moana.plugsearch.base.ConstantDef;
+import com.moana.carsharing.base.BroadcastActivity;
+import com.moana.carsharing.base.ConstantDef;
+import com.moana.carsharing.R;
 import com.squareup.picasso.Picasso;
 
 public class PlugInfoActivity extends BroadcastActivity {

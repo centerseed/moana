@@ -1,4 +1,4 @@
-package com.moana.plugsearch;
+package com.moana.carsharing;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,7 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.moana.plugsearch.map.MapsFragment;
+import com.moana.carsharing.map.MapsFragment;
+import com.moana.carsharing.R;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

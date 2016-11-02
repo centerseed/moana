@@ -1,14 +1,11 @@
-package com.moana.plugsearch.map;
+package com.moana.carsharing.map;
 
 
 import android.content.Context;
-import android.graphics.Color;
-import android.util.DisplayMetrics;
 
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.moana.plugsearch.R;
+import com.moana.carsharing.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

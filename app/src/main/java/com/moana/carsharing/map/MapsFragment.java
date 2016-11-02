@@ -1,4 +1,4 @@
-package com.moana.plugsearch.map;
+package com.moana.carsharing.map;
 
 
 import android.Manifest;
@@ -12,9 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,19 +26,17 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.moana.plugsearch.R;
-import com.moana.plugsearch.base.AsyncCallback;
-import com.moana.plugsearch.base.ConstantDef;
-import com.moana.plugsearch.base.PositionFragment;
-import com.moana.plugsearch.plug.PlugInfoActivity;
-import com.moana.plugsearch.plug.PlugProvider;
-import com.moana.plugsearch.sync.PlugSyncer;
+import com.moana.carsharing.base.ConstantDef;
+import com.moana.carsharing.sync.PlugSyncer;
+import com.moana.carsharing.R;
+import com.moana.carsharing.base.AsyncCallback;
+import com.moana.carsharing.base.PositionFragment;
+import com.moana.carsharing.plug.PlugInfoActivity;
+import com.moana.carsharing.plug.PlugProvider;
 
 import java.io.IOException;
 
 import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 

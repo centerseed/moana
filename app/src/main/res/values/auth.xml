@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="auth_provider_plug">com.moana.plugsearch.plug.PlugProvider</string>
+    <string name="auth_provider_plug">com.moana.carsharing.plug.PlugProvider</string>
 </resources>

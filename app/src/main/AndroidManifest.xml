@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.moana.plugsearch">
+    package="com.moana.carsharing">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.moana.carsharing.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -38,18 +38,18 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".map.MapsActivity"
+            android:name="com.moana.carsharing.map.MapsActivity"
             android:label="@string/title_activity_maps" />
 
         <provider
-            android:name=".plug.PlugProvider"
+            android:name="com.moana.carsharing.plug.PlugProvider"
             android:authorities="@string/auth_provider_plug"
             android:exported="false"
             android:label="@string/title_weather_plug"
             android:syncable="true" />
 
         <activity
-            android:name=".plug.PlugInfoActivity"
+            android:name="com.moana.carsharing.plug.PlugInfoActivity"
             android:label="@string/title_activity_plug_info"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

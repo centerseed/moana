@@ -1,4 +1,4 @@
-package com.moana.plugsearch.base;
+package com.moana.carsharing.base;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;

@@ -1,10 +1,10 @@
-package com.moana.plugsearch.plug;
+package com.moana.carsharing.plug;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
 
-import com.moana.plugsearch.base.BaseParser;
+import com.moana.carsharing.base.BaseParser;
 
 import org.json.JSONObject;
 
