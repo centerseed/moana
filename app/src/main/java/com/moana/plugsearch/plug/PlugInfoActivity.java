@@ -23,7 +23,7 @@ import com.moana.plugsearch.base.ConstantDef;
 import com.squareup.picasso.Picasso;
 
 public class PlugInfoActivity extends BroadcastActivity {
-    
+
     String mSnippet;
     ImageView mScrollImage;
 
