@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         app:fabSize="normal"
-        app:srcCompat="@android:drawable/ic_dialog_map"
+        app:srcCompat="@mipmap/ic_directions_car_white_24dp"
         app:layout_anchor="@id/bottom_sheet"
         app:layout_anchorGravity="right|top"
         app:useCompatPadding="true"
@@ -56,8 +56,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="8dp"
-        android:background="#bbdddddd">
+        android:background="#bbdddddd"
+        android:layout_margin="8dp">
 
         <RadioButton
             android:text="停車場"
@@ -66,7 +66,11 @@
             android:id="@+id/radioButton"
             android:layout_weight="1"
             android:checked="true"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:button="@android:color/transparent"
+            android:background="@drawable/selector_rect_normal"
+            android:padding="10dp"
+            android:textColor="@drawable/selector_text_normal"/>
 
         <RadioButton
             android:text="充電站"
@@ -74,6 +78,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/radioButton2"
             android:layout_weight="1"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:button="@android:color/transparent"
+            android:background="@drawable/selector_rect_normal"
+            android:padding="10dp"
+            android:textColor="@drawable/selector_text_normal"/>
     </RadioGroup>
 </android.support.design.widget.CoordinatorLayout>
