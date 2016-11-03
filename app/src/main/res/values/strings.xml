@@ -7,8 +7,12 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="action_search">Settings</string>
+    <string name="action_search">Search</string>
+
     <string name="title_weather_plug">Plug</string>
+    <string name="title_search_result">Search results</string>
+
+    <string name="hint_search_region">Enter region or address</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

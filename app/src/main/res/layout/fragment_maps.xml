@@ -52,5 +52,28 @@
         app:elevation="16dp"
         android:id="@+id/fabNavigation" />
 
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="#bbdddddd">
 
+        <RadioButton
+            android:text="停車場"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButton"
+            android:layout_weight="1"
+            android:checked="true"
+            android:gravity="center"/>
+
+        <RadioButton
+            android:text="充電站"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButton2"
+            android:layout_weight="1"
+            android:gravity="center"/>
+    </RadioGroup>
 </android.support.design.widget.CoordinatorLayout>

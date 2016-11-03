@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.moana.carsharing.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -38,16 +38,17 @@
             android:value="@string/google_maps_key" />
 
         <provider
-            android:name="com.moana.carsharing.plug.PlugProvider"
+            android:name=".plug.PlugProvider"
             android:authorities="@string/auth_provider_plug"
             android:exported="false"
             android:label="@string/title_weather_plug"
             android:syncable="true" />
 
         <activity
-            android:name="com.moana.carsharing.plug.PlugInfoActivity"
+            android:name=".plug.PlugInfoActivity"
             android:label="@string/title_activity_plug_info"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".plug.PlugSearchActivity"></activity>
     </application>
 
 </manifest>
