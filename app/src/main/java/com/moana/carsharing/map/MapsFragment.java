@@ -52,6 +52,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
     Marker mMarker;
     BottomSheetBehavior mBottomSheetBehavior;
     FloatingActionButton mFab;
+    FloatingActionButton mLocalization;
     LatLng mCurrPosition;
     LocationManager mLocationManager;
 
@@ -85,7 +86,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        mFab = (FloatingActionButton) view.findViewById(R.id.floatingActionButton);
+        mFab = (FloatingActionButton) view.findViewById(R.id.fabNavigation);
         mFab.setVisibility(View.GONE);
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,6 +121,14 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
                         });
                     }
                 });
+            }
+        });
+
+        mLocalization = (FloatingActionButton) view.findViewById(R.id.fabLocalize);
+        mLocalization.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requestLocation();
             }
         });
 

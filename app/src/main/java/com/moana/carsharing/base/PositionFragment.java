@@ -29,16 +29,7 @@ public abstract class PositionFragment extends BroadcastFragment {
     @Override
     public void onResume() {
         super.onResume();
-
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-                    REQUEST_GET_LOCATION_PREMISSION);
-            return;
-        }
-        mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-
-        final Location lastLocation = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        if (lastLocation != null) onLocationGet(lastLocation);
+        requestLocation();
     }
 
     public void addIntentFilter(IntentFilter filter) {
@@ -67,4 +58,16 @@ public abstract class PositionFragment extends BroadcastFragment {
         public void onProviderDisabled(String provider) {
         }
     };
+
+    protected void requestLocation() {
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                    REQUEST_GET_LOCATION_PREMISSION);
+            return;
+        }
+        mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+
+        final Location lastLocation = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        if (lastLocation != null) onLocationGet(lastLocation);
+    }
 }
