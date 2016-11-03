@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.v4.content.LocalBroadcastManager;
 
 import okhttp3.OkHttpClient;
 
@@ -42,13 +43,13 @@ abstract public class BroadcastFragment extends ContentFragment {
 
         intentFilter.addAction(ConstantDef.NETWORK_FAIL);
         addIntentFilter(intentFilter);
-        getContext().registerReceiver(receiver, intentFilter);
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(receiver, intentFilter);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        getContext().unregisterReceiver(receiver);
+        LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(receiver);
     }
 
     public abstract void addIntentFilter(IntentFilter filter);

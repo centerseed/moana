@@ -1,4 +1,4 @@
-package com.moana.carsharing;
+package com.moana.caresharing;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

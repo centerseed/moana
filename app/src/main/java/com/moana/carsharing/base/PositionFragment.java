@@ -18,7 +18,7 @@ public abstract class PositionFragment extends BroadcastFragment {
 
     LocationManager mLocationManager;
 
-    protected abstract void onPositionGet(Location location);
+    protected abstract void onLocationGet(Location location);
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public abstract class PositionFragment extends BroadcastFragment {
         mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
 
         final Location lastLocation = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        if (lastLocation != null) onPositionGet(lastLocation);
+        if (lastLocation != null) onLocationGet(lastLocation);
     }
 
     public void addIntentFilter(IntentFilter filter) {
@@ -46,15 +46,16 @@ public abstract class PositionFragment extends BroadcastFragment {
     }
 
     public void onReceiveBroadcast(String action, Intent intent) {
-        if (action.contentEquals(ConstantDef.ACTION_GET_LOCATION)) {
-            Location location = intent.getParcelableExtra(ConstantDef.ARG_LOCATION);
-            onPositionGet(location);
-        }
     }
 
     LocationListener locationListener = new LocationListener() {
         public void onLocationChanged(Location location) {
-
+            onLocationGet(location);
+            if (getContext() == null) return;
+            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+            mLocationManager.removeUpdates(locationListener);
         }
 
         public void onStatusChanged(String provider, int status, Bundle extras) {

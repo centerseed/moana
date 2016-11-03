@@ -10,19 +10,25 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.Loader;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -40,9 +46,12 @@ import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class MapsFragment extends PositionFragment implements OnMapReadyCallback, GoogleMap.OnInfoWindowLongClickListener, GoogleMap.OnInfoWindowClickListener {
+public class MapsFragment extends PositionFragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnInfoWindowLongClickListener, GoogleMap.OnInfoWindowClickListener {
 
     private GoogleMap mMap;
+    Marker mMarker;
+    BottomSheetBehavior mBottomSheetBehavior;
+    FloatingActionButton mFab;
     LatLng mCurrPosition;
     LocationManager mLocationManager;
 
@@ -57,8 +66,17 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
     }
 
     @Override
-    protected void onPositionGet(Location location) {
+    protected void onLocationGet(Location location) {
         mCurrPosition = new LatLng(location.getLatitude(), location.getLongitude());
+
+        Intent intent = new Intent();
+        intent.setAction(ConstantDef.ACTION_GET_LOCATION);
+        intent.putExtra(ConstantDef.ARG_LOCATION, location);
+        LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
+
+        if (mMap != null) {
+            moveCamera(11, location);
+        }
     }
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -66,6 +84,75 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        mFab = (FloatingActionButton) view.findViewById(R.id.floatingActionButton);
+        mFab.setVisibility(View.GONE);
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mCurrPosition == null || mMarker == null) return;
+
+                LatLng dest = mMarker.getPosition();
+                String url = getDirectionsUrl(mCurrPosition, dest);
+
+                Request request = new Request.Builder()
+                        .url(url)
+                        .build();
+                Call call = mClient.newCall(request);
+                call.enqueue(new AsyncCallback(getContext()) {
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String json = response.body().string();
+
+                        MapDirectionBuilder.MapDirectionResult result = new MapDirectionBuilder().build(getContext(), json);
+
+                        final PolylineOptions options = result.getPolyline();
+                        final CameraUpdate cu = result.getCameraUpdate();
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (mMap != null) {
+                                    mMap.addPolyline(options);
+                                    mMap.moveCamera(cu);
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
+        View bottomSheet = view.findViewById(R.id.bottom_sheet);
+        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if (newState == BottomSheetBehavior.STATE_HIDDEN) mFab.setVisibility(View.GONE);
+                else mFab.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+                mFab.setVisibility(View.GONE);
+            }
+        });
+
+        bottomSheet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mMarker == null) return;
+
+                Intent intent = new Intent(getActivity(), PlugInfoActivity.class);
+                intent.putExtra(ConstantDef.ARG_STRING, mMarker.getSnippet());
+
+                getActivity().startActivity(intent);
+            }
+        });
+
+        BottomSheetFragment f = new BottomSheetFragment();
+        getFragmentManager().beginTransaction().replace(R.id.bottom_sheet, f).commit();
     }
 
     @Override
@@ -95,8 +182,18 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setOnMarkerClickListener(this);
         mMap.setOnInfoWindowLongClickListener(this);
         mMap.setOnInfoWindowClickListener(this);
+
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                if (mBottomSheetBehavior.getState() != BottomSheetBehavior.STATE_HIDDEN) {
+                    mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                }
+            }
+        });
 
         moveToDummyPosition();
 
@@ -113,7 +210,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         Location location = new Location("");
         location.setLatitude(24.122771);
         location.setLongitude(120.651540);
-        moveCamera(12, location);
+        moveCamera(11, location);
     }
 
     private void moveCamera(float zoom, Location location) {
@@ -150,40 +247,11 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-        Intent intent = new Intent(getActivity(), PlugInfoActivity.class);
-        intent.putExtra(ConstantDef.ARG_STRING, marker.getSnippet());
 
-        getActivity().startActivity(intent);
     }
 
     @Override
     public void onInfoWindowLongClick(Marker marker) {
-        if (mCurrPosition == null) return;
-
-        LatLng dest = marker.getPosition();
-        String url = getDirectionsUrl(mCurrPosition, dest);
-
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-        Call call = mClient.newCall(request);
-        call.enqueue(new AsyncCallback(getContext()) {
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String json = response.body().string();
-
-                final PolylineOptions options = MapDirectionHelper.drawDirection(getActivity(), json);
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (mMap != null) {
-                            mMap.addPolyline(options);
-                        }
-                    }
-                });
-            }
-        });
     }
 
     private String getDirectionsUrl(LatLng origin, LatLng dest) {
@@ -207,5 +275,17 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters;
 
         return url;
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        mMarker = marker;
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+        Intent intent = new Intent();
+        intent.setAction(ConstantDef.ACTION_CHOOSE_POSIITON);
+        intent.putExtra(ConstantDef.ARG_STRING, marker.getSnippet());
+        LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
+        return true;
     }
 }

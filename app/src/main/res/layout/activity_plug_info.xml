@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.moana.caresharing.com.moana.caresharing.plug.PlugInfoActivity">
+    tools:context="com.moana.carsharing.plug.PlugInfoActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"

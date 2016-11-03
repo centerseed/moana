@@ -5,6 +5,7 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.CursorLoader;
@@ -24,6 +25,7 @@ public class PlugInfoActivity extends BroadcastActivity {
 
     String mSnippet;
     ImageView mScrollImage;
+    CollapsingToolbarLayout mCollapsingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,8 @@ public class PlugInfoActivity extends BroadcastActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
+
+        mCollapsingBar = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
 
         mSnippet = getIntent().getStringExtra(ConstantDef.ARG_STRING);
         mScrollImage = (ImageView) findViewById(R.id.scrollImg);
@@ -95,8 +98,7 @@ public class PlugInfoActivity extends BroadcastActivity {
             String imgUrl = data.getString(data.getColumnIndex(PlugProvider.FIELD_PLUG_PHOTO));
 
             Picasso.with(this).load(imgUrl).into(mScrollImage);
-            getSupportActionBar().setTitle(name);
-            getSupportActionBar().setSubtitle(address);
+            mCollapsingBar.setTitle(name);
         }
     }
 

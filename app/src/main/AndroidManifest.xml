@@ -37,10 +37,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-            android:name="com.moana.carsharing.map.MapsActivity"
-            android:label="@string/title_activity_maps" />
-
         <provider
             android:name="com.moana.carsharing.plug.PlugProvider"
             android:authorities="@string/auth_provider_plug"
