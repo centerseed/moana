@@ -45,7 +45,7 @@ public abstract class PositionFragment extends BroadcastFragment implements Loca
                     REQUEST_GET_LOCATION_PREMISSION);
             return;
         }
-        mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
         final Location lastLocation = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         if (lastLocation != null) onLocationGet(lastLocation);

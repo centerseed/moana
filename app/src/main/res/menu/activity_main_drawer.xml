@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/grp0"
+        android:checkableBehavior="single"></group>
+    <group
+        android:id="@+id/grp1"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_map"
             android:icon="@mipmap/ic_map_white_24dp"
-            android:title="Map" />
+            android:title="@string/title_map" />
+
     </group>
 
+    <group
+        android:id="@+id/grp2"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_account"
+            android:icon="@mipmap/ic_account_circle_white_24dp"
+            android:title="@string/title_account" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@android:drawable/ic_dialog_info"
+            android:title="@string/title_logout" />
+    </group>
 
 </menu>

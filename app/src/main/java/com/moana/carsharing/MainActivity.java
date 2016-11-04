@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.moana.carsharing.account.LoginActivity;
 import com.moana.carsharing.map.MapsFragment;
 import com.moana.carsharing.R;
 import com.moana.carsharing.plug.PlugSearchActivity;
@@ -85,9 +86,13 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_map) {
             f = new MapsFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, f).commit();
         }
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_main, f).commit();
+        if (id == R.id.nav_logout) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

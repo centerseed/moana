@@ -4,6 +4,7 @@ package com.moana.carsharing.map;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.location.Location;
@@ -134,7 +135,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
 
         View bottomSheet = view.findViewById(R.id.bottom_sheet);
         mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
-        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+       // mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
@@ -215,6 +216,17 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         PlugSyncer.with(getContext()).getPlugInfos();
     }
 
+    @Override
+    public void addIntentFilter(IntentFilter filter) {
+        super.addIntentFilter(filter);
+        filter.addAction(ConstantDef.ACTION_START_NAVIGATION);
+    }
+
+    @Override
+    public void onReceiveBroadcast(String action, Intent intent) {
+        super.onReceiveBroadcast(action, intent);
+    }
+
     private void moveToDummyPosition() {
         Location location = new Location("");
         location.setLatitude(24.122771);
@@ -289,7 +301,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
     @Override
     public boolean onMarkerClick(Marker marker) {
         mMarker = marker;
-        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
         Intent intent = new Intent();
         intent.setAction(ConstantDef.ACTION_CHOOSE_POSIITON);

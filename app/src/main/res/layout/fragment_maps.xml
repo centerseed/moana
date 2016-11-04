@@ -60,7 +60,7 @@
         android:layout_margin="8dp">
 
         <RadioButton
-            android:text="停車場"
+            android:text="@string/title_parking"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/radioButton"
@@ -73,7 +73,7 @@
             android:textColor="@drawable/selector_text_normal"/>
 
         <RadioButton
-            android:text="充電站"
+            android:text="@string/title_plug"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/radioButton2"

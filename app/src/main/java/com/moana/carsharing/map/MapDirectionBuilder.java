@@ -58,7 +58,7 @@ public class MapDirectionBuilder {
         }
 
         public CameraUpdate getCameraUpdate() {
-            return CameraUpdateFactory.newLatLngBounds(mBounds, (int) (100 * mDpi));
+            return CameraUpdateFactory.newLatLngBounds(mBounds, (int) (120 * mDpi));
         }
     }
 }
