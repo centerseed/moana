@@ -26,7 +26,7 @@
 
     <!-- Register -->
     <string name="title_register">Register</string>
-    <string name="title_register_personal"><u>Register personal account</u></string>
+    <string name="title_register_personal"><u>Create account</u></string>
     <string name="title_id">Personal Identity</string>
     <string name="title_name">Name</string>
     <string name="title_male">Male</string>

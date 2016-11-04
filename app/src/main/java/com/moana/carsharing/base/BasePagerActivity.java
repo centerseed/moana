@@ -37,12 +37,8 @@ public abstract class BasePagerActivity extends AppCompatActivity implements Vie
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(sectionsPagerAdapter);
         mViewPager.addOnPageChangeListener(this);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_base_pager, menu);
-        return true;
+        String title = getString(R.string.title_register_personal) + "(1/" + mViewPager.getAdapter().getCount() + ")";
+        getSupportActionBar().setTitle(title);
     }
 
     @Override
@@ -52,11 +48,6 @@ public abstract class BasePagerActivity extends AppCompatActivity implements Vie
         if (id == android.R.id.home) {
             finish();
         }
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -67,7 +58,8 @@ public abstract class BasePagerActivity extends AppCompatActivity implements Vie
 
     @Override
     public void onPageSelected(int position) {
-
+        String title = getString(R.string.title_register_personal) + "(" + ++position + "/" + mViewPager.getAdapter().getCount() + ")";
+        getSupportActionBar().setTitle(title);
     }
 
     @Override

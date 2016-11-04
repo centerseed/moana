@@ -15,7 +15,6 @@ public class RegisterPersonalActivity extends BasePagerActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle(getString(R.string.title_register_personal));
     }
 
     @Override

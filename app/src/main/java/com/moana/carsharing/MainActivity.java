@@ -39,7 +39,6 @@ public class MainActivity extends ContentActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
         getSupportActionBar().setTitle(getString(R.string.app_name) + " - " + mFunctionStr);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -47,6 +46,7 @@ public class MainActivity extends ContentActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+        toggle.setDrawerIndicatorEnabled(true);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -59,13 +59,14 @@ public class MainActivity extends ContentActivity
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 mFunction = i;
-                if (i == ConstantDef.FUNC_PARKING) {
-                    mFunctionStr = getString(R.string.title_parking);
-                    mSearchView.setQueryHint(getString(R.string.title_search_parking));
-                } else {
-                    mFunctionStr = getString(R.string.title_plug);
-                    mSearchView.setQueryHint(getString(R.string.title_search_plug));
-                }
+                if (mSearchView != null)
+                    if (i == ConstantDef.FUNC_PARKING) {
+                        mFunctionStr = getString(R.string.title_parking);
+                        mSearchView.setQueryHint(getString(R.string.title_search_parking));
+                    } else {
+                        mFunctionStr = getString(R.string.title_plug);
+                        mSearchView.setQueryHint(getString(R.string.title_search_plug));
+                    }
                 getSupportActionBar().setTitle(getString(R.string.app_name) + " - " + mFunctionStr);
             }
         });
