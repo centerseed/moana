@@ -57,6 +57,8 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
     LatLng mCurrPosition;
     LocationManager mLocationManager;
 
+    boolean isMoveToCurrentPosition = false;
+
     public MapsFragment() {
     }
 
@@ -76,8 +78,9 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         intent.putExtra(ConstantDef.ARG_LOCATION, location);
         LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
 
-        if (mMap != null) {
+        if (mMap != null && isMoveToCurrentPosition) {
             moveCamera(11, location);
+            isMoveToCurrentPosition = false;
         }
     }
 
@@ -129,6 +132,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         mLocalization.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                isMoveToCurrentPosition = true;
                 requestLocation();
             }
         });
