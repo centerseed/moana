@@ -3,6 +3,7 @@ package com.moana.carsharing.account;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.moana.carsharing.R;
+import com.moana.carsharing.account.personal.RegisterPersonalActivity;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -178,10 +180,6 @@ public class LoginActivity extends AppCompatActivity {
         int IS_PRIMARY = 1;
     }
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail;
@@ -233,6 +231,11 @@ public class LoginActivity extends AppCompatActivity {
             mAuthTask = null;
             showProgress(false);
         }
+    }
+
+    public void registerPersonal(View view) {
+        Intent intent = new Intent(this, RegisterPersonalActivity.class);
+        startActivity(intent);
     }
 }
 

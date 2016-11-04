@@ -42,6 +42,7 @@ import com.moana.carsharing.plug.PlugInfoActivity;
 import com.moana.carsharing.plug.PlugProvider;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Request;
@@ -56,6 +57,8 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
     FloatingActionButton mLocalization;
     LatLng mCurrPosition;
     LocationManager mLocationManager;
+
+    Marker mReserveMarker;
 
     boolean isMoveToCurrentPosition = false;
 
@@ -139,7 +142,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
 
         View bottomSheet = view.findViewById(R.id.bottom_sheet);
         mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
-       // mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
@@ -307,10 +310,28 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         mMarker = marker;
         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
+        removeReserveMarker();
+        if (mReserveMarker == null) {
+            mReserveMarker = marker;
+            // TODO: Add reserve Mark here
+        } else if (mReserveMarker != null && !marker.getSnippet().equals(mReserveMarker.getSnippet())){
+            // Change location, clear reserveMarker and add new one
+            removeReserveMarker();
+            mReserveMarker = marker;
+            // TODO: Add reserve Mark here
+        } else {
+            // TODO: Go to reserve page
+        }
+
         Intent intent = new Intent();
         intent.setAction(ConstantDef.ACTION_CHOOSE_POSIITON);
         intent.putExtra(ConstantDef.ARG_STRING, marker.getSnippet());
         LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
         return true;
+    }
+
+    private void removeReserveMarker() {
+        if (mReserveMarker != null) mReserveMarker.remove();
+        mReserveMarker = null;
     }
 }

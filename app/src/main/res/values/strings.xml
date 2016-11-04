@@ -15,6 +15,7 @@
     <string name="title_search_result">Search results</string>
     <string name="title_parking">Parking</string>
     <string name="title_plug">Plug</string>
+    <string name="title_register_personal"><u>Register personal account</u></string>
 
     <string name="hint_search_region">Enter region or address</string>
 
@@ -35,5 +36,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="title_activity_base_pager">BasePagerActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 
 </resources>
