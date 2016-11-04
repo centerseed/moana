@@ -58,6 +58,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
     LatLng mCurrPosition;
     LocationManager mLocationManager;
 
+    ArrayList<Marker> mMarkerList;
     Marker mReserveMarker;
 
     boolean isMoveToCurrentPosition = false;
@@ -227,11 +228,21 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
     public void addIntentFilter(IntentFilter filter) {
         super.addIntentFilter(filter);
         filter.addAction(ConstantDef.ACTION_START_NAVIGATION);
+        filter.addAction(ConstantDef.ACTION_SHOW_PARKING_POSITION);
+        filter.addAction(ConstantDef.ACTION_SHOW_PLUG_POSITION);
+        filter.addAction(ConstantDef.ACTION_MOVE_TO_POSITION);
     }
 
     @Override
     public void onReceiveBroadcast(String action, Intent intent) {
         super.onReceiveBroadcast(action, intent);
+
+        if (ConstantDef.ACTION_MOVE_TO_POSITION.equals(action) && mMarkerList != null) {
+
+            for (Marker marker : mMarkerList) {
+                // get location info and add mark
+            }
+        }
     }
 
     private void moveToDummyPosition() {
@@ -254,14 +265,18 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (data != null && data.moveToFirst() && mMap != null) {
             mMap.clear();
-
+            if (mMarkerList != null)
+                mMarkerList.clear();
+            else
+                mMarkerList = new ArrayList<>();
             while (!data.isAfterLast()) {
                 LatLng latLng = new LatLng(data.getFloat(data.getColumnIndex(PlugProvider.FIELD_LAT)),
                         data.getFloat(data.getColumnIndex(PlugProvider.FIELD_LNG)));
 
                 String name = data.getString(data.getColumnIndex(PlugProvider.FIELD_PLUG_NAME));
                 String address = data.getString(data.getColumnIndex(PlugProvider.FIELD_PLUG_ADDRESS));
-                mMap.addMarker(new MarkerOptions().position(latLng).title(name).snippet(address));
+                Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title(name).snippet(address));
+                mMarkerList.add(marker);
 
                 data.moveToNext();
             }

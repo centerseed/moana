@@ -7,4 +7,7 @@
     <color name="colorDirectionPath">#6a7ff1</color>
     <color name="colorAlphaCheck">#AA3F51B5</color>
     <color name="colorAlphaNormal">#AAFAFAFA</color>
+
+    <color name="colorDarkGrey">#555555</color>
+    <color name="colorLightGrey">#AACCCCCC</color>
 </resources>

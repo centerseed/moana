@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/colorLightGrey" />
+            <size
+                android:height="@dimen/fab_size"
+                android:width="@dimen/fab_size" />
+        </shape>
+    </item>
+
+    <item
+        android:bottom="@dimen/ring_padding"
+        android:left="@dimen/ring_padding"
+        android:right="@dimen/ring_padding"
+        android:top="@dimen/ring_padding">
+        <shape android:shape="oval">
+            <solid android:color="@color/colorDarkGrey" />
+        </shape>
+    </item>
+
+    <item android:drawable="@mipmap/ic_directions_car_white_24dp"
+        android:bottom="@dimen/fab_padding"
+        android:left="@dimen/fab_padding"
+        android:right="@dimen/fab_padding"
+        android:top="@dimen/fab_padding"/>
+</layer-list>

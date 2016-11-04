@@ -6,7 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.moana.carsharing.R;
-import com.moana.carsharing.account.RegsterSection1Fragment;
+import com.moana.carsharing.account.RegisterSection1Fragment;
+import com.moana.carsharing.account.RegisterSection2Fragment;
 import com.moana.carsharing.base.BasePagerActivity;
 
 public class RegisterPersonalActivity extends BasePagerActivity {
@@ -30,10 +31,14 @@ public class RegisterPersonalActivity extends BasePagerActivity {
 
         @Override
         public Fragment getItem(int position) {
-            if (position == 0)
-                return new RegsterSection1Fragment();
-            else
-                return PlaceholderFragment.newInstance(position + 1);
+            switch (position) {
+                case 0:
+                    return new RegisterSection1Fragment();
+                case 1:
+                    return new RegisterSection2Fragment();
+                default:
+                    return PlaceholderFragment.newInstance(position + 1);
+            }
         }
 
         @Override

@@ -1,10 +1,19 @@
 package com.moana.carsharing.base;
 
+import com.moana.carsharing.R;
+
 public class ConstantDef {
+    //Function
+    public static final int FUNC_PARKING = R.id.radio_parking;
+    public static final int FUNC_PLUG = R.id.radio_plug;
+
     //Action
     public static final String ACTION_GET_LOCATION = "com.moana.carsharing.GET_LOCATION";
     public static final String ACTION_CHOOSE_POSIITON = "com.moana.carsharing.ACTION_CHOOSE_POSIITON";
     public static final String ACTION_START_NAVIGATION = "com.moana.carsharing.ACTION_START_NAVIGATION";
+    public static final String ACTION_SHOW_PARKING_POSITION = "com.moana.carsharing.ACTION_SHOW_PARKING_POSITION";
+    public static final String ACTION_SHOW_PLUG_POSITION = "com.moana.carsharing.ACTION_SHOW_PLUG_POSITION";
+    public static final String ACTION_MOVE_TO_POSITION = "com.moana.carsharing.ACTION_MOVE_TO_POSITION";
 
     //Arguments
     public static final String ARG_LOCATION = "com.moana.carsharing.ARG_LOCATION";

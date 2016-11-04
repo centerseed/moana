@@ -75,7 +75,7 @@ public abstract class BasePagerActivity extends AppCompatActivity implements Vie
     }
 
     @Override
-    public void toPreviousFragment() {
+    public void toBackFragment() {
         if (mViewPager.getCurrentItem() > 0)
             mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1, true);
     }

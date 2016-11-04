@@ -2,11 +2,44 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/content_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.moana.carsharing.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+    <FrameLayout
+        android:id="@+id/content_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
+
+    <RadioGroup
+        android:id="@+id/function_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_margin="8dp"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radio_parking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/selector_parking_normal"
+            android:button="@android:color/transparent"
+            android:checked="true"
+            android:gravity="center"
+            android:textColor="@drawable/selector_text_normal" />
+
+        <RadioButton
+            android:id="@+id/radio_plug"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/selector_plug_normal"
+            android:button="@android:color/transparent"
+            android:gravity="center"
+            android:textColor="@drawable/selector_text_normal" />
+    </RadioGroup>
 </FrameLayout>

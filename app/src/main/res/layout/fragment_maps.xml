@@ -51,7 +51,7 @@
         app:useCompatPadding="true"
         app:elevation="16dp"
         android:id="@+id/fabNavigation" />
-
+    <!--
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -84,4 +84,5 @@
             android:padding="10dp"
             android:textColor="@drawable/selector_text_normal"/>
     </RadioGroup>
+    -->
 </android.support.design.widget.CoordinatorLayout>
