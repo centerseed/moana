@@ -19,6 +19,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
@@ -30,22 +31,21 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.moana.carsharing.base.ConstantDef;
-import com.moana.carsharing.base.IconUtils;
-import com.moana.carsharing.plug.ReservePlugActivity;
-import com.moana.carsharing.sync.PlugSyncer;
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.AsyncCallback;
+import com.moana.carsharing.base.ConstantDef;
+import com.moana.carsharing.base.IconUtils;
 import com.moana.carsharing.base.PositionFragment;
 import com.moana.carsharing.plug.PlugInfoActivity;
 import com.moana.carsharing.plug.PlugProvider;
+import com.moana.carsharing.plug.ReservePlugActivity;
+import com.moana.carsharing.sync.PlugSyncer;
+import com.moana.carsharing.sync.RentSyncer;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -67,6 +67,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
     ArrayList<Marker> mMarkerList;
     Marker mReserveMarker;
 
+    int mFunction = ConstantDef.FUNC_RENT;
     boolean isMoveToCurrentPosition = false;
 
     public MapsFragment() {
@@ -185,6 +186,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
 
         if (mMap != null) {
             PlugSyncer.with(getContext()).getPlugInfos();
+            RentSyncer.with(getContext()).getRentInfos();
             if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
@@ -229,13 +231,14 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
         PlugSyncer.with(getContext()).getPlugInfos();
+        RentSyncer.with(getContext()).getRentInfos();
     }
 
     @Override
     public void addIntentFilter(IntentFilter filter) {
         super.addIntentFilter(filter);
         filter.addAction(ConstantDef.ACTION_START_NAVIGATION);
-        filter.addAction(ConstantDef.ACTION_SHOW_PARKING_POSITION);
+        filter.addAction(ConstantDef.ACTION_SHOW_RENT_POSITION);
         filter.addAction(ConstantDef.ACTION_SHOW_PLUG_POSITION);
         filter.addAction(ConstantDef.ACTION_MOVE_TO_POSITION);
     }
@@ -249,6 +252,20 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
             for (Marker marker : mMarkerList) {
                 // get location info and add mark
             }
+        }
+
+        if (ConstantDef.ACTION_SHOW_PLUG_POSITION.equals(action)) {
+            mFunction = ConstantDef.FUNC_PLUG;
+        }
+
+        if (ConstantDef.ACTION_SHOW_RENT_POSITION.equals(action)) {
+            mFunction = ConstantDef.FUNC_RENT;
+        }
+
+        if (ConstantDef.ACTION_SHOW_PLUG_POSITION.equals(action) || ConstantDef.ACTION_SHOW_RENT_POSITION.equals(action)) {
+            getLoaderManager().restartLoader(0, null, this);
+            removeReserveMarker();
+            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         }
     }
 
@@ -266,6 +283,18 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
                         .zoom(zoom)
                         .build();
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        CursorLoader cl = (CursorLoader) super.onCreateLoader(id, args);
+        cl.setSelection(PlugProvider.FIELD_IS_RENT + "=?");
+        if (mFunction == ConstantDef.FUNC_PLUG) {
+            cl.setSelectionArgs(new String[]{"0"});
+        } else {
+            cl.setSelectionArgs(new String[]{"1"});
+        }
+        return cl;
     }
 
     @Override
@@ -336,7 +365,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
 
         if (mReserveMarker == null) {
             mReserveMarker = addReserveMarker(marker);
-        } else if (mReserveMarker != null && !marker.getSnippet().equals(mReserveMarker.getSnippet())){
+        } else if (mReserveMarker != null && !marker.getSnippet().equals(mReserveMarker.getSnippet())) {
             // Change location, clear reserveMarker and add new one
             removeReserveMarker();
 

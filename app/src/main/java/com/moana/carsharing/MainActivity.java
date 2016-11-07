@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.Loader;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -27,7 +28,7 @@ public class MainActivity extends ContentActivity
         implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener {
 
     RadioGroup mGroup;
-    int mFunction = ConstantDef.FUNC_PARKING;
+    int mFunction = ConstantDef.FUNC_RENT;
     String mFunctionStr;
     SearchView mSearchView;
 
@@ -59,14 +60,20 @@ public class MainActivity extends ContentActivity
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 mFunction = i;
-                if (mSearchView != null)
-                    if (i == ConstantDef.FUNC_PARKING) {
-                        mFunctionStr = getString(R.string.title_parking);
+                Intent intent = new Intent();
+
+                if (i == ConstantDef.FUNC_RENT) {
+                    mFunctionStr = getString(R.string.title_parking);
+                    if (mSearchView != null)
                         mSearchView.setQueryHint(getString(R.string.title_search_parking));
-                    } else {
-                        mFunctionStr = getString(R.string.title_plug);
+                    intent.setAction(ConstantDef.ACTION_SHOW_RENT_POSITION);
+                } else {
+                    mFunctionStr = getString(R.string.title_plug);
+                    if (mSearchView != null)
                         mSearchView.setQueryHint(getString(R.string.title_search_plug));
-                    }
+                    intent.setAction(ConstantDef.ACTION_SHOW_PLUG_POSITION);
+                }
+                LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
                 getSupportActionBar().setTitle(getString(R.string.app_name) + " - " + mFunctionStr);
             }
         });

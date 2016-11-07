@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.BaseSettingFragment;
-import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
+import com.weiwangcn.betterspinner.library.BetterSpinner;
 
 public class RegisterSection2Fragment extends BaseSettingFragment {
     @Override
@@ -22,9 +22,8 @@ public class RegisterSection2Fragment extends BaseSettingFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, COUNTRIES);
-        MaterialBetterSpinner textView = (MaterialBetterSpinner)
-                view.findViewById(R.id.spinner_post_code);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, COUNTRIES);
+        BetterSpinner textView = (BetterSpinner) view.findViewById(R.id.spinner_post_code);
         textView.setAdapter(adapter);
     }
 

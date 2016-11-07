@@ -3,6 +3,7 @@ package com.moana.carsharing.plug;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.icu.lang.UScript;
 
 import com.moana.carsharing.base.BaseContentProvider;
 
@@ -15,6 +16,9 @@ public class PlugProvider extends BaseContentProvider {
     public final static String FIELD_PLUG_PHOTO = "_plug_photo";
     public final static String FIELD_LAT = "_lnt";
     public final static String FIELD_LNG = "_lng";
+    public final static String FIELD_TOTAL = "_total";
+    public final static String FIELD_USAGE = "_usage";
+    public final static String FIELD_IS_RENT = "_is_rent";
 
     @Override
     public boolean onCreate() {
@@ -24,7 +28,7 @@ public class PlugProvider extends BaseContentProvider {
 
     private class PlugDatabase extends SQLiteOpenHelper {
 
-        private final static int _DBVersion = 2;
+        private final static int _DBVersion = 3;
         private final static String _DBName = "plug.db";
 
         public PlugDatabase(Context context) {
@@ -39,7 +43,10 @@ public class PlugProvider extends BaseContentProvider {
                     + FIELD_PLUG_ADDRESS + " TEXT, "
                     + FIELD_PLUG_PHOTO + " TEXT, "
                     + FIELD_LAT + " TEXT, "
-                    + FIELD_LNG + " TEXT "
+                    + FIELD_LNG + " TEXT, "
+                    + FIELD_USAGE + " INTEGER, "
+                    + FIELD_TOTAL + " INTEGER, "
+                    + FIELD_IS_RENT + " INTEGER "
                     + ");");
         }
 
