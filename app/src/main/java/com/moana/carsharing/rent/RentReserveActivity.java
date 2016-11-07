@@ -1,4 +1,4 @@
-package com.moana.carsharing.plug;
+package com.moana.carsharing.rent;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,15 +6,17 @@ import android.view.MenuItem;
 
 import com.moana.carsharing.R;
 
-public class ReservePlugActivity extends AppCompatActivity {
+public class RentReserveActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reserve_plug);
+        setContentView(R.layout.activity_rent_resrve);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(getString(R.string.title_rent_reserve));
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

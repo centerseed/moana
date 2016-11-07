@@ -10,15 +10,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.moana.carsharing.R;
 import com.moana.carsharing.base.BroadcastActivity;
 import com.moana.carsharing.base.ConstantDef;
-import com.moana.carsharing.R;
 import com.squareup.picasso.Picasso;
 
 public class PlugInfoActivity extends BroadcastActivity {
@@ -97,7 +96,8 @@ public class PlugInfoActivity extends BroadcastActivity {
             String address = data.getString(data.getColumnIndex(PlugProvider.FIELD_PLUG_ADDRESS));
             String imgUrl = data.getString(data.getColumnIndex(PlugProvider.FIELD_PLUG_PHOTO));
 
-            Picasso.with(this).load(imgUrl).into(mScrollImage);
+            if (imgUrl != null && imgUrl.length() > 0)
+                Picasso.with(this).load(imgUrl).into(mScrollImage);
             mCollapsingBar.setTitle(name);
         }
     }

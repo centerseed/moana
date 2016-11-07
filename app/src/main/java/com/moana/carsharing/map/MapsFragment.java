@@ -43,7 +43,8 @@ import com.moana.carsharing.base.IconUtils;
 import com.moana.carsharing.base.PositionFragment;
 import com.moana.carsharing.plug.PlugInfoActivity;
 import com.moana.carsharing.plug.PlugProvider;
-import com.moana.carsharing.plug.ReservePlugActivity;
+import com.moana.carsharing.plug.PlugReserveActivity;
+import com.moana.carsharing.rent.RentReserveActivity;
 import com.moana.carsharing.sync.PlugSyncer;
 import com.moana.carsharing.sync.RentSyncer;
 
@@ -276,9 +277,9 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
 
     private void moveToDummyPosition() {
         Location location = new Location("");
-        location.setLatitude(24.122771);
-        location.setLongitude(120.651540);
-        moveCamera(11, location);
+        location.setLatitude(23.6000634);
+        location.setLongitude(120.982024);
+        moveCamera(7.62f, location);
     }
 
     private void moveCamera(float zoom, Location location) {
@@ -376,7 +377,10 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
             mReserveMarker = addReserveMarker(marker);
         } else {
             // TODO: Go to reserve page
-            Intent intent = new Intent(getActivity(), ReservePlugActivity.class);
+            Intent intent = null;
+            if (mFunction == ConstantDef.FUNC_PLUG)
+                intent = new Intent(getActivity(), PlugReserveActivity.class);
+            else intent = new Intent(getActivity(), RentReserveActivity.class);
             startActivity(intent);
         }
 
