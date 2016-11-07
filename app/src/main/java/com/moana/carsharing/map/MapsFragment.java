@@ -368,7 +368,6 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         } else if (mReserveMarker != null && !marker.getSnippet().equals(mReserveMarker.getSnippet())) {
             // Change location, clear reserveMarker and add new one
             removeReserveMarker();
-
             mReserveMarker = addReserveMarker(marker);
         } else {
             // TODO: Go to reserve page

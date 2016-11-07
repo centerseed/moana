@@ -47,4 +47,16 @@
             android:gravity="center"
             android:textColor="@drawable/selector_text_normal" />
     </RadioGroup>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_result"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:background="@color/colorAlphaWhite"
+        android:padding="8dp">
+
+    </android.support.v7.widget.RecyclerView>
+
 </FrameLayout>

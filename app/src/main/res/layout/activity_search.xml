@@ -9,8 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
 
-    android:orientation="vertical"
-    tools:context="com.moana.carsharing.plug.PlugSearchActivity">
+    android:orientation="vertical">
 
     <RadioGroup
         android:layout_width="match_parent"
