@@ -166,7 +166,10 @@ public class MainActivity extends ContentActivity
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         CursorLoader cl = (CursorLoader) super.onCreateLoader(id, args);
-        cl.setSelection(PlugProvider.FIELD_PLUG_ADDRESS + " like '%" + mSearchText + "%' or " + PlugProvider.FIELD_PLUG_NAME + " like '%" + mSearchText + "%'");
+        String funArg;
+        if (mFunction == ConstantDef.FUNC_PLUG) funArg = "0";
+        else funArg = "1";
+        cl.setSelection(PlugProvider.FIELD_IS_RENT + "=" + funArg + " AND (" + PlugProvider.FIELD_PLUG_ADDRESS + " like '%" + mSearchText + "%' or " + PlugProvider.FIELD_PLUG_NAME + " like '%" + mSearchText + "%')");
         return cl;
     }
 
