@@ -251,6 +251,11 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
 
             for (Marker marker : mMarkerList) {
                 // get location info and add mark
+                String snippet = intent.getStringExtra(ConstantDef.ARG_STRING);
+                if (marker.getSnippet().equals(snippet)) {
+                    onMarkerClick(marker);
+                    break;
+                }
             }
         }
 

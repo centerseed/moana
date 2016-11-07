@@ -11,8 +11,19 @@ import com.moana.carsharing.base.AbstractRecyclerCursorAdapter;
 import com.moana.carsharing.plug.PlugProvider;
 
 public class SiteSearchResultAdapter extends AbstractRecyclerCursorAdapter {
+
+    ResultAdapterListener mListener;
+
+    public interface ResultAdapterListener {
+        void onResultClick(String snippet);
+    }
+
     public SiteSearchResultAdapter(Context context, Cursor c) {
         super(context, c);
+    }
+
+    public void setSiteSearchResultAdapterListener(ResultAdapterListener listener) {
+        mListener = listener;
     }
 
     @Override
@@ -37,6 +48,16 @@ public class SiteSearchResultAdapter extends AbstractRecyclerCursorAdapter {
             super(itemView);
             tvName = (TextView) itemView.findViewById(R.id.name);
             tvAddress = (TextView) itemView.findViewById(R.id.address);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mListener != null) {
+                        Cursor cursor = (Cursor) getItem(getAdapterPosition());
+                        mListener.onResultClick(cursor.getString(cursor.getColumnIndex(PlugProvider.FIELD_PLUG_ADDRESS)));
+                    }
+                }
+            });
         }
     }
 }

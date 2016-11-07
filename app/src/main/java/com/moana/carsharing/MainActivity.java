@@ -30,7 +30,7 @@ import com.moana.carsharing.map.MapsFragment;
 import com.moana.carsharing.plug.PlugProvider;
 
 public class MainActivity extends ContentActivity
-        implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener {
+        implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener, SiteSearchResultAdapter.ResultAdapterListener {
 
     RadioGroup mGroup;
     int mFunction = ConstantDef.FUNC_RENT;
@@ -88,6 +88,7 @@ public class MainActivity extends ContentActivity
         });
 
         mAdapter = new SiteSearchResultAdapter(this, null);
+        mAdapter.setSiteSearchResultAdapterListener(this);
 
         mSearchResultList = (RecyclerView) findViewById(R.id.search_result);
         LinearLayoutManager manager = new LinearLayoutManager(this);
@@ -202,5 +203,17 @@ public class MainActivity extends ContentActivity
             mSearchResultList.setVisibility(View.GONE);
         }
         return false;
+    }
+
+    @Override
+    public void onResultClick(String snippet) {
+        Intent intent = new Intent();
+        intent.setAction(ConstantDef.ACTION_MOVE_TO_POSITION);
+        intent.putExtra(ConstantDef.ARG_STRING, snippet);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+
+        mSearchText = "";
+        mSearchView.onActionViewCollapsed();
+        mSearchResultList.setVisibility(View.GONE);
     }
 }
