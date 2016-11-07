@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -27,6 +30,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -34,6 +38,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.moana.carsharing.base.ConstantDef;
+import com.moana.carsharing.base.IconUtils;
+import com.moana.carsharing.plug.ReservePlugActivity;
 import com.moana.carsharing.sync.PlugSyncer;
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.AsyncCallback;
@@ -210,6 +216,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
                 if (mBottomSheetBehavior.getState() != BottomSheetBehavior.STATE_HIDDEN) {
                     mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                 }
+                removeReserveMarker();
             }
         });
 
@@ -275,10 +282,20 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
 
                 String name = data.getString(data.getColumnIndex(PlugProvider.FIELD_PLUG_NAME));
                 String address = data.getString(data.getColumnIndex(PlugProvider.FIELD_PLUG_ADDRESS));
-                Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title(name).snippet(address));
+
+                Drawable drawable = getResources().getDrawable(R.mipmap.ic_person_pin_circle_white_36dp);
+                drawable.setColorFilter(Color.BLUE, PorterDuff.Mode.MULTIPLY);
+                Marker marker = mMap.addMarker(new MarkerOptions()
+                        .position(latLng)
+                        .title(name).snippet(address)
+                        .icon(IconUtils.getMarkerIconFromDrawable(drawable)));
                 mMarkerList.add(marker);
 
                 data.moveToNext();
+            }
+
+            if (mReserveMarker != null) {
+                mReserveMarker = addReserveMarker(mReserveMarker);
             }
         }
     }
@@ -298,23 +315,15 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
     }
 
     private String getDirectionsUrl(LatLng origin, LatLng dest) {
-
         // Origin of route
         String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
 
         // Destination of route
         String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
 
-        // Sensor enabled
         String sensor = "sensor=false";
-
-        // Building the parameters to the web service
         String parameters = str_origin + "&" + str_dest + "&" + sensor;
-
-        // Output format
         String output = "json";
-
-        // Building the url to the web service
         String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters;
 
         return url;
@@ -325,17 +334,17 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         mMarker = marker;
         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
-        removeReserveMarker();
         if (mReserveMarker == null) {
-            mReserveMarker = marker;
-            // TODO: Add reserve Mark here
+            mReserveMarker = addReserveMarker(marker);
         } else if (mReserveMarker != null && !marker.getSnippet().equals(mReserveMarker.getSnippet())){
             // Change location, clear reserveMarker and add new one
             removeReserveMarker();
-            mReserveMarker = marker;
-            // TODO: Add reserve Mark here
+
+            mReserveMarker = addReserveMarker(marker);
         } else {
             // TODO: Go to reserve page
+            Intent intent = new Intent(getActivity(), ReservePlugActivity.class);
+            startActivity(intent);
         }
 
         Intent intent = new Intent();
@@ -343,6 +352,16 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         intent.putExtra(ConstantDef.ARG_STRING, marker.getSnippet());
         LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
         return true;
+    }
+
+    private Marker addReserveMarker(Marker oriMarker) {
+        Drawable drawable = getResources().getDrawable(R.mipmap.ic_person_pin_white_48dp);
+        drawable.setColorFilter(Color.BLUE, PorterDuff.Mode.MULTIPLY);
+        Marker marker = mMap.addMarker(new MarkerOptions()
+                .position(oriMarker.getPosition())
+                .title(oriMarker.getTitle()).snippet(oriMarker.getSnippet())
+                .icon(IconUtils.getMarkerIconFromDrawable(drawable)));
+        return marker;
     }
 
     private void removeReserveMarker() {

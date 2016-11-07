@@ -60,9 +60,10 @@
             android:label="@string/title_activity_login" />
         <activity
             android:name=".account.personal.RegisterPersonalActivity"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
             android:label="@string/title_activity_base_pager"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
+        <activity android:name=".plug.ReservePlugActivity"></activity>
     </application>
 
 </manifest>
