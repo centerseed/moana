@@ -1,32 +1,39 @@
 package com.moana.carsharing.rent;
 
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.moana.carsharing.R;
+import com.moana.carsharing.base.BasePagerActivity;
 
-public class RentReserveActivity extends AppCompatActivity {
+import java.io.Serializable;
+
+public class RentReserveActivity extends BasePagerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rent_resrve);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(getString(R.string.title_rent_reserve));
     }
 
+    @Override
+    protected FragmentPagerAdapter getPagerAdapter(FragmentManager fm) {
+        return null;
+    }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+    protected String getActivityTitle() {
+        return getResources().getString(R.string.title_rent_reserve);
+    }
 
-        if (id == android.R.id.home) {
-            finish();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public class RentReserveInfo implements Serializable {
+        public String name;
+        public String address;
+        public long startTime;
+        public long endTime;
+        public String fee;
+        public String cost;
     }
 }

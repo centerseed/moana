@@ -263,6 +263,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
                 String snippet = intent.getStringExtra(ConstantDef.ARG_STRING);
                 if (marker.getSnippet().equals(snippet)) {
                     onMarkerClick(marker);
+                    moveCamera(10, marker.getPosition());
                     break;
                 }
             }
@@ -294,6 +295,15 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         CameraPosition cameraPosition =
                 new CameraPosition.Builder()
                         .target(new LatLng(location.getLatitude(), location.getLongitude()))
+                        .zoom(zoom)
+                        .build();
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+    }
+
+    private void moveCamera(float zoom, LatLng latLng) {
+        CameraPosition cameraPosition =
+                new CameraPosition.Builder()
+                        .target(latLng)
                         .zoom(zoom)
                         .build();
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
