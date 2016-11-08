@@ -23,7 +23,7 @@ public class RegisterSection2Fragment extends BaseSettingFragment {
         super.onViewCreated(view, savedInstanceState);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, COUNTRIES);
-        BetterSpinner textView = (BetterSpinner) view.findViewById(R.id.spinner_post_code);
+        BetterSpinner textView = (BetterSpinner) view.findViewById(R.id.spinner_country);
         textView.setAdapter(adapter);
     }
 

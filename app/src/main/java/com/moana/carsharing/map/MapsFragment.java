@@ -39,7 +39,6 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.AsyncCallback;
 import com.moana.carsharing.base.ConstantDef;
-import com.moana.carsharing.base.IconUtils;
 import com.moana.carsharing.base.PositionFragment;
 import com.moana.carsharing.plug.PlugInfoActivity;
 import com.moana.carsharing.plug.PlugProvider;
@@ -47,6 +46,8 @@ import com.moana.carsharing.plug.PlugReserveActivity;
 import com.moana.carsharing.rent.RentReserveActivity;
 import com.moana.carsharing.sync.PlugSyncer;
 import com.moana.carsharing.sync.RentSyncer;
+import com.moana.carsharing.utils.IconUtils;
+import com.moana.carsharing.utils.PreferenceUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -68,7 +69,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
     ArrayList<Marker> mMarkerList;
     Marker mReserveMarker;
 
-    int mFunction = ConstantDef.FUNC_RENT;
+    int mFunction = -1;
     boolean isMoveToCurrentPosition = false;
 
     public MapsFragment() {
@@ -78,7 +79,14 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mLocationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        mFunction = PreferenceUtils.getCurrentFunction(getContext());
         return inflater.inflate(R.layout.fragment_maps, container, false);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        PreferenceUtils.setCurrentFunction(getContext(), mFunction);
     }
 
     @Override
@@ -297,6 +305,8 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         cl.setSelection(PlugProvider.FIELD_IS_RENT + "=?");
         if (mFunction == ConstantDef.FUNC_PLUG) {
             cl.setSelectionArgs(new String[]{"0"});
+        } else if (mFunction == ConstantDef.FUNC_RENT) {
+            cl.setSelectionArgs(new String[]{"1"});
         } else {
             cl.setSelectionArgs(new String[]{"1"});
         }
@@ -381,6 +391,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
             if (mFunction == ConstantDef.FUNC_PLUG)
                 intent = new Intent(getActivity(), PlugReserveActivity.class);
             else intent = new Intent(getActivity(), RentReserveActivity.class);
+            intent.putExtra(ConstantDef.ARG_STRING, marker.getSnippet());
             startActivity(intent);
         }
 

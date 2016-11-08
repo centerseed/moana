@@ -1,4 +1,4 @@
-package com.moana.carsharing.base;
+package com.moana.carsharing.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

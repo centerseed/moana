@@ -1,31 +1,82 @@
 package com.moana.carsharing.plug;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 
 import com.moana.carsharing.R;
+import com.moana.carsharing.base.BasePagerActivity;
+import com.moana.carsharing.base.ConstantDef;
 
-public class PlugReserveActivity extends AppCompatActivity {
+import java.io.Serializable;
+
+public class PlugReserveActivity extends BasePagerActivity {
+
+    String mAddress;
+    public PlugReserveInfo mInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reserve_plug);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(getString(R.string.title_plug_reserve));
+        mAddress = getIntent().getStringExtra(ConstantDef.ARG_STRING);
+        mInfo = new PlugReserveInfo();
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+    protected FragmentPagerAdapter getPagerAdapter(FragmentManager fm) {
+        return new SectionsPagerAdapter(fm);
+    }
 
-        if (id == android.R.id.home) {
-            finish();
-            return true;
+    @Override
+    protected String getActivityTitle() {
+        return getResources().getString(R.string.title_plug_reserve);
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        super.onPageSelected(position);
+        if (position == 1) {
+            PlugReserveConfirmFragment.onPageSelected();
+        }
+    }
+
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
         }
 
-        return super.onOptionsItemSelected(item);
+        @Override
+        public Fragment getItem(int position) {
+            Bundle bundle = new Bundle();
+            bundle.putString(ConstantDef.ARG_STRING, mAddress);
+            switch (position) {
+                case 0:
+                    return PlugReserveOrderFragment.newInstance(bundle);
+                case 1:
+                    return PlugReserveConfirmFragment.newInstance(bundle);
+            }
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return null;
+        }
+    }
+
+    public class PlugReserveInfo implements Serializable {
+        public String name;
+        public String address;
+        public long startTime;
+        public long endTime;
+        public String fee;
+        public String cost;
     }
 }

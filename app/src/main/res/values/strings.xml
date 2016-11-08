@@ -2,7 +2,6 @@
     <string name="app_name">RoadPro</string>
     <string name="title_activity_maps">Map</string>
 
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -10,6 +9,7 @@
     <string name="action_search">Search</string>
     <string name="action_next">Next</string>
     <string name="action_back">Back</string>
+    <string name="action_loading">Loading...</string>
 
     <string name="title_map">Home</string>
     <string name="title_account">Account</string>
@@ -42,8 +42,17 @@
     <string name="title_birthday">Birthday</string>
     <string name="title_phone">Phone</string>
     <string name="title_same_as_contact_address">Same as contact address</string>
+
+    <!-- Rent -->
     <string name="title_rent_reserve">Rent - Reserve</string>
     <string name="title_plug_reserve">Plug - Reserve</string>
+    <string name="title_site_name">SiteName</string>
+    <string name="title_reserve_start_time">Start Time</string>
+    <string name="title_reserve_end_time">End Time</string>
+    <string name="title_reserve_usage">Usage</string>
+    <string name="title_fee">Fee</string>
+    <string name="title_time_format">yyyy/MM/dd HH:mm</string>
+    <string name="title_cost">Cost</string>
 
     <string name="hint_search_region">Enter region or address</string>
 

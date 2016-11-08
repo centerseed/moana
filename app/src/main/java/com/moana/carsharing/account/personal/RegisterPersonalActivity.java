@@ -22,6 +22,11 @@ public class RegisterPersonalActivity extends BasePagerActivity {
         return new SectionsPagerAdapter(fm);
     }
 
+    @Override
+    protected String getActivityTitle() {
+        return getResources().getString(R.string.title_register_personal);
+    }
+
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -47,14 +52,6 @@ public class RegisterPersonalActivity extends BasePagerActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "SECTION 1";
-                case 1:
-                    return "SECTION 2";
-                case 2:
-                    return "SECTION 3";
-            }
             return null;
         }
     }

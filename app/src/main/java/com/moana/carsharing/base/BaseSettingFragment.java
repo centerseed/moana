@@ -12,14 +12,6 @@ import android.widget.Button;
 
 import com.moana.carsharing.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link BaseSettingFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link BaseSettingFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class BaseSettingFragment extends Fragment {
 
     protected OnFragmentInteractionListener mListener;
@@ -64,7 +56,6 @@ public class BaseSettingFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
 
     public interface OnFragmentInteractionListener {
         void toBackFragment();

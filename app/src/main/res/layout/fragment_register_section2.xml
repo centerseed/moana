@@ -146,30 +146,6 @@
     </ScrollView>
 
     <!-- footer -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="4dp"
-        android:orientation="horizontal"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp">
-
-        <Button
-            android:id="@+id/back"
-            android:layout_width="0dp"
-            android:layout_height="52dp"
-            android:layout_margin="12dp"
-            android:layout_weight="1"
-            android:text="@string/action_back" />
-
-        <Button
-            android:id="@+id/next"
-            android:layout_width="0dp"
-            android:layout_height="52dp"
-            android:layout_margin="12dp"
-            android:layout_weight="1"
-            android:text="@string/action_next" />
-    </LinearLayout>
+    <include layout="@layout/footer_setting_pager"/>
 
 </LinearLayout>
