@@ -8,6 +8,7 @@
     <color name="colorAlphaCheck">#AA3F51B5</color>
     <color name="colorAlphaNormal">#AAFAFAFA</color>
     <color name="colorAlphaWhite">#EDffffff</color>
+    <color name="colorAlphaDark">#88333333</color>
 
     <color name="colorDarkGrey">#555555</color>
     <color name="colorLightGrey">#AACCCCCC</color>

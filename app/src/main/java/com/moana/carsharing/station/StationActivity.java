@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.BroadcastActivity;
@@ -27,12 +28,15 @@ import com.squareup.picasso.Picasso;
 
 public class StationActivity extends BroadcastActivity implements AppBarLayout.OnOffsetChangedListener {
 
+    int mFunction;
+    Toolbar mToolbar;
     String mSnippet;
     ImageView mScrollImage;
     CollapsingToolbarLayout mCollapsingBar;
     AppBarLayout mAppBar;
-    int mFunction;
 
+    FloatingActionButton mFab;
+    LinearLayout mLabel;
     RecyclerFragment mFragment;
 
     @Override
@@ -45,10 +49,14 @@ public class StationActivity extends BroadcastActivity implements AppBarLayout.O
 
         mAppBar = (AppBarLayout) findViewById(R.id.app_bar);
         mCollapsingBar = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         mSnippet = getIntent().getStringExtra(ConstantDef.ARG_STRING);
         mFunction = getIntent().getIntExtra(ConstantDef.ARG_INT, ConstantDef.FUNC_RENT);
         mScrollImage = (ImageView) findViewById(R.id.scrollImg);
+
+        mLabel = (LinearLayout) findViewById(R.id.label);
+        mFab = (FloatingActionButton) findViewById(R.id.fab);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -143,5 +151,9 @@ public class StationActivity extends BroadcastActivity implements AppBarLayout.O
         } else {
             mFragment.enableRefresh(true);
         }
+
+        float percentage = (1 - (float)Math.abs(verticalOffset)/appBarLayout.getTotalScrollRange());
+        mLabel.setAlpha(percentage);
+        mFab.setAlpha(percentage);
     }
 }
