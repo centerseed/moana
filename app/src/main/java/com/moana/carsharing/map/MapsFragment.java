@@ -40,10 +40,8 @@ import com.moana.carsharing.R;
 import com.moana.carsharing.base.AsyncCallback;
 import com.moana.carsharing.base.ConstantDef;
 import com.moana.carsharing.base.PositionFragment;
-import com.moana.carsharing.station.plug.PlugInfoActivity;
+import com.moana.carsharing.station.StationActivity;
 import com.moana.carsharing.station.StationProvider;
-import com.moana.carsharing.station.plug.PlugReserveActivity;
-import com.moana.carsharing.station.rent.RentReserveActivity;
 import com.moana.carsharing.sync.PlugSyncer;
 import com.moana.carsharing.sync.RentSyncer;
 import com.moana.carsharing.utils.IconUtils;
@@ -81,27 +79,6 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         mLocationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         mFunction = PreferenceUtils.getCurrentFunction(getContext());
         return inflater.inflate(R.layout.fragment_maps, container, false);
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        PreferenceUtils.setCurrentFunction(getContext(), mFunction);
-    }
-
-    @Override
-    protected void onLocationGet(Location location) {
-        mCurrPosition = new LatLng(location.getLatitude(), location.getLongitude());
-
-        Intent intent = new Intent();
-        intent.setAction(ConstantDef.ACTION_GET_LOCATION);
-        intent.putExtra(ConstantDef.ARG_LOCATION, location);
-        LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
-
-        if (mMap != null && isMoveToCurrentPosition) {
-            moveCamera(11, location);
-            isMoveToCurrentPosition = false;
-        }
     }
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -176,17 +153,33 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         bottomSheet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mMarker == null) return;
-
-                Intent intent = new Intent(getActivity(), PlugInfoActivity.class);
-                intent.putExtra(ConstantDef.ARG_STRING, mMarker.getSnippet());
-
-                getActivity().startActivity(intent);
+                toStationInfoActivity();
             }
         });
 
         BottomSheetFragment f = new BottomSheetFragment();
         getFragmentManager().beginTransaction().replace(R.id.bottom_sheet, f).commit();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        PreferenceUtils.setCurrentFunction(getContext(), mFunction);
+    }
+
+    @Override
+    protected void onLocationGet(Location location) {
+        mCurrPosition = new LatLng(location.getLatitude(), location.getLongitude());
+
+        Intent intent = new Intent();
+        intent.setAction(ConstantDef.ACTION_GET_LOCATION);
+        intent.putExtra(ConstantDef.ARG_LOCATION, location);
+        LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
+
+        if (mMap != null && isMoveToCurrentPosition) {
+            moveCamera(11, location);
+            isMoveToCurrentPosition = false;
+        }
     }
 
     @Override
@@ -396,13 +389,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
             removeReserveMarker();
             mReserveMarker = addReserveMarker(marker);
         } else {
-            // TODO: Go to reserve page
-            Intent intent = null;
-            if (mFunction == ConstantDef.FUNC_PLUG)
-                intent = new Intent(getActivity(), PlugReserveActivity.class);
-            else intent = new Intent(getActivity(), RentReserveActivity.class);
-            intent.putExtra(ConstantDef.ARG_STRING, marker.getSnippet());
-            startActivity(intent);
+            toStationInfoActivity();
         }
 
         Intent intent = new Intent();
@@ -425,5 +412,14 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
     private void removeReserveMarker() {
         if (mReserveMarker != null) mReserveMarker.remove();
         mReserveMarker = null;
+    }
+
+    private void toStationInfoActivity() {
+        if (mMarker == null) return;
+
+        Intent intent = new Intent(getActivity(), StationActivity.class);
+        intent.putExtra(ConstantDef.ARG_STRING, mMarker.getSnippet());
+        intent.putExtra(ConstantDef.ARG_INT, mFunction);
+        getActivity().startActivity(intent);
     }
 }

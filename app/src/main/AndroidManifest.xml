@@ -51,7 +51,7 @@
             android:syncable="true" />
 
         <activity
-            android:name=".station.plug.PlugInfoActivity"
+            android:name=".station.StationActivity"
             android:label="@string/title_activity_plug_info"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -71,7 +71,7 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".station.rent.RentReserveActivity"
+            android:name=".station.car.RentReserveActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden"></activity>

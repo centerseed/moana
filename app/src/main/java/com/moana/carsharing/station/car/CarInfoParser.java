@@ -1,4 +1,4 @@
-package com.moana.carsharing.station.plug;
+package com.moana.carsharing.station.car;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,8 +12,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class PlugInfoParser extends BaseParser {
-    protected PlugInfoParser(Context context, Uri uri) {
+public class CarInfoParser extends BaseParser {
+    protected CarInfoParser(Context context, Uri uri) {
         super(context, uri);
     }
 

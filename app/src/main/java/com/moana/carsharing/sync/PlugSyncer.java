@@ -7,7 +7,7 @@ import android.util.Log;
 import com.google.android.gms.maps.model.LatLng;
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.AsyncCallback;
-import com.moana.carsharing.station.plug.PlugInfoParser;
+import com.moana.carsharing.station.StationPlugParser;
 import com.moana.carsharing.station.StationProvider;
 
 import java.io.IOException;
@@ -52,6 +52,6 @@ public class PlugSyncer {
 
     public void getPlugInfos() {
         // TODO: okhttp, we use fake data
-        PlugInfoParser.with(mContext, mUri).parseDummy();
+        StationPlugParser.with(mContext, mUri).parseDummy();
     }
 }

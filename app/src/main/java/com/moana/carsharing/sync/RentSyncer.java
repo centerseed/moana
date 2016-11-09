@@ -8,7 +8,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.AsyncCallback;
 import com.moana.carsharing.station.StationProvider;
-import com.moana.carsharing.station.rent.RentInfoParser;
+import com.moana.carsharing.station.StationCarParser;
 
 import java.io.IOException;
 
@@ -52,6 +52,6 @@ public class RentSyncer {
 
     public void getRentInfos() {
         // TODO: okhttp, we use fake data
-        RentInfoParser.with(mContext, mUri).parseDummy();
+        StationCarParser.with(mContext, mUri).parseDummy();
     }
 }

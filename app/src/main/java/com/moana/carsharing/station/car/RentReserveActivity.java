@@ -1,4 +1,4 @@
-package com.moana.carsharing.station.rent;
+package com.moana.carsharing.station.car;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;

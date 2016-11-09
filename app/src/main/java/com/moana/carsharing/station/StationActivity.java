@@ -1,4 +1,4 @@
-package com.moana.carsharing.station.plug;
+package com.moana.carsharing.station;
 
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -21,11 +21,12 @@ import com.moana.carsharing.base.ConstantDef;
 import com.moana.carsharing.station.StationProvider;
 import com.squareup.picasso.Picasso;
 
-public class PlugInfoActivity extends BroadcastActivity {
+public class StationActivity extends BroadcastActivity {
 
     String mSnippet;
     ImageView mScrollImage;
     CollapsingToolbarLayout mCollapsingBar;
+    int mFunction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class PlugInfoActivity extends BroadcastActivity {
         mCollapsingBar = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
 
         mSnippet = getIntent().getStringExtra(ConstantDef.ARG_STRING);
+        mFunction = getIntent().getIntExtra(ConstantDef.ARG_INT, ConstantDef.FUNC_RENT);
         mScrollImage = (ImageView) findViewById(R.id.scrollImg);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
