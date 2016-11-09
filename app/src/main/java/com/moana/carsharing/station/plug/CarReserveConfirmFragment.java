@@ -10,18 +10,20 @@ import android.widget.TextView;
 
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.BaseSettingFragment;
+import com.moana.carsharing.station.car.CarReserveActivity;
+import com.moana.carsharing.station.car.CarReserveInfo;
 import com.moana.carsharing.utils.TimeUtils;
 
-public class PlugReserveConfirmFragment extends BaseSettingFragment{
+public class CarReserveConfirmFragment extends BaseSettingFragment{
 
     public String mAddress;
     public EditText mSite;
     public TextView mStartTime;
     public TextView mEndTime;
-    static PlugReserveConfirmFragment mInstance;
+    static CarReserveConfirmFragment mInstance;
 
-    public static PlugReserveConfirmFragment newInstance(Bundle bundle) {
-        mInstance = new PlugReserveConfirmFragment();
+    public static CarReserveConfirmFragment newInstance(Bundle bundle) {
+        mInstance = new CarReserveConfirmFragment();
         mInstance.setArguments(bundle);
         return mInstance;
     }
@@ -42,7 +44,7 @@ public class PlugReserveConfirmFragment extends BaseSettingFragment{
 
     public static void onPageSelected() {
         if (mInstance != null && mInstance.isResumed()) {
-            PlugReserveInfo info = ((PlugReserveActivity)mInstance.getActivity()).mInfo;
+            CarReserveInfo info = ((CarReserveActivity)mInstance.getActivity()).mInfo;
             if (info != null) {
                 mInstance.mSite.setText(info.address);
                 mInstance.mStartTime.setText(TimeUtils.getYYYYMMDDStr(mInstance.getContext(), info.startTime));

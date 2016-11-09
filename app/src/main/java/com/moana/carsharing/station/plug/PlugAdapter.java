@@ -20,7 +20,7 @@ public class PlugAdapter extends AbstractRecyclerCursorAdapter {
     String mPlugStatus[];
 
     public interface ResultAdapterListener {
-        void onPlugClick(int id);
+        void onPlugClick(Cursor cursor);
     }
 
     public void setPlugAdapterListener(PlugAdapter.ResultAdapterListener listener) {
@@ -61,7 +61,7 @@ public class PlugAdapter extends AbstractRecyclerCursorAdapter {
                 public void onClick(View view) {
                     if (mListener != null) {
                         Cursor cursor = (Cursor) getItem(getAdapterPosition());
-                        mListener.onPlugClick(cursor.getInt(cursor.getColumnIndex(StationProvider.FIELD_ID)));
+                        mListener.onPlugClick(cursor);
                     }
                 }
             });

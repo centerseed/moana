@@ -1,28 +1,29 @@
-package com.moana.carsharing.station.plug;
+package com.moana.carsharing.station.car;
 
-import android.database.Cursor;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.os.Bundle;
 
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.BasePagerActivity;
 import com.moana.carsharing.base.ConstantDef;
-import com.moana.carsharing.station.StationProvider;
+import com.moana.carsharing.station.plug.CarReserveConfirmFragment;
+import com.moana.carsharing.station.plug.CarReserveOrderFragment;
+import com.moana.carsharing.station.plug.PlugReserveConfirmFragment;
+import com.moana.carsharing.station.plug.PlugReserveInfo;
+import com.moana.carsharing.station.plug.PlugReserveOrderFragment;
 
 import java.io.Serializable;
 
-public class PlugReserveActivity extends BasePagerActivity {
+public class CarReserveActivity extends BasePagerActivity {
 
-    String mAddress;
-    public PlugReserveInfo mInfo;
+    public CarReserveInfo mInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAddress = getIntent().getStringExtra(ConstantDef.ARG_STRING);
-        mInfo = (PlugReserveInfo) getIntent().getSerializableExtra(ConstantDef.ARG_RESERVE_PLUG_INFO);
+        mInfo = (CarReserveInfo) getIntent().getSerializableExtra(ConstantDef.ARG_RESERVE_CAR_INFO);
     }
 
     @Override
@@ -32,15 +33,7 @@ public class PlugReserveActivity extends BasePagerActivity {
 
     @Override
     protected String getActivityTitle() {
-        return getResources().getString(R.string.title_plug_reserve);
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-        super.onPageSelected(position);
-        if (position == 1) {
-            PlugReserveConfirmFragment.onPageSelected();
-        }
+        return getResources().getString(R.string.title_rent_reserve);
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -55,11 +48,9 @@ public class PlugReserveActivity extends BasePagerActivity {
             bundle.putString(ConstantDef.ARG_STRING, mInfo.address);
             switch (position) {
                 case 0:
-                    return PlugReserveOrderFragment.newInstance(bundle);
-                case 1:
-                    return PlugReserveConfirmFragment.newInstance(bundle);
+                    return CarReserveOrderFragment.newInstance(bundle);
             }
-            return null;
+            return CarReserveConfirmFragment.newInstance(bundle);
         }
 
         @Override
@@ -71,5 +62,14 @@ public class PlugReserveActivity extends BasePagerActivity {
         public CharSequence getPageTitle(int position) {
             return null;
         }
+    }
+
+    public class RentReserveInfo implements Serializable {
+        public String name;
+        public String address;
+        public long startTime;
+        public long endTime;
+        public String fee;
+        public String cost;
     }
 }

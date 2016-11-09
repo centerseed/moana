@@ -5,6 +5,8 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +15,7 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,6 +26,7 @@ import com.moana.carsharing.R;
 import com.moana.carsharing.base.BroadcastActivity;
 import com.moana.carsharing.base.ConstantDef;
 import com.moana.carsharing.base.RecyclerFragment;
+import com.moana.carsharing.station.car.CarListFragment;
 import com.moana.carsharing.station.plug.PlugListFragment;
 import com.squareup.picasso.Picasso;
 
@@ -69,11 +73,6 @@ public class StationActivity extends BroadcastActivity implements AppBarLayout.O
                         .setAction("Action", null).show();
             }
         });
-
-        if (mFunction == ConstantDef.FUNC_RENT) mFragment = new PlugListFragment();
-        else mFragment = new PlugListFragment();
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, mFragment).commit();
     }
 
     @Override
@@ -139,8 +138,24 @@ public class StationActivity extends BroadcastActivity implements AppBarLayout.O
                 Picasso.with(this).load(imgUrl).into(mScrollImage);
             mCollapsingBar.setTitle(name);
             mAddress.setText(address);
+
+            handler.sendEmptyMessage(2);
         }
     }
+
+    private Handler handler = new Handler()  { // handler for commiting fragment after data is loaded
+        @Override
+        public void handleMessage(Message msg) {
+            if(msg.what == 2) {
+                if (mFunction == ConstantDef.FUNC_RENT)
+                    mFragment = CarListFragment.newInstance("", mCollapsingBar.getTitle().toString(), mAddress.getText().toString());
+                else
+                    mFragment = PlugListFragment.newInstance("", mCollapsingBar.getTitle().toString(), mAddress.getText().toString());
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, mFragment).commit();
+            }
+        }
+    };
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {

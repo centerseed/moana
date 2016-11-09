@@ -39,7 +39,7 @@ public class StationProvider extends BaseContentProvider {
 
     private class PlugDatabase extends SQLiteOpenHelper {
 
-        private final static int _DBVersion = 5;
+        private final static int _DBVersion = 6;
         private final static String _DBName = "plug.db";
 
         public PlugDatabase(Context context) {

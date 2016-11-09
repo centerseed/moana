@@ -17,6 +17,10 @@ public class CarInfoParser extends BaseParser {
         super(context, uri);
     }
 
+    public static CarInfoParser with(Context context, Uri uri) {
+        return new CarInfoParser(context, uri);
+    }
+
     @Override
     public void parse(JSONObject object) {
 

@@ -13,17 +13,19 @@ import android.widget.Spinner;
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.BaseSettingFragment;
 import com.moana.carsharing.base.ConstantDef;
+import com.moana.carsharing.station.car.CarReserveActivity;
+import com.moana.carsharing.station.car.CarReserveInfo;
 import com.moana.carsharing.utils.TimeUtils;
 
-public class PlugReserveOrderFragment extends BaseSettingFragment {
+public class CarReserveOrderFragment extends BaseSettingFragment {
 
     String mAddress;
     EditText mSite;
     EditText mStartTime;
     Spinner mUsage;
 
-    public static PlugReserveOrderFragment newInstance(Bundle bundle) {
-        PlugReserveOrderFragment f = new PlugReserveOrderFragment();
+    public static CarReserveOrderFragment newInstance(Bundle bundle) {
+        CarReserveOrderFragment f = new CarReserveOrderFragment();
         f.setArguments(bundle);
         return f;
     }
@@ -62,7 +64,7 @@ public class PlugReserveOrderFragment extends BaseSettingFragment {
     }
 
     private void dummySendOrder() {
-        final PlugReserveInfo info = ((PlugReserveActivity) getActivity()).mInfo;
+        final CarReserveInfo info = ((CarReserveActivity) getActivity()).mInfo;
         final ProgressDialog dialog = ProgressDialog.show(getActivity(), getString(R.string.action_loading), "", true);
         new Thread(new Runnable() {
             @Override
