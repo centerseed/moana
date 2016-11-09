@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.moana.caresharing.com.moana.caresharing.plug.PlugInfoActivity"
-    tools:showIn="@layout/activity_plug_info">
+    tools:showIn="@layout/activity_station">
 
 
 </android.support.v4.widget.NestedScrollView>

@@ -1,4 +1,4 @@
-package com.moana.carsharing.sync;
+package com.moana.carsharing.station;
 
 import android.content.Context;
 import android.net.Uri;
@@ -7,8 +7,6 @@ import android.util.Log;
 import com.google.android.gms.maps.model.LatLng;
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.AsyncCallback;
-import com.moana.carsharing.station.StationProvider;
-import com.moana.carsharing.station.StationCarParser;
 
 import java.io.IOException;
 
@@ -17,23 +15,23 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class RentSyncer {
-    static final String TAG = "PlugSyncer";
+public class StationPlugSyncer {
+    static final String TAG = "StationPlugSyncer";
 
     Context mContext;
     Uri mUri;
     OkHttpClient mClient;
 
-    private RentSyncer(Context context) {
+    private StationPlugSyncer(Context context) {
         mContext = context;
         mUri = StationProvider.getProviderUri(context.getString(R.string.auth_provider_plug), StationProvider.TABLE_STATION);
     }
 
-    public static RentSyncer with(Context context) {
-        return new RentSyncer(context);
+    public static StationPlugSyncer with(Context context) {
+        return new StationPlugSyncer(context);
     }
 
-    public void getRentInfos(LatLng latLng) {
+    public void getPlugInfos(LatLng latLng) {
         String url = "";
 
         Request request = new Request.Builder()
@@ -50,8 +48,8 @@ public class RentSyncer {
         });
     }
 
-    public void getRentInfos() {
+    public void getPlugInfos() {
         // TODO: okhttp, we use fake data
-        StationCarParser.with(mContext, mUri).parseDummy();
+        StationPlugParser.with(mContext, mUri).parseDummy();
     }
 }

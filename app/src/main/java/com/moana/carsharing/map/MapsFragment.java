@@ -42,8 +42,8 @@ import com.moana.carsharing.base.ConstantDef;
 import com.moana.carsharing.base.PositionFragment;
 import com.moana.carsharing.station.StationActivity;
 import com.moana.carsharing.station.StationProvider;
-import com.moana.carsharing.sync.PlugSyncer;
-import com.moana.carsharing.sync.RentSyncer;
+import com.moana.carsharing.station.StationPlugSyncer;
+import com.moana.carsharing.station.StationCarSyncer;
 import com.moana.carsharing.utils.IconUtils;
 import com.moana.carsharing.utils.PreferenceUtils;
 
@@ -187,8 +187,8 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         super.onResume();
 
         if (mMap != null) {
-            PlugSyncer.with(getContext()).getPlugInfos();
-            RentSyncer.with(getContext()).getRentInfos();
+            StationPlugSyncer.with(getContext()).getPlugInfos();
+            StationCarSyncer.with(getContext()).getRentInfos();
             if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
@@ -232,8 +232,8 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
-        PlugSyncer.with(getContext()).getPlugInfos();
-        RentSyncer.with(getContext()).getRentInfos();
+        StationPlugSyncer.with(getContext()).getPlugInfos();
+        StationCarSyncer.with(getContext()).getRentInfos();
     }
 
     @Override

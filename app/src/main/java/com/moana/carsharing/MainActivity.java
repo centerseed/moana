@@ -28,6 +28,7 @@ import com.moana.carsharing.base.ConstantDef;
 import com.moana.carsharing.base.ContentActivity;
 import com.moana.carsharing.map.MapsFragment;
 import com.moana.carsharing.station.StationProvider;
+import com.moana.carsharing.utils.PreferenceUtils;
 
 public class MainActivity extends ContentActivity
         implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener, SiteSearchResultAdapter.ResultAdapterListener {
@@ -97,6 +98,12 @@ public class MainActivity extends ContentActivity
         mSearchResultList.setAdapter(mAdapter);
 
         mSearchResultList.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mGroup.check(PreferenceUtils.getCurrentFunction(this));
     }
 
     @Override

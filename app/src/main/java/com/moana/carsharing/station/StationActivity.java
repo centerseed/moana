@@ -5,11 +5,14 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,24 +21,29 @@ import android.widget.ImageView;
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.BroadcastActivity;
 import com.moana.carsharing.base.ConstantDef;
-import com.moana.carsharing.station.StationProvider;
+import com.moana.carsharing.base.RecyclerFragment;
+import com.moana.carsharing.station.plug.PlugListFragment;
 import com.squareup.picasso.Picasso;
 
-public class StationActivity extends BroadcastActivity {
+public class StationActivity extends BroadcastActivity implements AppBarLayout.OnOffsetChangedListener {
 
     String mSnippet;
     ImageView mScrollImage;
     CollapsingToolbarLayout mCollapsingBar;
+    AppBarLayout mAppBar;
     int mFunction;
+
+    RecyclerFragment mFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plug_info);
+        setContentView(R.layout.activity_station);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        mAppBar = (AppBarLayout) findViewById(R.id.app_bar);
         mCollapsingBar = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
 
         mSnippet = getIntent().getStringExtra(ConstantDef.ARG_STRING);
@@ -50,6 +58,23 @@ public class StationActivity extends BroadcastActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        if (mFunction == ConstantDef.FUNC_RENT) mFragment = new PlugListFragment();
+        else mFragment = new PlugListFragment();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, mFragment).commit();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAppBar.addOnOffsetChangedListener(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mAppBar.removeOnOffsetChangedListener(this);
     }
 
     @Override
@@ -108,5 +133,15 @@ public class StationActivity extends BroadcastActivity {
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
+    }
+
+    @Override
+    public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+        if (mFragment != null && mFragment.isResumed())
+        if (mCollapsingBar.getHeight() + verticalOffset < 2 * ViewCompat.getMinimumHeight(mCollapsingBar)) {
+            mFragment.enableRefresh(false);
+        } else {
+            mFragment.enableRefresh(true);
+        }
     }
 }
