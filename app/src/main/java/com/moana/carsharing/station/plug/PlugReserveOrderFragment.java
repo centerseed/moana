@@ -47,7 +47,7 @@ public class PlugReserveOrderFragment extends BaseSettingFragment {
         mStartTime.setText(TimeUtils.getYYYYMMDDStr(getContext(), System.currentTimeMillis()));
 
         mUsage = (Spinner) view.findViewById(R.id.spinner_usage);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.rent_time));
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.rent_hour));
         mUsage.setAdapter(adapter);
 
         // override on Click event

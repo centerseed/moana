@@ -1,4 +1,4 @@
-package com.moana.carsharing.station.plug;
+package com.moana.carsharing.station.car;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.BaseSettingFragment;
-import com.moana.carsharing.station.car.CarReserveActivity;
-import com.moana.carsharing.station.car.CarReserveInfo;
 import com.moana.carsharing.utils.TimeUtils;
 
 public class CarReserveConfirmFragment extends BaseSettingFragment{

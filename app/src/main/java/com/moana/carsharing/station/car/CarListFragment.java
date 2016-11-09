@@ -22,8 +22,8 @@ public class CarListFragment extends RecyclerFragment implements CarAdapter.Resu
     public static CarListFragment newInstance(String id, String name, String address) {
         Bundle bundle = new Bundle();
         bundle.putString(StationProvider.FIELD_ID, id);
-        bundle.putString(StationProvider.FIELD_STATION_ADDRESS, name);
-        bundle.putString(StationProvider.FIELD_STATION_NAME, address);
+        bundle.putString(StationProvider.FIELD_STATION_NAME, name);
+        bundle.putString(StationProvider.FIELD_STATION_ADDRESS, address);
 
         CarListFragment f = new CarListFragment();
         f.setArguments(bundle);
@@ -33,7 +33,6 @@ public class CarListFragment extends RecyclerFragment implements CarAdapter.Resu
     @Override
     public void onResume() {
         super.onResume();
-        CarSyncer.with(getContext()).getCarInfos();
 
         ((CarAdapter)mAdapter).setCarAdapterListener(this);
     }
@@ -44,6 +43,21 @@ public class CarListFragment extends RecyclerFragment implements CarAdapter.Resu
     }
 
     @Override
+    protected void onSync() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    CarSyncer.with(getContext()).getCarInfos();
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    @Override
     protected Uri getProviderUri() {
         return StationProvider.getProviderUri(getResources().getString(R.string.auth_provider_plug), StationProvider.TABLE_CAR);
     }
@@ -51,6 +65,7 @@ public class CarListFragment extends RecyclerFragment implements CarAdapter.Resu
     @Override
     public void onCarClick(Cursor cursor) {
         CarReserveInfo info = new CarReserveInfo(cursor);
+        info.name = getArguments().getString(StationProvider.FIELD_STATION_NAME);
         info.address = getArguments().getString(StationProvider.FIELD_STATION_ADDRESS);
         Intent intent = new Intent(getActivity(), CarReserveActivity.class);
         intent.putExtra(ConstantDef.ARG_RESERVE_CAR_INFO, info);

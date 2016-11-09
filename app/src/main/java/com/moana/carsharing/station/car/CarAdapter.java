@@ -34,13 +34,13 @@ public class CarAdapter extends AbstractRecyclerCursorAdapter {
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, Cursor cursor) {
         CarViewHolder holder = (CarViewHolder) viewHolder;
         int charge = cursor.getInt(cursor.getColumnIndex(StationProvider.FIELD_CAR_CHARGE));
-        holder.car.setColorFilter(getProgressColor(charge));
+        holder.car.setColorFilter(getProgressColor(m_context, charge));
         holder.progressBar.invalidate();
         holder.progressBar.setProgress(charge);
-        holder.progressBar.setProgressColor(getProgressColor(charge));
+        holder.progressBar.setProgressColor(getProgressColor(m_context, charge));
 
         holder.charge.setText(charge + "%");
-        holder.charge.setTextColor(getProgressColor(charge));
+        holder.charge.setTextColor(getProgressColor(m_context, charge));
     }
 
     @Override
@@ -71,9 +71,9 @@ public class CarAdapter extends AbstractRecyclerCursorAdapter {
         }
     }
 
-    private int getProgressColor(int progress) {
-        if (progress > 20) return m_context.getResources().getColor(R.color.colorPlugAvailable);
-        return m_context.getResources().getColor(R.color.colorInUsage);
+    public static int getProgressColor(Context context, int progress) {
+        if (progress > 20) return context.getResources().getColor(R.color.colorPlugAvailable);
+        return context.getResources().getColor(R.color.colorInUsage);
 
     }
 }

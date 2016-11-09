@@ -52,6 +52,7 @@
     <string name="title_reserve_usage">Usage</string>
     <string name="title_fee">Fee</string>
     <string name="title_time_format">yyyy/MM/dd HH:mm</string>
+    <string name="title_time_format_no_hour">yyyy/MM/dd</string>
     <string name="title_cost">Cost</string>
 
     <string name="hint_search_region">Enter region or address</string>

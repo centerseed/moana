@@ -41,9 +41,17 @@ public abstract class RecyclerFragment extends ContentFragment implements SwipeR
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        mSwipeRefresh.setRefreshing(true);
+        onSync();
+    }
+
+    @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (data != null && data.moveToFirst()) {
             mAdapter.swapCursor(data);
+            mSwipeRefresh.setRefreshing(false);
         }
     }
 
@@ -61,21 +69,8 @@ public abstract class RecyclerFragment extends ContentFragment implements SwipeR
 
     @Override
     public void onRefresh() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mSwipeRefresh.setRefreshing(false);
-                    }
-                });
-            }
-        }).start();
+        onSync();
     }
+
+    protected abstract void onSync();
 }

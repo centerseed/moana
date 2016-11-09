@@ -15,6 +15,7 @@ import com.moana.carsharing.base.ConstantDef;
 import com.moana.carsharing.base.RecyclerFragment;
 import com.moana.carsharing.station.StationProvider;
 import com.moana.carsharing.station.car.CarListFragment;
+import com.moana.carsharing.station.car.CarSyncer;
 
 import static com.moana.carsharing.station.plug.PlugReserveActivity.*;
 
@@ -43,8 +44,6 @@ public class PlugListFragment extends RecyclerFragment implements PlugAdapter.Re
     @Override
     public void onResume() {
         super.onResume();
-
-        PlugSyncer.with(getContext()).getPlugInfos();
     }
 
     @Override
@@ -64,5 +63,20 @@ public class PlugListFragment extends RecyclerFragment implements PlugAdapter.Re
         Intent intent = new Intent(getActivity(), PlugReserveActivity.class);
         intent.putExtra(ConstantDef.ARG_RESERVE_PLUG_INFO, info);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onSync() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    PlugSyncer.with(getContext()).getPlugInfos();
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 }

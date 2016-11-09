@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="rent_time">
+
+    <string-array name="rent_day">
+        <item>0 day</item>
+        <item>1 day</item>
+        <item>2 days</item>
+        <item>3 days</item>
+        <item>4 days</item>
+        <item>5 days</item>
+        <item>6 days</item>
+        <item>7 days</item>
+    </string-array>
+
+    <string-array name="rent_hour">
         <item>1 hour</item>
         <item>2 hours</item>
         <item>3 hours</item>
         <item>6 hours</item>
         <item>12 hours</item>
-        <item>1 days</item>
-        <item>2 days</item>
-        <item>3 days</item>
+        <item>16 hours</item>
+        <item>18 hours</item>
     </string-array>
 
     <string-array name="plug_status">

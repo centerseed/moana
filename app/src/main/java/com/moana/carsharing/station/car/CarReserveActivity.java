@@ -8,13 +8,7 @@ import android.os.Bundle;
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.BasePagerActivity;
 import com.moana.carsharing.base.ConstantDef;
-import com.moana.carsharing.station.plug.CarReserveConfirmFragment;
-import com.moana.carsharing.station.plug.CarReserveOrderFragment;
 import com.moana.carsharing.station.plug.PlugReserveConfirmFragment;
-import com.moana.carsharing.station.plug.PlugReserveInfo;
-import com.moana.carsharing.station.plug.PlugReserveOrderFragment;
-
-import java.io.Serializable;
 
 public class CarReserveActivity extends BasePagerActivity {
 
@@ -36,6 +30,14 @@ public class CarReserveActivity extends BasePagerActivity {
         return getResources().getString(R.string.title_rent_reserve);
     }
 
+    @Override
+    public void onPageSelected(int position) {
+        super.onPageSelected(position);
+        if (position == 1) {
+            CarReserveConfirmFragment.onPageSelected();
+        }
+    }
+
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -45,7 +47,7 @@ public class CarReserveActivity extends BasePagerActivity {
         @Override
         public Fragment getItem(int position) {
             Bundle bundle = new Bundle();
-            bundle.putString(ConstantDef.ARG_STRING, mInfo.address);
+            bundle.putSerializable(ConstantDef.ARG_RESERVE_CAR_INFO, mInfo);
             switch (position) {
                 case 0:
                     return CarReserveOrderFragment.newInstance(bundle);

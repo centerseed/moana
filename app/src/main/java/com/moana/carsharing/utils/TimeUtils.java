@@ -16,7 +16,9 @@ public class TimeUtils {
             Date netDate = (new Date(timeStamp));
             return sdf.format(netDate);
         } catch (Exception ex) {
-            return "";
+            DateFormat sdf = new SimpleDateFormat(context.getResources().getString(R.string.title_time_format_no_hour));
+            Date netDate = (new Date(timeStamp));
+            return sdf.format(netDate);
         }
     }
 
