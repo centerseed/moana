@@ -78,13 +78,13 @@ public class PlugInfoActivity extends BroadcastActivity {
 
     @Override
     protected Uri getProviderUri() {
-        return PlugProvider.getProviderUri(getString(R.string.auth_provider_plug), PlugProvider.TABLE_PLUG);
+        return PlugProvider.getProviderUri(getString(R.string.auth_provider_plug), PlugProvider.TABLE_STATION);
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         CursorLoader cl = (CursorLoader) super.onCreateLoader(id, args);
-        cl.setSelection(PlugProvider.FIELD_PLUG_ADDRESS + "=?");
+        cl.setSelection(PlugProvider.FIELD_STATION_ADDRESS + "=?");
         cl.setSelectionArgs(new String[]{mSnippet});
         return cl;
     }
@@ -92,9 +92,9 @@ public class PlugInfoActivity extends BroadcastActivity {
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (data != null && data.moveToFirst()) {
-            String name = data.getString(data.getColumnIndex(PlugProvider.FIELD_PLUG_NAME));
-            String address = data.getString(data.getColumnIndex(PlugProvider.FIELD_PLUG_ADDRESS));
-            String imgUrl = data.getString(data.getColumnIndex(PlugProvider.FIELD_PLUG_PHOTO));
+            String name = data.getString(data.getColumnIndex(PlugProvider.FIELD_STATION_NAME));
+            String address = data.getString(data.getColumnIndex(PlugProvider.FIELD_STATION_ADDRESS));
+            String imgUrl = data.getString(data.getColumnIndex(PlugProvider.FIELD_STATION_PHOTO));
 
             if (imgUrl != null && imgUrl.length() > 0)
                 Picasso.with(this).load(imgUrl).into(mScrollImage);

@@ -101,7 +101,7 @@ public class MainActivity extends ContentActivity
 
     @Override
     protected Uri getProviderUri() {
-        return PlugProvider.getProviderUri(getString(R.string.auth_provider_plug), PlugProvider.TABLE_PLUG);
+        return PlugProvider.getProviderUri(getString(R.string.auth_provider_plug), PlugProvider.TABLE_STATION);
     }
 
     @Override
@@ -170,7 +170,7 @@ public class MainActivity extends ContentActivity
         String funArg;
         if (mFunction == ConstantDef.FUNC_PLUG) funArg = "0";
         else funArg = "1";
-        cl.setSelection(PlugProvider.FIELD_IS_RENT + "=" + funArg + " AND (" + PlugProvider.FIELD_PLUG_ADDRESS + " like '%" + mSearchText + "%' or " + PlugProvider.FIELD_PLUG_NAME + " like '%" + mSearchText + "%')");
+        cl.setSelection(PlugProvider.FIELD_IS_RENT + "=" + funArg + " AND (" + PlugProvider.FIELD_STATION_ADDRESS + " like '%" + mSearchText + "%' or " + PlugProvider.FIELD_STATION_NAME + " like '%" + mSearchText + "%')");
         return cl;
     }
 

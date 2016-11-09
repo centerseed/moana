@@ -27,7 +27,7 @@ public class RentSyncer {
 
     private RentSyncer(Context context) {
         mContext = context;
-        mUri = PlugProvider.getProviderUri(context.getString(R.string.auth_provider_plug), PlugProvider.TABLE_PLUG);
+        mUri = PlugProvider.getProviderUri(context.getString(R.string.auth_provider_plug), PlugProvider.TABLE_STATION);
     }
 
     public static RentSyncer with(Context context) {

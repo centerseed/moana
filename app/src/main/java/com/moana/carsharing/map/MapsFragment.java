@@ -211,7 +211,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
 
     @Override
     protected Uri getProviderUri() {
-        return PlugProvider.getProviderUri(getString(R.string.auth_provider_plug), PlugProvider.TABLE_PLUG);
+        return PlugProvider.getProviderUri(getString(R.string.auth_provider_plug), PlugProvider.TABLE_STATION);
     }
 
     @Override
@@ -335,8 +335,8 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
                 LatLng latLng = new LatLng(data.getFloat(data.getColumnIndex(PlugProvider.FIELD_LAT)),
                         data.getFloat(data.getColumnIndex(PlugProvider.FIELD_LNG)));
 
-                String name = data.getString(data.getColumnIndex(PlugProvider.FIELD_PLUG_NAME));
-                String address = data.getString(data.getColumnIndex(PlugProvider.FIELD_PLUG_ADDRESS));
+                String name = data.getString(data.getColumnIndex(PlugProvider.FIELD_STATION_NAME));
+                String address = data.getString(data.getColumnIndex(PlugProvider.FIELD_STATION_ADDRESS));
 
                 Drawable drawable = getResources().getDrawable(R.mipmap.ic_person_pin_circle_white_36dp);
                 drawable.setColorFilter(Color.BLUE, PorterDuff.Mode.MULTIPLY);

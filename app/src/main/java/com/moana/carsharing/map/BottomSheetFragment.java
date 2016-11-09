@@ -44,13 +44,13 @@ public class BottomSheetFragment extends BroadcastFragment{
 
     @Override
     protected Uri getProviderUri() {
-        return PlugProvider.getProviderUri(getString(R.string.auth_provider_plug), PlugProvider.TABLE_PLUG);
+        return PlugProvider.getProviderUri(getString(R.string.auth_provider_plug), PlugProvider.TABLE_STATION);
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         CursorLoader cl = (CursorLoader) super.onCreateLoader(id, args);
-        cl.setSelection(PlugProvider.FIELD_PLUG_ADDRESS + "=?");
+        cl.setSelection(PlugProvider.FIELD_STATION_ADDRESS + "=?");
         cl.setSelectionArgs(new String[]{mSnippet});
         return cl;
     }
@@ -58,8 +58,8 @@ public class BottomSheetFragment extends BroadcastFragment{
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (data != null && data.moveToFirst()) {
-            mName.setText(data.getString(data.getColumnIndex(PlugProvider.FIELD_PLUG_NAME)));
-            mAddress.setText(data.getString(data.getColumnIndex(PlugProvider.FIELD_PLUG_ADDRESS)));
+            mName.setText(data.getString(data.getColumnIndex(PlugProvider.FIELD_STATION_NAME)));
+            mAddress.setText(data.getString(data.getColumnIndex(PlugProvider.FIELD_STATION_ADDRESS)));
         }
     }
 
