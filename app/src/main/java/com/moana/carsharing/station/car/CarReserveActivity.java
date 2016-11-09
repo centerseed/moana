@@ -63,13 +63,4 @@ public class CarReserveActivity extends BasePagerActivity {
             return null;
         }
     }
-
-    public class RentReserveInfo implements Serializable {
-        public String name;
-        public String address;
-        public long startTime;
-        public long endTime;
-        public String fee;
-        public String cost;
-    }
 }

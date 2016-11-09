@@ -35,6 +35,7 @@ public class CarAdapter extends AbstractRecyclerCursorAdapter {
         CarViewHolder holder = (CarViewHolder) viewHolder;
         int charge = cursor.getInt(cursor.getColumnIndex(StationProvider.FIELD_CAR_CHARGE));
         holder.car.setColorFilter(getProgressColor(charge));
+        holder.progressBar.invalidate();
         holder.progressBar.setProgress(charge);
         holder.progressBar.setProgressColor(getProgressColor(charge));
 
