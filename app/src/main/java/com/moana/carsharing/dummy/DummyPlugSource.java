@@ -32,7 +32,7 @@ public class DummyPlugSource {
         values = new ContentValues();
         values.put(StationProvider.FIELD_ID, "p4".hashCode());
         values.put(StationProvider.FIELD_PLUG_BELONG_STATION, "");
-        values.put(StationProvider.FIELD_PLUG_STATUS, StationProvider.FIELD_USAGE);
+        values.put(StationProvider.FIELD_PLUG_STATUS, StationProvider.PLUG_STATUS_IN_USAGE);
         arrayList.add(values);
 
         values = new ContentValues();

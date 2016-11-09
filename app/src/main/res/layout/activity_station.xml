@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleMarginBottom="50dp"
+            app:expandedTitleMarginBottom="54dp"
             app:expandedTitleTextAppearance="@android:color/transparent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
@@ -56,14 +56,14 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="2dp"
                         android:layout_marginLeft="@dimen/appbar_title_margin_left"
-                        android:layout_marginTop="50dp"
+                        android:layout_marginTop="42dp"
                         android:text="address" />
 
                     <TextView
                         android:id="@+id/distance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
+                        android:layout_marginBottom="8dp"
                         android:layout_marginLeft="@dimen/appbar_title_margin_left"
                         android:text="3.7km" />
                 </LinearLayout>

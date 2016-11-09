@@ -9,7 +9,6 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewCompat;
@@ -18,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.BroadcastActivity;
@@ -32,6 +32,7 @@ public class StationActivity extends BroadcastActivity implements AppBarLayout.O
     Toolbar mToolbar;
     String mSnippet;
     ImageView mScrollImage;
+    TextView mAddress;
     CollapsingToolbarLayout mCollapsingBar;
     AppBarLayout mAppBar;
 
@@ -49,6 +50,7 @@ public class StationActivity extends BroadcastActivity implements AppBarLayout.O
 
         mAppBar = (AppBarLayout) findViewById(R.id.app_bar);
         mCollapsingBar = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+        mCollapsingBar.setExpandedTitleTextAppearance(R.style.ExpandAppBarText);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         mSnippet = getIntent().getStringExtra(ConstantDef.ARG_STRING);
@@ -56,6 +58,7 @@ public class StationActivity extends BroadcastActivity implements AppBarLayout.O
         mScrollImage = (ImageView) findViewById(R.id.scrollImg);
 
         mLabel = (LinearLayout) findViewById(R.id.label);
+        mAddress = (TextView) findViewById(R.id.address);
         mFab = (FloatingActionButton) findViewById(R.id.fab);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -135,6 +138,7 @@ public class StationActivity extends BroadcastActivity implements AppBarLayout.O
             if (imgUrl != null && imgUrl.length() > 0)
                 Picasso.with(this).load(imgUrl).into(mScrollImage);
             mCollapsingBar.setTitle(name);
+            mAddress.setText(address);
         }
     }
 
@@ -146,13 +150,13 @@ public class StationActivity extends BroadcastActivity implements AppBarLayout.O
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
         if (mFragment != null && mFragment.isResumed())
-        if (mCollapsingBar.getHeight() + verticalOffset < 2 * ViewCompat.getMinimumHeight(mCollapsingBar)) {
-            mFragment.enableRefresh(false);
-        } else {
-            mFragment.enableRefresh(true);
-        }
+            if (mCollapsingBar.getHeight() + verticalOffset < 2 * ViewCompat.getMinimumHeight(mCollapsingBar)) {
+                mFragment.enableRefresh(false);
+            } else {
+                mFragment.enableRefresh(true);
+            }
 
-        float percentage = (1 - (float)Math.abs(verticalOffset)/appBarLayout.getTotalScrollRange());
+        float percentage = (1 - (float) Math.abs(verticalOffset) / appBarLayout.getTotalScrollRange());
         mLabel.setAlpha(percentage);
         mFab.setAlpha(percentage);
     }

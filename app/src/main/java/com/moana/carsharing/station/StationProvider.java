@@ -27,9 +27,9 @@ public class StationProvider extends BaseContentProvider {
     public final static String FIELD_PLUG_BELONG_STATION = "_plug_belong_station";
     public final static String FIELD_PLUG_STATUS = "_plug_charge";
 
-    public final static int PLUG_STATUS_AVALIABLE = 1;
-    public final static int PLUG_STATUS_IN_USAGE= 2;
-    public final static int PLUG_STATUS_ERROR = 3;
+    public final static int PLUG_STATUS_AVALIABLE = 0;
+    public final static int PLUG_STATUS_IN_USAGE= 1;
+    public final static int PLUG_STATUS_ERROR = 2;
 
     @Override
     public boolean onCreate() {

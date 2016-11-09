@@ -2,6 +2,8 @@ package com.moana.carsharing.station.plug;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import com.moana.carsharing.station.StationProvider;
 
 public class PlugAdapter extends AbstractRecyclerCursorAdapter {
     PlugAdapter.ResultAdapterListener mListener;
+    String mPlugStatus[];
 
     public interface ResultAdapterListener {
         void onPlugClick(int id);
@@ -26,11 +29,16 @@ public class PlugAdapter extends AbstractRecyclerCursorAdapter {
 
     public PlugAdapter(Context context, Cursor c) {
         super(context, c);
+        mPlugStatus = context.getResources().getStringArray(R.array.plug_status);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, Cursor cursor) {
-
+        PlugViewHolder holder = (PlugViewHolder) viewHolder;
+        int status = cursor.getInt(cursor.getColumnIndex(StationProvider.FIELD_PLUG_STATUS));
+        holder.tvStatus.setText(mPlugStatus[status]);
+        holder.tvStatus.setTextColor(getStatusTextColor(status));
+        holder.plug.setColorFilter(getStatusColor(status), PorterDuff.Mode.MULTIPLY);
     }
 
     @Override
@@ -57,6 +65,28 @@ public class PlugAdapter extends AbstractRecyclerCursorAdapter {
                     }
                 }
             });
+        }
+    }
+
+    private int getStatusColor(int status) {
+        switch (status) {
+            case StationProvider.PLUG_STATUS_AVALIABLE:
+                return m_context.getResources().getColor(R.color.colorPlugAvailable);
+            case StationProvider.PLUG_STATUS_IN_USAGE:
+                return m_context.getResources().getColor(R.color.colorInUsage);
+            default:
+                return m_context.getResources().getColor(R.color.colorFail);
+        }
+    }
+
+    private int getStatusTextColor(int status) {
+        switch (status) {
+            case StationProvider.PLUG_STATUS_AVALIABLE:
+                return m_context.getResources().getColor(R.color.colorPlugAvailable);
+            case StationProvider.PLUG_STATUS_IN_USAGE:
+                return m_context.getResources().getColor(R.color.colorInUsage);
+            default:
+                return m_context.getResources().getColor(R.color.colorDarkGrey);
         }
     }
 }

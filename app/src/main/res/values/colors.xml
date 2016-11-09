@@ -10,6 +10,11 @@
     <color name="colorAlphaWhite">#EDffffff</color>
     <color name="colorAlphaDark">#88333333</color>
 
+    <color name="colorPlugAvailable">#78d251</color>
+    <color name="colorInUsage">#d62626</color>
+    <color name="colorFail">#ffffff</color>
+
     <color name="colorDarkGrey">#555555</color>
     <color name="colorLightGrey">#AACCCCCC</color>
+    <color name="colorGrey">#CCCCCC</color>
 </resources>
