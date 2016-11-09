@@ -1,13 +1,12 @@
-package com.moana.carsharing.plug;
+package com.moana.carsharing.station;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.icu.lang.UScript;
 
 import com.moana.carsharing.base.BaseContentProvider;
 
-public class PlugProvider extends BaseContentProvider {
+public class StationProvider extends BaseContentProvider {
 
     public final static String TABLE_STATION = "_table_station";
     public final static String TABLE_CAR = "_table_car";

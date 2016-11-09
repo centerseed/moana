@@ -1,12 +1,9 @@
 package com.moana.carsharing.map;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
-import android.location.Location;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.CursorLoader;
@@ -16,13 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.moana.carsharing.R;
-import com.moana.carsharing.base.BroadcastActivity;
 import com.moana.carsharing.base.BroadcastFragment;
 import com.moana.carsharing.base.ConstantDef;
-import com.moana.carsharing.base.ContentFragment;
-import com.moana.carsharing.plug.PlugProvider;
+import com.moana.carsharing.station.StationProvider;
 
 public class BottomSheetFragment extends BroadcastFragment{
     String mSnippet = "";
@@ -44,13 +38,13 @@ public class BottomSheetFragment extends BroadcastFragment{
 
     @Override
     protected Uri getProviderUri() {
-        return PlugProvider.getProviderUri(getString(R.string.auth_provider_plug), PlugProvider.TABLE_STATION);
+        return StationProvider.getProviderUri(getString(R.string.auth_provider_plug), StationProvider.TABLE_STATION);
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         CursorLoader cl = (CursorLoader) super.onCreateLoader(id, args);
-        cl.setSelection(PlugProvider.FIELD_STATION_ADDRESS + "=?");
+        cl.setSelection(StationProvider.FIELD_STATION_ADDRESS + "=?");
         cl.setSelectionArgs(new String[]{mSnippet});
         return cl;
     }
@@ -58,8 +52,8 @@ public class BottomSheetFragment extends BroadcastFragment{
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (data != null && data.moveToFirst()) {
-            mName.setText(data.getString(data.getColumnIndex(PlugProvider.FIELD_STATION_NAME)));
-            mAddress.setText(data.getString(data.getColumnIndex(PlugProvider.FIELD_STATION_ADDRESS)));
+            mName.setText(data.getString(data.getColumnIndex(StationProvider.FIELD_STATION_NAME)));
+            mAddress.setText(data.getString(data.getColumnIndex(StationProvider.FIELD_STATION_ADDRESS)));
         }
     }
 

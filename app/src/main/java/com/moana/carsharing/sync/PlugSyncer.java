@@ -7,8 +7,8 @@ import android.util.Log;
 import com.google.android.gms.maps.model.LatLng;
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.AsyncCallback;
-import com.moana.carsharing.plug.PlugInfoParser;
-import com.moana.carsharing.plug.PlugProvider;
+import com.moana.carsharing.station.plug.PlugInfoParser;
+import com.moana.carsharing.station.StationProvider;
 
 import java.io.IOException;
 
@@ -26,7 +26,7 @@ public class PlugSyncer {
 
     private PlugSyncer(Context context) {
         mContext = context;
-        mUri = PlugProvider.getProviderUri(context.getString(R.string.auth_provider_plug), PlugProvider.TABLE_STATION);
+        mUri = StationProvider.getProviderUri(context.getString(R.string.auth_provider_plug), StationProvider.TABLE_STATION);
     }
 
     public static PlugSyncer with(Context context) {

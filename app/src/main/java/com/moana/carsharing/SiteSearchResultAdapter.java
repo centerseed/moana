@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.moana.carsharing.base.AbstractRecyclerCursorAdapter;
-import com.moana.carsharing.plug.PlugProvider;
+import com.moana.carsharing.station.StationProvider;
 
 public class SiteSearchResultAdapter extends AbstractRecyclerCursorAdapter {
 
@@ -29,8 +29,8 @@ public class SiteSearchResultAdapter extends AbstractRecyclerCursorAdapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, Cursor cursor) {
         SiteViewHolder holder = (SiteViewHolder) viewHolder;
-        holder.tvName.setText(cursor.getString(cursor.getColumnIndex(PlugProvider.FIELD_STATION_NAME)));
-        holder.tvAddress.setText(cursor.getString(cursor.getColumnIndex(PlugProvider.FIELD_STATION_ADDRESS)));
+        holder.tvName.setText(cursor.getString(cursor.getColumnIndex(StationProvider.FIELD_STATION_NAME)));
+        holder.tvAddress.setText(cursor.getString(cursor.getColumnIndex(StationProvider.FIELD_STATION_ADDRESS)));
     }
 
     @Override
@@ -54,7 +54,7 @@ public class SiteSearchResultAdapter extends AbstractRecyclerCursorAdapter {
                 public void onClick(View view) {
                     if (mListener != null) {
                         Cursor cursor = (Cursor) getItem(getAdapterPosition());
-                        mListener.onResultClick(cursor.getString(cursor.getColumnIndex(PlugProvider.FIELD_STATION_ADDRESS)));
+                        mListener.onResultClick(cursor.getString(cursor.getColumnIndex(StationProvider.FIELD_STATION_ADDRESS)));
                     }
                 }
             });

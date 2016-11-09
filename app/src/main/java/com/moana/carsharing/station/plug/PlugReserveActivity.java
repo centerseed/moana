@@ -1,4 +1,4 @@
-package com.moana.carsharing.plug;
+package com.moana.carsharing.station.plug;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

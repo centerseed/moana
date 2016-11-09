@@ -27,7 +27,7 @@ import com.moana.carsharing.account.LoginActivity;
 import com.moana.carsharing.base.ConstantDef;
 import com.moana.carsharing.base.ContentActivity;
 import com.moana.carsharing.map.MapsFragment;
-import com.moana.carsharing.plug.PlugProvider;
+import com.moana.carsharing.station.StationProvider;
 
 public class MainActivity extends ContentActivity
         implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener, SiteSearchResultAdapter.ResultAdapterListener {
@@ -101,7 +101,7 @@ public class MainActivity extends ContentActivity
 
     @Override
     protected Uri getProviderUri() {
-        return PlugProvider.getProviderUri(getString(R.string.auth_provider_plug), PlugProvider.TABLE_STATION);
+        return StationProvider.getProviderUri(getString(R.string.auth_provider_plug), StationProvider.TABLE_STATION);
     }
 
     @Override
@@ -170,7 +170,7 @@ public class MainActivity extends ContentActivity
         String funArg;
         if (mFunction == ConstantDef.FUNC_PLUG) funArg = "0";
         else funArg = "1";
-        cl.setSelection(PlugProvider.FIELD_IS_RENT + "=" + funArg + " AND (" + PlugProvider.FIELD_STATION_ADDRESS + " like '%" + mSearchText + "%' or " + PlugProvider.FIELD_STATION_NAME + " like '%" + mSearchText + "%')");
+        cl.setSelection(StationProvider.FIELD_IS_RENT + "=" + funArg + " AND (" + StationProvider.FIELD_STATION_ADDRESS + " like '%" + mSearchText + "%' or " + StationProvider.FIELD_STATION_NAME + " like '%" + mSearchText + "%')");
         return cl;
     }
 

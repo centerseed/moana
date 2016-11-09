@@ -44,14 +44,14 @@
             android:value="@string/google_maps_key" />
 
         <provider
-            android:name=".plug.PlugProvider"
+            android:name=".station.StationProvider"
             android:authorities="@string/auth_provider_plug"
             android:exported="false"
             android:label="@string/title_plug"
             android:syncable="true" />
 
         <activity
-            android:name=".plug.PlugInfoActivity"
+            android:name=".station.plug.PlugInfoActivity"
             android:label="@string/title_activity_plug_info"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -66,12 +66,12 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".plug.PlugReserveActivity"
+            android:name=".station.plug.PlugReserveActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".rent.RentReserveActivity"
+            android:name=".station.rent.RentReserveActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden"></activity>

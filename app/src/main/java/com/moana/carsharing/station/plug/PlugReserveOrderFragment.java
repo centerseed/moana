@@ -1,4 +1,4 @@
-package com.moana.carsharing.plug;
+package com.moana.carsharing.station.plug;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;

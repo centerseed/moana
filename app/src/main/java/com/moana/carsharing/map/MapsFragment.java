@@ -40,10 +40,10 @@ import com.moana.carsharing.R;
 import com.moana.carsharing.base.AsyncCallback;
 import com.moana.carsharing.base.ConstantDef;
 import com.moana.carsharing.base.PositionFragment;
-import com.moana.carsharing.plug.PlugInfoActivity;
-import com.moana.carsharing.plug.PlugProvider;
-import com.moana.carsharing.plug.PlugReserveActivity;
-import com.moana.carsharing.rent.RentReserveActivity;
+import com.moana.carsharing.station.plug.PlugInfoActivity;
+import com.moana.carsharing.station.StationProvider;
+import com.moana.carsharing.station.plug.PlugReserveActivity;
+import com.moana.carsharing.station.rent.RentReserveActivity;
 import com.moana.carsharing.sync.PlugSyncer;
 import com.moana.carsharing.sync.RentSyncer;
 import com.moana.carsharing.utils.IconUtils;
@@ -211,7 +211,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
 
     @Override
     protected Uri getProviderUri() {
-        return PlugProvider.getProviderUri(getString(R.string.auth_provider_plug), PlugProvider.TABLE_STATION);
+        return StationProvider.getProviderUri(getString(R.string.auth_provider_plug), StationProvider.TABLE_STATION);
     }
 
     @Override
@@ -312,7 +312,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         CursorLoader cl = (CursorLoader) super.onCreateLoader(id, args);
-        cl.setSelection(PlugProvider.FIELD_IS_RENT + "=?");
+        cl.setSelection(StationProvider.FIELD_IS_RENT + "=?");
         if (mFunction == ConstantDef.FUNC_PLUG) {
             cl.setSelectionArgs(new String[]{"0"});
         } else if (mFunction == ConstantDef.FUNC_RENT) {
@@ -332,11 +332,11 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
             else
                 mMarkerList = new ArrayList<>();
             while (!data.isAfterLast()) {
-                LatLng latLng = new LatLng(data.getFloat(data.getColumnIndex(PlugProvider.FIELD_LAT)),
-                        data.getFloat(data.getColumnIndex(PlugProvider.FIELD_LNG)));
+                LatLng latLng = new LatLng(data.getFloat(data.getColumnIndex(StationProvider.FIELD_LAT)),
+                        data.getFloat(data.getColumnIndex(StationProvider.FIELD_LNG)));
 
-                String name = data.getString(data.getColumnIndex(PlugProvider.FIELD_STATION_NAME));
-                String address = data.getString(data.getColumnIndex(PlugProvider.FIELD_STATION_ADDRESS));
+                String name = data.getString(data.getColumnIndex(StationProvider.FIELD_STATION_NAME));
+                String address = data.getString(data.getColumnIndex(StationProvider.FIELD_STATION_ADDRESS));
 
                 Drawable drawable = getResources().getDrawable(R.mipmap.ic_person_pin_circle_white_36dp);
                 drawable.setColorFilter(Color.BLUE, PorterDuff.Mode.MULTIPLY);
