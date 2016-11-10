@@ -24,8 +24,8 @@ public class PlugListFragment extends RecyclerFragment implements PlugAdapter.Re
     public static PlugListFragment newInstance(String id, String name, String address) {
         Bundle bundle = new Bundle();
         bundle.putString(StationProvider.FIELD_ID, id);
-        bundle.putString(StationProvider.FIELD_STATION_ADDRESS, name);
-        bundle.putString(StationProvider.FIELD_STATION_NAME, address);
+        bundle.putString(ConstantDef.ARG_SITE_NAME, name);
+        bundle.putString(ConstantDef.ARG_SITE_ADDRESS, address);
 
         PlugListFragment f = new PlugListFragment();
         f.setArguments(bundle);

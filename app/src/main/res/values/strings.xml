@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">RoadPro</string>
     <string name="title_activity_maps">Map</string>
@@ -11,6 +10,7 @@
     <string name="action_next">Next</string>
     <string name="action_back">Back</string>
     <string name="action_loading">Loading...</string>
+    <string name="action_sending_order">Sedning Order...</string>
 
     <string name="title_map">Home</string>
     <string name="title_account">Account</string>
@@ -59,6 +59,16 @@
     <string name="title_no_day">0 Day</string>
     <string name="title_fee_confirm">Confirm</string>
     <string name="title_fee_type">Fee Type</string>
+    <string name="title_car_type">Car Type</string>
+    <string name="title_rent_site">Rent Site</string>
+    <string name="title_return_site">Return Site</string>
+    <string name="title_cancel_order">Cancel Order</string>
+
+    <!-- Order Detail -->
+    <string name="title_order_detail">Order Detail</string>
+    <string name="title_order_serial">Order Serial</string>
+    <string name="title_reserve_time">Reserve Time</string>
+    <string name="title_payment_status">Payment Status</string>
 
     <string name="hint_search_region">Enter region or address</string>
 

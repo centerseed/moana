@@ -71,12 +71,12 @@ public class PlugReserveOrderFragment extends BaseSettingFragment {
 
     private void dummySendOrder() {
         final PlugReserveInfo info = ((PlugReserveActivity) getActivity()).mInfo;
-        final ProgressDialog dialog = ProgressDialog.show(getActivity(), getString(R.string.action_loading), "", true);
+        final ProgressDialog dialog = ProgressDialog.show(getActivity(), "", getString(R.string.action_sending_order), true);
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(1500);
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
@@ -94,7 +94,6 @@ public class PlugReserveOrderFragment extends BaseSettingFragment {
                 }
             }
         }).start();
-
     }
 
     @Override

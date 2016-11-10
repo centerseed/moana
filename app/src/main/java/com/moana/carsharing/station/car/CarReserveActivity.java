@@ -66,13 +66,15 @@ public class CarReserveActivity extends BasePagerActivity {
             switch (position) {
                 case 0:
                     return CarReserveOrderFragment.newInstance(bundle);
+                case 1:
+                    return CarReserveConfirmFragment.newInstance(bundle);
             }
-            return CarReserveConfirmFragment.newInstance(bundle);
+            return CarReserveDetailFragment.newInstance(bundle);
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
 
         @Override

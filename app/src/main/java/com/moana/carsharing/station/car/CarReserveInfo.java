@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 public class CarReserveInfo implements Serializable {
     ContentValues mContentValues;
+    int id = 0;
     public String carType;
     public String orderSerial;
     public long orderTime;
@@ -24,6 +25,7 @@ public class CarReserveInfo implements Serializable {
     }
 
     public CarReserveInfo(Cursor cursor) {
+        id = cursor.getInt(cursor.getColumnIndex(StationProvider.FIELD_ID));
         carType = cursor.getString(cursor.getColumnIndex(StationProvider.FIELD_CAR_ORDER_CAR_TYPE));
         orderSerial = cursor.getString(cursor.getColumnIndex(StationProvider.FIELD_CAR_ORDER_SERIAL));
         orderTime = cursor.getLong(cursor.getColumnIndex(StationProvider.FIELD_CAR_ORDER_TIME));
@@ -38,6 +40,10 @@ public class CarReserveInfo implements Serializable {
 
     public ContentValues getContentValues() {
         mContentValues = new ContentValues();
+        if (id == 0)
+            mContentValues.put(StationProvider.FIELD_ID, orderSerial.hashCode());
+        else
+            mContentValues.put(StationProvider.FIELD_ID, id);
         mContentValues.put(StationProvider.FIELD_CAR_ORDER_SERIAL, orderSerial);
         mContentValues.put(StationProvider.FIELD_CAR_ORDER_CAR_TYPE, carType);
         mContentValues.put(StationProvider.FIELD_CAR_ORDER_TIME, orderTime);

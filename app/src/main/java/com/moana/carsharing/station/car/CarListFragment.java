@@ -22,8 +22,8 @@ public class CarListFragment extends RecyclerFragment implements CarAdapter.Resu
     public static CarListFragment newInstance(String id, String name, String address) {
         Bundle bundle = new Bundle();
         bundle.putString(StationProvider.FIELD_ID, id);
-        bundle.putString(StationProvider.FIELD_STATION_NAME, name);
-        bundle.putString(StationProvider.FIELD_STATION_ADDRESS, address);
+        bundle.putString(ConstantDef.ARG_SITE_NAME, name);
+        bundle.putString(ConstantDef.ARG_SITE_ADDRESS, address);
 
         CarListFragment f = new CarListFragment();
         f.setArguments(bundle);

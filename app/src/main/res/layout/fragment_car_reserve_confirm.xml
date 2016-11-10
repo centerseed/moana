@@ -18,7 +18,7 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="60dp"
                 android:background="@android:color/white">
 
                 <TextView
@@ -26,7 +26,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/title_fee_confirm"
-                    android:textSize="24sp" />
+                    android:textSize="20sp" />
             </FrameLayout>
 
 
@@ -48,6 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="32dp"
                     android:layout_marginRight="32dp"
                     android:orientation="vertical">
 
@@ -79,40 +80,42 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp">
+                android:layout_marginTop="16dp">
 
                 <TextView
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="8dp"
-                    android:text="@string/title_site_name" />
+                    android:text="@string/title_site_name"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="8dp" />
+                    android:layout_marginRight="8dp"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="8dp">
+                android:layout_marginLeft="24dp">
 
                 <TextView
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="8dp"
-                    android:text="@string/title_fee_type" />
+                    android:text="@string/title_fee_type"
+                    android:textSize="16sp" />
 
                 <android.support.v7.widget.AppCompatSpinner
-                    android:id="@+id/frr_type"
+                    android:id="@+id/fee_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="8dp"></android.support.v7.widget.AppCompatSpinner>
@@ -121,45 +124,49 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp">
+    >
 
                 <TextView
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="8dp"
-                    android:text="@string/title_reserve_start_time" />
+                    android:text="@string/title_reserve_start_time"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/time_start"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="8dp" />
+                    android:layout_marginRight="8dp"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="24dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
+                android:layout_marginTop="8dp">
 
                 <TextView
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="8dp"
-                    android:text="@string/title_reserve_end_time" />
+                    android:text="@string/title_reserve_end_time"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/time_end"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="8dp" />
+                    android:layout_marginRight="8dp"
+                    android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
