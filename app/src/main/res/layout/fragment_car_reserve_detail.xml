@@ -22,7 +22,8 @@
                 android:layout_gravity="center"
                 android:layout_margin="12dp"
                 android:text="@string/title_order_detail"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="normal|bold" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -54,6 +55,8 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="8dp"
                             android:layout_weight="2" />
                     </LinearLayout>
 
@@ -79,6 +82,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="8dp"
                             android:layout_weight="2" />
                     </LinearLayout>
 
@@ -103,6 +107,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="8dp"
                             android:layout_weight="2" />
                     </LinearLayout>
 
@@ -129,6 +134,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_weight="2"
+                            android:layout_marginLeft="8dp"
                             android:id="@+id/name" />
                     </LinearLayout>
 
@@ -153,6 +159,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="8dp"
                             android:layout_weight="2" />
                     </LinearLayout>
 
@@ -179,6 +186,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="8dp"
                             android:layout_weight="2" />
                     </LinearLayout>
 
@@ -204,6 +212,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="8dp"
                             android:layout_weight="2" />
                     </LinearLayout>
 
@@ -229,6 +238,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="8dp"
                             android:layout_weight="2" />
                     </LinearLayout>
 
@@ -253,6 +263,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="8dp"
                             android:layout_weight="2" />
                     </LinearLayout>
 
@@ -278,6 +289,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="8dp"
                             android:layout_weight="2" />
                     </LinearLayout>
 
