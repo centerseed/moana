@@ -44,7 +44,7 @@ public class CarReserveConfirmFragment extends BaseSettingFragment{
         if (mInstance != null && mInstance.isResumed()) {
             CarReserveInfo info = ((CarReserveActivity)mInstance.getActivity()).mInfo;
             if (info != null) {
-                mInstance.mSite.setText(info.address);
+                mInstance.mSite.setText(info.name);
                 mInstance.mStartTime.setText(TimeUtils.getYYYYMMDDStr(mInstance.getContext(), info.startTime));
             }
         }

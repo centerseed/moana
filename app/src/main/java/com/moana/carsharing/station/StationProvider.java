@@ -23,11 +23,12 @@ public class StationProvider extends BaseContentProvider {
 
     public final static String FIELD_CAR_BELONG_STATION = "_car_belong_station";
     public final static String FIELD_CAR_CHARGE = "_car_charge";
+    public final static String FIELD_CAR_REMAIN = "_car_remain";
 
     public final static String FIELD_PLUG_BELONG_STATION = "_plug_belong_station";
     public final static String FIELD_PLUG_STATUS = "_plug_charge";
 
-    public final static int PLUG_STATUS_AVALIABLE = 0;
+    public final static int PLUG_STATUS_AVAILABLE = 0;
     public final static int PLUG_STATUS_IN_USAGE= 1;
     public final static int PLUG_STATUS_ERROR = 2;
 
@@ -63,7 +64,8 @@ public class StationProvider extends BaseContentProvider {
             db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_CAR + " ( "
                     + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + FIELD_CAR_BELONG_STATION + " TEXT, "
-                    + FIELD_CAR_CHARGE + " INTEGER "
+                    + FIELD_CAR_CHARGE + " INTEGER, "
+                    + FIELD_CAR_REMAIN + " INTEGER "
                     + ");");
 
             db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_PLUG + " ( "

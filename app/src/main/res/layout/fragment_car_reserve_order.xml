@@ -18,12 +18,20 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
 
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        android:alpha="0.6"
+                        app:srcCompat="@mipmap/ic_battery_std_white_48dp" />
 
                     <com.mikhaellopez.circularprogressbar.CircularProgressBar
                         android:id="@+id/progressBar"
@@ -40,66 +48,86 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="100%"
-                        android:textSize="24dp" />
+                        android:text="240km"
+                        android:textSize="24dp"
+                        android:textStyle="normal|bold" />
                 </FrameLayout>
 
-                <TextView
-                    android:id="@+id/name"
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/remain_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Remain 50 minutes" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_margin="8dp"
+                    app:srcCompat="@mipmap/ic_directions_car_white_24dp" />
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="16dp"
-                    android:textSize="16sp" />
+                    android:layout_marginRight="32dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/car"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="kget-e6"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/car_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="ID: 9527"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="12dp"
+                    app:srcCompat="@drawable/cast_ic_notification_play" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="4dp">
+                android:layout_gravity="center"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/title_address"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:id="@+id/edit_address"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2.2"
-                    android:ems="10"
-                    android:focusable="false"
-                    android:inputType="none"
-                    android:maxLines="1"
-                    android:text="Name"
-                    android:textAlignment="center"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:orientation="horizontal"
-                android:padding="4dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/title_reserve_start_time"
-                    android:textSize="16sp" />
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="8dp"
+                    android:text="@string/title_reserve_start_time" />
 
                 <EditText
                     android:id="@+id/edit_time_start"
-                    android:layout_width="0dp"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2.2"
+                    android:layout_gravity="center_vertical"
                     android:ems="10"
                     android:focusable="false"
                     android:inputType="none"
@@ -112,34 +140,42 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:orientation="horizontal"
-                android:padding="4dp">
+                android:layout_gravity="center"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/title_reserve_usage"
-                    android:textSize="16sp" />
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="8dp"
+                    android:text="@string/title_reserve_usage" />
 
-                <Spinner
+                <android.support.v7.widget.AppCompatSpinner
                     android:id="@+id/spinner_day"
-                    android:layout_width="0dp"
+                    style="@style/TextViewSpinnerItem"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2.2"></Spinner>
+                    android:layout_gravity="center_vertical"
+                    android:textAlignment="center"></android.support.v7.widget.AppCompatSpinner>
 
-                <Spinner
+                <android.support.v7.widget.AppCompatSpinner
                     android:id="@+id/spinner_hour"
-                    android:layout_width="0dp"
+                    style="@style/TextViewSpinnerItem"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2.2"></Spinner>
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:textAlignment="center"></android.support.v7.widget.AppCompatSpinner>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp">
+                android:layout_gravity="center"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="12dp">
 
                 <TextView
                     android:layout_width="wrap_content"

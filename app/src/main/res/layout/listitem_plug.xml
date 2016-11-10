@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="16dp"
-            app:srcCompat="@mipmap/ic_local_gas_station_white_48dp" />
+            app:srcCompat="@mipmap/ic_ev_station_white_48dp" />
     </FrameLayout>
 
     <TextView

@@ -19,7 +19,7 @@
         </shape>
     </item>
 
-    <item android:drawable="@mipmap/ic_local_gas_station_white_24dp"
+    <item android:drawable="@mipmap/ic_ev_station_white_24dp"
         android:bottom="@dimen/fab_padding"
         android:left="@dimen/fab_padding"
         android:right="@dimen/fab_padding"

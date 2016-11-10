@@ -14,19 +14,19 @@ public class DummyPlugSource {
         ContentValues values = new ContentValues();
         values.put(StationProvider.FIELD_ID, "p1".hashCode());
         values.put(StationProvider.FIELD_PLUG_BELONG_STATION, "");
-        values.put(StationProvider.FIELD_PLUG_STATUS, StationProvider.PLUG_STATUS_AVALIABLE);
+        values.put(StationProvider.FIELD_PLUG_STATUS, StationProvider.PLUG_STATUS_AVAILABLE);
         arrayList.add(values);
 
         values = new ContentValues();
         values.put(StationProvider.FIELD_ID, "p2".hashCode());
         values.put(StationProvider.FIELD_PLUG_BELONG_STATION, "");
-        values.put(StationProvider.FIELD_PLUG_STATUS, StationProvider.PLUG_STATUS_AVALIABLE);
+        values.put(StationProvider.FIELD_PLUG_STATUS, StationProvider.PLUG_STATUS_AVAILABLE);
         arrayList.add(values);
 
         values = new ContentValues();
         values.put(StationProvider.FIELD_ID, "p3".hashCode());
         values.put(StationProvider.FIELD_PLUG_BELONG_STATION, "");
-        values.put(StationProvider.FIELD_PLUG_STATUS, StationProvider.PLUG_STATUS_AVALIABLE);
+        values.put(StationProvider.FIELD_PLUG_STATUS, StationProvider.PLUG_STATUS_AVAILABLE);
         arrayList.add(values);
 
         values = new ContentValues();

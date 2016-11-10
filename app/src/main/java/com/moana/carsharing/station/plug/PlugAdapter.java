@@ -70,7 +70,7 @@ public class PlugAdapter extends AbstractRecyclerCursorAdapter {
 
     private int getStatusColor(int status) {
         switch (status) {
-            case StationProvider.PLUG_STATUS_AVALIABLE:
+            case StationProvider.PLUG_STATUS_AVAILABLE:
                 return m_context.getResources().getColor(R.color.colorPlugAvailable);
             case StationProvider.PLUG_STATUS_IN_USAGE:
                 return m_context.getResources().getColor(R.color.colorInUsage);
@@ -81,7 +81,7 @@ public class PlugAdapter extends AbstractRecyclerCursorAdapter {
 
     private int getStatusTextColor(int status) {
         switch (status) {
-            case StationProvider.PLUG_STATUS_AVALIABLE:
+            case StationProvider.PLUG_STATUS_AVAILABLE:
                 return m_context.getResources().getColor(R.color.colorPlugAvailable);
             case StationProvider.PLUG_STATUS_IN_USAGE:
                 return m_context.getResources().getColor(R.color.colorInUsage);

@@ -1,13 +1,14 @@
 package com.moana.carsharing.station.car;
 
 import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -20,13 +21,15 @@ import com.moana.carsharing.R;
 import com.moana.carsharing.base.BaseSettingFragment;
 import com.moana.carsharing.base.ConstantDef;
 import com.moana.carsharing.utils.TimeUtils;
+import com.weiwangcn.betterspinner.library.BetterSpinner;
 
 import java.util.Calendar;
 
 public class CarReserveOrderFragment extends BaseSettingFragment {
 
     TextView mName;
-    EditText mSite;
+    TextView mAddress;
+    TextView mRemainTime;
     EditText mStartTime;
     Spinner mDay;
     Spinner mHour;
@@ -52,9 +55,6 @@ public class CarReserveOrderFragment extends BaseSettingFragment {
 
         mInfo = (CarReserveInfo) getArguments().getSerializable(ConstantDef.ARG_RESERVE_CAR_INFO);
 
-        mName = (TextView) view.findViewById(R.id.name);
-        mName.setText(mInfo.name);
-
         mProgressBar = (CircularProgressBar) view.findViewById(R.id.progressBar);
         mProgressBar.setProgress(mInfo.charge);
         mProgressBar.setColor(CarAdapter.getProgressColor(getContext(), mInfo.charge));
@@ -63,9 +63,11 @@ public class CarReserveOrderFragment extends BaseSettingFragment {
         mCharge.setText(mInfo.charge + "%");
         mCharge.setTextColor(CarAdapter.getProgressColor(getContext(), mInfo.charge));
 
-        mSite = (EditText) view.findViewById(R.id.edit_address);
-        mSite.setText(mInfo.address);
-
+        mRemainTime = (TextView) view.findViewById(R.id.remain_time);
+        if (mInfo.charge != 100)
+            mRemainTime.setVisibility(View.VISIBLE);
+        else
+            mRemainTime.setVisibility(View.GONE);
         mStartTime = (EditText) view.findViewById(R.id.edit_time_start);
         mStartTime.setText(TimeUtils.getYYYYMMDDStr(getContext(), System.currentTimeMillis()));
         mStartTime.setOnClickListener(new DatePickListener());
@@ -73,6 +75,17 @@ public class CarReserveOrderFragment extends BaseSettingFragment {
         mDay = (Spinner) view.findViewById(R.id.spinner_day);
         ArrayAdapter<String> dayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.rent_day));
         mDay.setAdapter(dayAdapter);
+        mDay.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.d("RoadPro", "CarReserveOrderFragment: " + "Spinner Day select " + i );
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         mHour = (Spinner) view.findViewById(R.id.spinner_hour);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.rent_hour));
