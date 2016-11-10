@@ -12,7 +12,7 @@ import android.widget.Button;
 
 import com.moana.carsharing.R;
 
-public class BaseSettingFragment extends Fragment {
+public abstract class BaseSettingFragment extends ContentFragment {
 
     protected OnFragmentInteractionListener mListener;
     protected Button mNext;

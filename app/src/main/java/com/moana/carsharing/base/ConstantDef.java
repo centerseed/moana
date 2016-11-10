@@ -24,7 +24,10 @@ public class ConstantDef {
     public static final String ARG_START_POSITION = "com.moana.carsharing.ARG_START_POSITION";
     public static final String ARG_END_POSITION = "com.moana.carsharing.ARG_END_POSITION";
     public static final String ARG_RESERVE_PLUG_INFO = "com.moana.carsharing.ARG_RESERVE_PLUG_INFO";
-    public static final String ARG_RESERVE_CAR_INFO = "com.moana.carsharing.ARG_RESERVE_CAR_INFO";
+    public static final String ARG_SITE_NAME = "com.moana.carsharing.ARG_SITE_NAME";
+    public static final String ARG_SITE_ADDRESS = "com.moana.carsharing.ARG_SITE_ADDRESS";
+    public static final String ARG_CHARGE = "com.moana.carsharing.ARG_CHARGE";
+    public static final String ARG_ORDER_TEMP_SERIAL = "com.moana.carsharing.ARG_ORDER_TEMP_SERIAL";
 
     // Network status
     public static final String NETWORK_FAIL = "com.moana.carsharing.NETWORK_FAIL";

@@ -1,5 +1,6 @@
 package com.moana.carsharing.station.car;
 
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -8,18 +9,32 @@ import android.os.Bundle;
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.BasePagerActivity;
 import com.moana.carsharing.base.ConstantDef;
+import com.moana.carsharing.station.StationProvider;
 import com.moana.carsharing.station.plug.PlugReserveConfirmFragment;
 
 public class CarReserveActivity extends BasePagerActivity {
-
-    public CarReserveInfo mInfo;
+    String mSiteName;
+    String mSiteAddress;
+    String mOrderTmpSerial;
+    int mCharge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mInfo = (CarReserveInfo) getIntent().getSerializableExtra(ConstantDef.ARG_RESERVE_CAR_INFO);
+        mSiteName = getIntent().getStringExtra(ConstantDef.ARG_SITE_NAME);
+        mSiteAddress = getIntent().getStringExtra(ConstantDef.ARG_SITE_ADDRESS);
+        mCharge = getIntent().getIntExtra(ConstantDef.ARG_CHARGE, 0);
+
+        mOrderTmpSerial = System.currentTimeMillis() + "";
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        Uri uri = StationProvider.getProviderUri(getString(R.string.auth_provider_plug), StationProvider.TABLE_CAR_ORDER);
+        getContentResolver().delete(uri, StationProvider.FIELD_CAR_ORDER_SERIAL + "=?", new String[]{mOrderTmpSerial});
+    }
     @Override
     protected FragmentPagerAdapter getPagerAdapter(FragmentManager fm) {
         return new SectionsPagerAdapter(fm);
@@ -33,9 +48,6 @@ public class CarReserveActivity extends BasePagerActivity {
     @Override
     public void onPageSelected(int position) {
         super.onPageSelected(position);
-        if (position == 1) {
-            CarReserveConfirmFragment.onPageSelected();
-        }
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -47,7 +59,10 @@ public class CarReserveActivity extends BasePagerActivity {
         @Override
         public Fragment getItem(int position) {
             Bundle bundle = new Bundle();
-            bundle.putSerializable(ConstantDef.ARG_RESERVE_CAR_INFO, mInfo);
+            bundle.putString(ConstantDef.ARG_ORDER_TEMP_SERIAL, mOrderTmpSerial);
+            bundle.putString(ConstantDef.ARG_SITE_NAME, mSiteName);
+            bundle.putString(ConstantDef.ARG_SITE_ADDRESS, mSiteAddress);
+            bundle.putInt(ConstantDef.ARG_CHARGE, mCharge);
             switch (position) {
                 case 0:
                     return CarReserveOrderFragment.newInstance(bundle);

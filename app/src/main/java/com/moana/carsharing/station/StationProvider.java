@@ -11,6 +11,8 @@ public class StationProvider extends BaseContentProvider {
     public final static String TABLE_STATION = "_table_station";
     public final static String TABLE_CAR = "_table_car";
     public final static String TABLE_PLUG = "_table_plug";
+    public final static String TABLE_CAR_ORDER = "_table_car_order";
+    public final static String TABLE_PLUG_ORDER = "_table_plug_order";
 
     public final static String FIELD_STATION_NAME = "_station_name";
     public final static String FIELD_STATION_ADDRESS = "_station_address";
@@ -28,6 +30,17 @@ public class StationProvider extends BaseContentProvider {
     public final static String FIELD_PLUG_BELONG_STATION = "_plug_belong_station";
     public final static String FIELD_PLUG_STATUS = "_plug_charge";
 
+    public final static String FIELD_CAR_ORDER_SERIAL = "_car_order_serial";
+    public final static String FIELD_CAR_ORDER_TIME = "_car_order_time";
+    public final static String FIELD_CAR_ORDER_START_TIME = "_car_order_start_time";
+    public final static String FIELD_CAR_ORDER_END_TIME = "_car_order_end_time";
+    public final static String FIELD_CAR_ORDER_CAR_TYPE = "_car_order_car_type";
+    public final static String FIELD_CAR_ORDER_RENT_SITE = "_car_order_rent_site";
+    public final static String FIELD_CAR_ORDER_RETURN_SITE = "_car_order_return_site";
+    public final static String FIELD_CAR_ORDER_USAGE = "_car_order_usage";
+    public final static String FIELD_CAR_ORDER_FEE = "_car_order_fee";
+    public final static String FIELD_CAR_ORDER_PAYMENT = "_car_order_payment";
+
     public final static int PLUG_STATUS_AVAILABLE = 0;
     public final static int PLUG_STATUS_IN_USAGE= 1;
     public final static int PLUG_STATUS_ERROR = 2;
@@ -40,7 +53,7 @@ public class StationProvider extends BaseContentProvider {
 
     private class PlugDatabase extends SQLiteOpenHelper {
 
-        private final static int _DBVersion = 6;
+        private final static int _DBVersion = 1;
         private final static String _DBName = "plug.db";
 
         public PlugDatabase(Context context) {
@@ -73,6 +86,20 @@ public class StationProvider extends BaseContentProvider {
                     + FIELD_PLUG_BELONG_STATION + " TEXT, "
                     + FIELD_PLUG_STATUS + " INTEGER "
                     + ");");
+
+            db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_CAR_ORDER + " ( "
+                    + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + FIELD_CAR_ORDER_SERIAL + " TEXT, "
+                    + FIELD_CAR_ORDER_TIME + " INTEGER, "
+                    + FIELD_CAR_ORDER_START_TIME + " INTEGER, "
+                    + FIELD_CAR_ORDER_END_TIME + " INTEGER, "
+                    + FIELD_CAR_ORDER_RENT_SITE + " TEXT, "
+                    + FIELD_CAR_ORDER_RETURN_SITE + " TEXT, "
+                    + FIELD_CAR_ORDER_CAR_TYPE + " TEXT, "
+                    + FIELD_CAR_ORDER_USAGE + " INTEGER, "
+                    + FIELD_CAR_ORDER_FEE + " INTEGER, "
+                    + FIELD_CAR_ORDER_PAYMENT + " TEXT "
+                    + ");");
         }
 
         @Override
@@ -80,6 +107,7 @@ public class StationProvider extends BaseContentProvider {
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_STATION);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_CAR);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_PLUG);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_CAR_ORDER);
             onCreate(db);
         }
     }

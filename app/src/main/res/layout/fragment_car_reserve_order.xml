@@ -35,8 +35,8 @@
 
                     <com.mikhaellopez.circularprogressbar.CircularProgressBar
                         android:id="@+id/progressBar"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
                         android:layout_margin="8dp"
                         app:cpb_background_progressbar_color="@color/colorLightGrey"
                         app:cpb_background_progressbar_width="10dp"

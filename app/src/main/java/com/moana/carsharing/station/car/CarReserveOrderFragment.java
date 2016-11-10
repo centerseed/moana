@@ -2,8 +2,12 @@ package com.moana.carsharing.station.car;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +24,7 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.BaseSettingFragment;
 import com.moana.carsharing.base.ConstantDef;
+import com.moana.carsharing.station.StationProvider;
 import com.moana.carsharing.utils.TimeUtils;
 import com.weiwangcn.betterspinner.library.BetterSpinner;
 
@@ -33,10 +38,10 @@ public class CarReserveOrderFragment extends BaseSettingFragment {
     EditText mStartTime;
     Spinner mDay;
     Spinner mHour;
-    CarReserveInfo mInfo;
     CircularProgressBar mProgressBar;
     TextView mCharge;
 
+    ContentValues mOrder;
     public static CarReserveOrderFragment newInstance(Bundle bundle) {
         CarReserveOrderFragment f = new CarReserveOrderFragment();
         f.setArguments(bundle);
@@ -53,18 +58,17 @@ public class CarReserveOrderFragment extends BaseSettingFragment {
         super.onViewCreated(view, savedInstanceState);
         mBack.setVisibility(View.GONE);
 
-        mInfo = (CarReserveInfo) getArguments().getSerializable(ConstantDef.ARG_RESERVE_CAR_INFO);
-
+        int charge = getArguments().getInt(ConstantDef.ARG_CHARGE);
         mProgressBar = (CircularProgressBar) view.findViewById(R.id.progressBar);
-        mProgressBar.setProgress(mInfo.charge);
-        mProgressBar.setColor(CarAdapter.getProgressColor(getContext(), mInfo.charge));
+        mProgressBar.setProgress(charge);
+        mProgressBar.setColor(CarAdapter.getProgressColor(getContext(), charge));
 
         mCharge = (TextView) view.findViewById(R.id.charge);
-        mCharge.setText(mInfo.charge + "%");
-        mCharge.setTextColor(CarAdapter.getProgressColor(getContext(), mInfo.charge));
+        mCharge.setText(charge + "%");
+        mCharge.setTextColor(CarAdapter.getProgressColor(getContext(), charge));
 
         mRemainTime = (TextView) view.findViewById(R.id.remain_time);
-        if (mInfo.charge != 100)
+        if (charge != 100)
             mRemainTime.setVisibility(View.VISIBLE);
         else
             mRemainTime.setVisibility(View.GONE);
@@ -96,12 +100,34 @@ public class CarReserveOrderFragment extends BaseSettingFragment {
             @Override
             public void onClick(View view) {
                 if (mListener != null) {
-                    CarReserveInfo info = ((CarReserveActivity) getActivity()).mInfo;
+                    CarReserveInfo info = new CarReserveInfo();
+                    info.orderSerial = getArguments().getString(ConstantDef.ARG_ORDER_TEMP_SERIAL);
                     info.startTime = TimeUtils.getYYYYMMDDTimeStamp(getContext(), mStartTime.getText().toString());
+                    int usage = mDay.getSelectedItemPosition() * 24 + mHour.getSelectedItemPosition() + 1;
+                    info.usage = usage;
+                    info.endTime = info.startTime + usage * 3600 * 1000;
+
+                    getContext().getContentResolver().insert(mUri, info.getContentValues());
+                    getContext().getContentResolver().notifyChange(mUri, null);
                     mListener.toNextFragment();
                 }
             }
         });
+    }
+
+    @Override
+    protected Uri getProviderUri() {
+        return StationProvider.getProviderUri(getString(R.string.auth_provider_plug), StationProvider.TABLE_CAR_ORDER);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
     }
 
     public class DatePickListener implements View.OnClickListener {

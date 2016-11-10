@@ -1,8 +1,11 @@
 package com.moana.carsharing.station.plug;
 
 import android.app.ProgressDialog;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +64,11 @@ public class PlugReserveOrderFragment extends BaseSettingFragment {
         });
     }
 
+    @Override
+    protected Uri getProviderUri() {
+        return null;
+    }
+
     private void dummySendOrder() {
         final PlugReserveInfo info = ((PlugReserveActivity) getActivity()).mInfo;
         final ProgressDialog dialog = ProgressDialog.show(getActivity(), getString(R.string.action_loading), "", true);
@@ -86,6 +94,16 @@ public class PlugReserveOrderFragment extends BaseSettingFragment {
                 }
             }
         }).start();
+
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
 
     }
 }
