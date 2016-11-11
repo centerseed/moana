@@ -71,6 +71,15 @@
     <string name="title_payment_status">Payment Status</string>
     <string name="title_plug_id">Plug ID</string>
 
+    <!-- Car Detail -->
+    <string name="title_car_size">SIZE L*W*H(mm)</string>
+    <string name="title_car_wheelbase">Wheelbase(mm)</string>
+    <string name="title_car_track">Track(front/back)(mm)</string>
+    <string name="title_car_min_turn_radius">Min Turn Radius(m)</string>
+    <string name="title_car_capacity">Trunk Capacity</string>
+    <string name="title_car_wheel">Wheel</string>
+    <string name="title_car_weight">Weight</string>
+
     <string name="hint_search_region">Enter region or address</string>
 
     <!-- TODO: Remove or change this placeholder text -->

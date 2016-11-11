@@ -39,6 +39,7 @@ public class MainActivity extends ContentActivity
     SearchView mSearchView;
     RecyclerView mSearchResultList;
     SiteSearchResultAdapter mAdapter;
+    NavigationView mNavigation;
 
     String mSearchText = "";
 
@@ -59,11 +60,11 @@ public class MainActivity extends ContentActivity
         toggle.syncState();
         toggle.setDrawerIndicatorEnabled(true);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        mNavigation = (NavigationView) findViewById(R.id.nav_view);
+        mNavigation.setNavigationItemSelectedListener(this);
 
-        onNavigationItemSelected(navigationView.getMenu().getItem(0));
-        navigationView.getMenu().getItem(0).setChecked(true);
+        onNavigationItemSelected(mNavigation.getMenu().getItem(0));
+        mNavigation.getMenu().getItem(0).setChecked(true);
 
         mGroup = (RadioGroup) findViewById(R.id.function_group);
         mGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -103,6 +104,7 @@ public class MainActivity extends ContentActivity
     @Override
     protected void onResume() {
         super.onResume();
+        mNavigation.getMenu().getItem(0).setChecked(true);
         mGroup.check(PreferenceUtils.getCurrentFunction(this));
     }
 
@@ -163,6 +165,11 @@ public class MainActivity extends ContentActivity
 
         if (id == R.id.nav_logout) {
             Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+
+        if (id == R.id.nav_car_intro) {
+            Intent intent = new Intent(this, CarIntroduceActivity.class);
             startActivity(intent);
         }
 

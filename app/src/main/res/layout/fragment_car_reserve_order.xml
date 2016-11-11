@@ -113,12 +113,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="24dp"
+                android:layout_marginLeft="12dp"
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="50dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="8dp"
@@ -127,7 +127,7 @@
 
                 <EditText
                     android:id="@+id/edit_time_start"
-                    android:layout_width="200dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:ems="10"
@@ -143,12 +143,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="24dp"
+                android:layout_marginLeft="12dp"
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="50dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="8dp"
@@ -158,7 +158,7 @@
                 <android.support.v7.widget.AppCompatSpinner
                     android:id="@+id/spinner_day"
                     style="@style/TextViewSpinnerItem"
-                    android:layout_width="100dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:textAlignment="center"></android.support.v7.widget.AppCompatSpinner>
@@ -166,7 +166,7 @@
                 <android.support.v7.widget.AppCompatSpinner
                     android:id="@+id/spinner_hour"
                     style="@style/TextViewSpinnerItem"
-                    android:layout_width="120dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"

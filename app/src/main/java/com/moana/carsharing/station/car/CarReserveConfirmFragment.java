@@ -55,7 +55,8 @@ public class CarReserveConfirmFragment extends BaseSettingFragment {
         mTimeEnd = (TextView) view.findViewById(R.id.time_end);
 
         mFee = (Spinner) view.findViewById(R.id.fee_type);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, FEE);
+        String fee[] = getResources().getStringArray(R.array.fee_type);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, fee);
         mFee.setAdapter(adapter);
 
         mNext.setOnClickListener(new View.OnClickListener() {
@@ -126,8 +127,4 @@ public class CarReserveConfirmFragment extends BaseSettingFragment {
             }
         }).start();
     }
-    private static final String[] FEE = new String[]{
-            "1 hour / NTD 250 (holiday 300)",
-            "1 day / NTD 1600 (holiday 2000)"
-    };
 }

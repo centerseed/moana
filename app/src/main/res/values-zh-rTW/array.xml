@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="rent_day">
+        <item>0 天</item>
+        <item>1 天</item>
+        <item>2 天</item>
+        <item>3 天</item>
+        <item>4 天</item>
+        <item>5 天</item>
+        <item>6 天</item>
+        <item>7 天</item>
+    </string-array>
+
+    <string-array name="rent_hour">
+        <item>1 小時</item>
+        <item>2 小時</item>
+        <item>3 小時</item>
+        <item>6 小時</item>
+        <item>12 小時</item>
+        <item>16 小時</item>
+        <item>18 小時</item>
+    </string-array>
+
+    <string-array name="plug_status">
+        <item>可使用</item>
+        <item>使用中</item>
+        <item>故障</item>
+    </string-array>
+
+    <string-array name="fee_type">
+        <item>1 小時 / NTD 250 (假日 300)</item>
+        <item>1 天 / NTD 1600 (假日 2000)</item>
+    </string-array>
+</resources>

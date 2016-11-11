@@ -27,4 +27,9 @@
         <item>In Use</item>
         <item>Failure</item>
     </string-array>
+
+    <string-array name="fee_type">
+        <item>1 hour / NTD 250 (holiday 300)</item>
+        <item>1 day / NTD 1600 (holiday 2000)</item>
+    </string-array>
 </resources>
