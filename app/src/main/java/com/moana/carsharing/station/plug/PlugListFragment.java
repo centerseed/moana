@@ -58,10 +58,10 @@ public class PlugListFragment extends RecyclerFragment implements PlugAdapter.Re
 
     @Override
     public void onPlugClick(Cursor cursor) {
-        PlugReserveInfo info = new PlugReserveInfo(cursor);
-        info.address = getArguments().getString(StationProvider.FIELD_STATION_ADDRESS);
         Intent intent = new Intent(getActivity(), PlugReserveActivity.class);
-        intent.putExtra(ConstantDef.ARG_RESERVE_PLUG_INFO, info);
+        intent.putExtra(ConstantDef.ARG_SITE_NAME, getArguments().getString(ConstantDef.ARG_SITE_NAME));
+        intent.putExtra(ConstantDef.ARG_SITE_ADDRESS, getArguments().getString(ConstantDef.ARG_SITE_ADDRESS));
+        intent.putExtra(ConstantDef.ARG_INT, cursor.getInt(cursor.getColumnIndex(StationProvider.FIELD_ID)));
         startActivity(intent);
     }
 

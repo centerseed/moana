@@ -1,16 +1,15 @@
 package com.moana.carsharing.station.car;
 
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.os.Bundle;
 
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.BasePagerActivity;
 import com.moana.carsharing.base.ConstantDef;
 import com.moana.carsharing.station.StationProvider;
-import com.moana.carsharing.station.plug.PlugReserveConfirmFragment;
 
 public class CarReserveActivity extends BasePagerActivity {
     String mSiteName;

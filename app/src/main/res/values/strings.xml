@@ -69,6 +69,7 @@
     <string name="title_order_serial">Order Serial</string>
     <string name="title_reserve_time">Reserve Time</string>
     <string name="title_payment_status">Payment Status</string>
+    <string name="title_plug_id">Plug ID</string>
 
     <string name="hint_search_region">Enter region or address</string>
 

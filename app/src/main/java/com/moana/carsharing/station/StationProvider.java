@@ -41,6 +41,10 @@ public class StationProvider extends BaseContentProvider {
     public final static String FIELD_CAR_ORDER_FEE = "_car_order_fee";
     public final static String FIELD_CAR_ORDER_PAYMENT = "_car_order_payment";
 
+    public final static String FIELD_PLUG_ORDER_SERIAL = "_plug_order_serial";
+    public final static String FIELD_PLUG_ORDER_TIME = "_plug_order_time";
+    public final static String FIELD_PLUG_ORDER_SITE = "_plug_order_site";
+
     public final static int PLUG_STATUS_AVAILABLE = 0;
     public final static int PLUG_STATUS_IN_USAGE= 1;
     public final static int PLUG_STATUS_ERROR = 2;
@@ -53,7 +57,7 @@ public class StationProvider extends BaseContentProvider {
 
     private class PlugDatabase extends SQLiteOpenHelper {
 
-        private final static int _DBVersion = 1;
+        private final static int _DBVersion = 2;
         private final static String _DBName = "plug.db";
 
         public PlugDatabase(Context context) {
@@ -100,6 +104,13 @@ public class StationProvider extends BaseContentProvider {
                     + FIELD_CAR_ORDER_FEE + " INTEGER, "
                     + FIELD_CAR_ORDER_PAYMENT + " TEXT "
                     + ");");
+
+            db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_PLUG_ORDER + " ( "
+                    + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + FIELD_PLUG_ORDER_SERIAL + " TEXT, "
+                    + FIELD_PLUG_ORDER_SITE + " TEXT, "
+                    + FIELD_PLUG_ORDER_TIME + " INTEGER "
+                    + ");");
         }
 
         @Override
@@ -108,6 +119,7 @@ public class StationProvider extends BaseContentProvider {
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_CAR);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_PLUG);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_CAR_ORDER);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_PLUG_ORDER);
             onCreate(db);
         }
     }

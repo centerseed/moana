@@ -48,16 +48,6 @@ public class PlugReserveConfirmFragment extends BaseSettingFragment{
         return null;
     }
 
-    public static void onPageSelected() {
-        if (mInstance != null && mInstance.isResumed()) {
-            PlugReserveInfo info = ((PlugReserveActivity)mInstance.getActivity()).mInfo;
-            if (info != null) {
-                mInstance.mSite.setText(info.address);
-                mInstance.mStartTime.setText(TimeUtils.getYYYYMMDDStr(mInstance.getContext(), info.startTime));
-            }
-        }
-    }
-
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
 

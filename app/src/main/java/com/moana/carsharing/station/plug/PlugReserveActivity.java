@@ -1,6 +1,7 @@
 package com.moana.carsharing.station.plug;
 
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,14 +16,28 @@ import java.io.Serializable;
 
 public class PlugReserveActivity extends BasePagerActivity {
 
+    String mName;
     String mAddress;
+    String mOrderTmpSerial;
+    int mPlugID;
     public PlugReserveInfo mInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAddress = getIntent().getStringExtra(ConstantDef.ARG_STRING);
-        mInfo = (PlugReserveInfo) getIntent().getSerializableExtra(ConstantDef.ARG_RESERVE_PLUG_INFO);
+        mName = getIntent().getStringExtra(ConstantDef.ARG_SITE_NAME);
+        mAddress = getIntent().getStringExtra(ConstantDef.ARG_SITE_ADDRESS);
+        mPlugID = getIntent().getIntExtra(ConstantDef.ARG_INT, 0);
+
+        mOrderTmpSerial = System.currentTimeMillis() + "";
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        Uri uri = StationProvider.getProviderUri(getString(R.string.auth_provider_plug), StationProvider.TABLE_PLUG_ORDER);
+        getContentResolver().delete(uri, StationProvider.FIELD_PLUG_ORDER_SERIAL + "=?", new String[]{mOrderTmpSerial});
     }
 
     @Override
@@ -35,14 +50,6 @@ public class PlugReserveActivity extends BasePagerActivity {
         return getResources().getString(R.string.title_plug_reserve);
     }
 
-    @Override
-    public void onPageSelected(int position) {
-        super.onPageSelected(position);
-        if (position == 1) {
-            PlugReserveConfirmFragment.onPageSelected();
-        }
-    }
-
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -52,12 +59,15 @@ public class PlugReserveActivity extends BasePagerActivity {
         @Override
         public Fragment getItem(int position) {
             Bundle bundle = new Bundle();
-            bundle.putString(ConstantDef.ARG_STRING, mInfo.address);
+            bundle.putString(ConstantDef.ARG_ORDER_TEMP_SERIAL, mOrderTmpSerial);
+            bundle.putInt(ConstantDef.ARG_INT, mPlugID);
+            bundle.putString(ConstantDef.ARG_SITE_NAME, mName);
+            bundle.putString(ConstantDef.ARG_SITE_ADDRESS, mAddress);
             switch (position) {
                 case 0:
                     return PlugReserveOrderFragment.newInstance(bundle);
                 case 1:
-                    return PlugReserveConfirmFragment.newInstance(bundle);
+                    return PlugReserveDetailFragment.newInstance(bundle);
             }
             return null;
         }

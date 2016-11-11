@@ -12,18 +12,21 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.BaseSettingFragment;
 import com.moana.carsharing.base.ConstantDef;
+import com.moana.carsharing.station.StationProvider;
 import com.moana.carsharing.utils.TimeUtils;
 
 public class PlugReserveOrderFragment extends BaseSettingFragment {
 
-    String mAddress;
-    EditText mSite;
+    int mPlugId;
+    String mSiteName;
+    TextView mSite;
+    TextView mPlugSerial;
     EditText mStartTime;
-    Spinner mUsage;
 
     public static PlugReserveOrderFragment newInstance(Bundle bundle) {
         PlugReserveOrderFragment f = new PlugReserveOrderFragment();
@@ -41,24 +44,33 @@ public class PlugReserveOrderFragment extends BaseSettingFragment {
         super.onViewCreated(view, savedInstanceState);
         mBack.setVisibility(View.GONE);
 
-        mAddress = getArguments().getString(ConstantDef.ARG_STRING);
+        mPlugId = getArguments().getInt(ConstantDef.ARG_INT);
+        mSiteName = getArguments().getString(ConstantDef.ARG_SITE_NAME);
 
-        mSite = (EditText) view.findViewById(R.id.edit_site_name);
-        mSite.setText(mAddress);
+        mSite = (TextView) view.findViewById(R.id.name);
+        mSite.setText(mSiteName);
+
+        mPlugSerial = (TextView) view.findViewById(R.id.serial);
+        mPlugSerial.setText(mPlugId + "");
 
         mStartTime = (EditText) view.findViewById(R.id.edit_time_start);
         mStartTime.setText(TimeUtils.getYYYYMMDDStr(getContext(), System.currentTimeMillis()));
 
-        mUsage = (Spinner) view.findViewById(R.id.spinner_usage);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.rent_hour));
-        mUsage.setAdapter(adapter);
 
         // override on Click event
         mNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: generate order from API
+                // TODO: Delete this temp order, open new activity to show result
                 // use dummy data
+                PlugReserveInfo info = new PlugReserveInfo();
+                info.serial = getArguments().getString(ConstantDef.ARG_ORDER_TEMP_SERIAL);
+                info.id = mPlugId;
+                info.site = mSiteName;
+                info.time = 0;
+
+                getContext().getContentResolver().insert(mUri, info.getContentValues());
+                getContext().getContentResolver().notifyChange(mUri, null);
                 dummySendOrder();
             }
         });
@@ -66,11 +78,10 @@ public class PlugReserveOrderFragment extends BaseSettingFragment {
 
     @Override
     protected Uri getProviderUri() {
-        return null;
+        return StationProvider.getProviderUri(getString(R.string.auth_provider_plug), StationProvider.TABLE_PLUG_ORDER);
     }
 
     private void dummySendOrder() {
-        final PlugReserveInfo info = ((PlugReserveActivity) getActivity()).mInfo;
         final ProgressDialog dialog = ProgressDialog.show(getActivity(), "", getString(R.string.action_sending_order), true);
         new Thread(new Runnable() {
             @Override
@@ -81,10 +92,6 @@ public class PlugReserveOrderFragment extends BaseSettingFragment {
                     e.printStackTrace();
                 } finally {
                     dialog.dismiss();
-
-                    info.name = "";
-                    info.address = mAddress;
-                    info.startTime = TimeUtils.getYYYYMMDDTimeStamp(getContext(), mStartTime.getText().toString());
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {

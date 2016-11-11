@@ -101,6 +101,8 @@ public class CarReserveOrderFragment extends BaseSettingFragment {
             public void onClick(View view) {
                 if (mListener != null) {
                     CarReserveInfo info = new CarReserveInfo();
+
+                    // TODO: Delete this temp order, open new activity to show result
                     info.orderSerial = getArguments().getString(ConstantDef.ARG_ORDER_TEMP_SERIAL);
                     info.startTime = TimeUtils.getYYYYMMDDTimeStamp(getContext(), mStartTime.getText().toString());
                     int usage = mDay.getSelectedItemPosition() * 24 + mHour.getSelectedItemPosition() + 1;

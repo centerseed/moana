@@ -275,6 +275,19 @@ public class DummyStationSource {
         values.put(StationProvider.FIELD_IS_RENT, 0);
         arrayList.add(values);
 
+        // Dummy 11
+        values = new ContentValues();
+        values.put(StationProvider.FIELD_ID, "plug12".hashCode());
+        values.put(StationProvider.FIELD_STATION_NAME, "車麗屋");
+        values.put(StationProvider.FIELD_STATION_ADDRESS, "新北市板橋區中山路一段277號");
+        values.put(StationProvider.FIELD_LAT, 25.0139465);
+        values.put(StationProvider.FIELD_LNG, 121.4670474);
+        values.put(StationProvider.FIELD_STATION_PHOTO, "http://www.carshop.com.tw/images/car_quality_goodle_3.jpg");
+        values.put(StationProvider.FIELD_TOTAL, 10);
+        values.put(StationProvider.FIELD_USAGE, 0);
+        values.put(StationProvider.FIELD_IS_RENT, 0);
+        arrayList.add(values);
+
         return arrayList;
     }
 }
