@@ -44,6 +44,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        app:srcCompat="@mipmap/ic_traffic_white_24dp"
+        android:id="@+id/fab_traffic"
+        android:tint="@android:color/black"
+        android:alpha="1"
+        app:backgroundTint="#fafafa"
+        app:useCompatPadding="true"
+        app:fabSize="normal"
+        app:elevation="16dp"
+        app:borderWidth="1dp"
+        app:layout_anchor="@id/fabLocalize"
+        app:layout_anchorGravity="right|top" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
         app:fabSize="normal"
         app:srcCompat="@mipmap/ic_directions_car_white_24dp"
         app:layout_anchor="@id/bottom_sheet"
@@ -51,38 +67,5 @@
         app:useCompatPadding="true"
         app:elevation="16dp"
         android:id="@+id/fabNavigation" />
-    <!--
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="#bbdddddd"
-        android:layout_margin="8dp">
 
-        <RadioButton
-            android:text="@string/title_parking"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/radioButton"
-            android:layout_weight="1"
-            android:checked="true"
-            android:gravity="center"
-            android:button="@android:color/transparent"
-            android:background="@drawable/selector_rect_normal"
-            android:padding="10dp"
-            android:textColor="@drawable/selector_text_normal"/>
-
-        <RadioButton
-            android:text="@string/title_plug"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/radioButton2"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:button="@android:color/transparent"
-            android:background="@drawable/selector_rect_normal"
-            android:padding="10dp"
-            android:textColor="@drawable/selector_text_normal"/>
-    </RadioGroup>
-    -->
 </android.support.design.widget.CoordinatorLayout>

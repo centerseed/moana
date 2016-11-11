@@ -61,6 +61,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
     BottomSheetBehavior mBottomSheetBehavior;
     FloatingActionButton mFab;
     FloatingActionButton mLocalization;
+    FloatingActionButton mTraffic;
     LatLng mCurrPosition;
     LocationManager mLocationManager;
 
@@ -69,6 +70,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
 
     int mFunction = -1;
     boolean isMoveToCurrentPosition = false;
+    boolean isEnableTraffic = false;
 
     public MapsFragment() {
     }
@@ -122,6 +124,17 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
                         });
                     }
                 });
+            }
+        });
+
+        mTraffic = (FloatingActionButton) view.findViewById(R.id.fab_traffic);
+        mTraffic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mMap != null) {
+                    isEnableTraffic = !isEnableTraffic;
+                    mMap.setTrafficEnabled(isEnableTraffic);
+                }
             }
         });
 
