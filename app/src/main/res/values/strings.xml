@@ -24,10 +24,11 @@
     <string name="title_plug">Plug</string>
     <string name="title_search_parking">Search Parking...</string>
     <string name="title_search_plug">Search Plug...</string>
+    <string name="title_query_order">Query Order</string>
 
     <!-- Register -->
     <string name="title_register">Register</string>
-    <string name="title_register_personal"><u>Create account</u></string>
+    <string name="title_register_personal">Add Member</string>
     <string name="title_id">Personal Identity</string>
     <string name="title_name">Name</string>
     <string name="title_male">Male</string>
@@ -69,6 +70,7 @@
     <string name="title_order_serial">Order Serial</string>
     <string name="title_reserve_time">Reserve Time</string>
     <string name="title_payment_status">Payment Status</string>
+    <string name="title_order_status">Status</string>
     <string name="title_plug_id">Plug ID</string>
 
     <!-- Car Detail -->
@@ -81,9 +83,7 @@
     <string name="title_car_weight">Weight</string>
 
     <string name="hint_search_region">Enter region or address</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    
     <string name="title_activity_plug_info">PlugInfoActivity</string>
     <string name="title_activity_login">Sign in</string>
 

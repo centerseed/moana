@@ -21,10 +21,11 @@
     <string name="title_plug">充電站</string>
     <string name="title_search_parking">搜尋停車場(區域，地址)...</string>
     <string name="title_search_plug">搜尋充電站(區域，地址)...</string>
+    <string name="title_query_order">訂單查詢</string>
 
     <!-- Register -->
     <string name="title_register">註冊</string>
-    <string name="title_register_personal"><u>加入會員</u></string>
+    <string name="title_register_personal">加入會員</string>
     <string name="title_id">身分證字號</string>
     <string name="title_name">中文姓名</string>
     <string name="title_male">女</string>
@@ -66,6 +67,7 @@
     <string name="title_order_serial">訂單編號</string>
     <string name="title_reserve_time">訂單時間</string>
     <string name="title_payment_status">訂單狀態</string>
+    <string name="title_order_status">狀態</string>
     <string name="title_plug_id">充電樁編號</string>
 
     <!-- Car Detail -->

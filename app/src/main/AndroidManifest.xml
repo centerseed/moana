@@ -75,7 +75,8 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
-        <activity android:name=".CarIntroduceActivity"></activity>
+        <activity android:name=".CarIntroduceActivity" />
+        <activity android:name=".order.OrderListActivity"></activity>
     </application>
 
 </manifest>

@@ -21,12 +21,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
+import com.moana.carsharing.account.AccountUtils;
 import com.moana.carsharing.account.LoginActivity;
+import com.moana.carsharing.account.personal.RegisterPersonalActivity;
 import com.moana.carsharing.base.ConstantDef;
 import com.moana.carsharing.base.ContentActivity;
 import com.moana.carsharing.map.MapsFragment;
+import com.moana.carsharing.order.OrderListActivity;
 import com.moana.carsharing.station.StationProvider;
 import com.moana.carsharing.utils.PreferenceUtils;
 
@@ -40,6 +45,12 @@ public class MainActivity extends ContentActivity
     RecyclerView mSearchResultList;
     SiteSearchResultAdapter mAdapter;
     NavigationView mNavigation;
+
+    LinearLayout mLogin;
+    LinearLayout mSigninBtn;
+    LinearLayout mMember;
+    TextView mOrder;
+    TextView mAddMember;
 
     String mSearchText = "";
 
@@ -99,6 +110,36 @@ public class MainActivity extends ContentActivity
         mSearchResultList.setAdapter(mAdapter);
 
         mSearchResultList.setVisibility(View.GONE);
+
+        View headerView = mNavigation.getHeaderView(0);
+        mLogin = (LinearLayout) headerView.findViewById(R.id.login);
+        mSigninBtn = (LinearLayout) headerView.findViewById(R.id.singin_button);
+        mSigninBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(i);
+            }
+        });
+
+        mAddMember = (TextView) headerView.findViewById(R.id.add_member);
+        mAddMember.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, RegisterPersonalActivity.class);
+                startActivity(i);
+            }
+        });
+
+        mMember = (LinearLayout) headerView.findViewById(R.id.member);
+        mOrder = (TextView) headerView.findViewById(R.id.query_order);
+        mOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, OrderListActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -106,6 +147,14 @@ public class MainActivity extends ContentActivity
         super.onResume();
         mNavigation.getMenu().getItem(0).setChecked(true);
         mGroup.check(PreferenceUtils.getCurrentFunction(this));
+
+        if (AccountUtils.with(this).getAccountName() == null) {
+            mLogin.setVisibility(View.VISIBLE);
+            mMember.setVisibility(View.GONE);
+        } else {
+            mLogin.setVisibility(View.GONE);
+            mMember.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -164,8 +213,8 @@ public class MainActivity extends ContentActivity
         }
 
         if (id == R.id.nav_logout) {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
+            AccountUtils.with(this).clearAcconut();
+            onResume();
         }
 
         if (id == R.id.nav_car_intro) {
