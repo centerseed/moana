@@ -1,6 +1,8 @@
 package com.moana.carsharing.station.plug;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,15 +12,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.BaseSettingFragment;
 import com.moana.carsharing.base.ConstantDef;
 import com.moana.carsharing.station.StationProvider;
+import com.moana.carsharing.station.car.CarReserveOrderFragment;
 import com.moana.carsharing.utils.TimeUtils;
+
+import java.util.Calendar;
 
 public class PlugReserveOrderFragment extends BaseSettingFragment {
 
@@ -55,7 +62,7 @@ public class PlugReserveOrderFragment extends BaseSettingFragment {
 
         mStartTime = (EditText) view.findViewById(R.id.edit_time_start);
         mStartTime.setText(TimeUtils.getYYYYMMDDStr(getContext(), System.currentTimeMillis()));
-
+        mStartTime.setOnClickListener(new DatePickListener());
 
         // override on Click event
         mNext.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +74,7 @@ public class PlugReserveOrderFragment extends BaseSettingFragment {
                 info.serial = getArguments().getString(ConstantDef.ARG_ORDER_TEMP_SERIAL);
                 info.id = mPlugId;
                 info.site = mSiteName;
-                info.time = 0;
+                info.time = TimeUtils.getYYYYMMDDTimeStamp(getContext(), mStartTime.getText().toString());;
 
                 getContext().getContentResolver().insert(mUri, info.getContentValues());
                 getContext().getContentResolver().notifyChange(mUri, null);
@@ -111,5 +118,46 @@ public class PlugReserveOrderFragment extends BaseSettingFragment {
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
+    }
+
+    public class DatePickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View view) {
+            final EditText editText = (EditText) view;
+            String dates[] = editText.getText().toString().split(" ");
+            final Calendar c = Calendar.getInstance();
+
+            int year, month, day;
+            year = c.get(Calendar.YEAR);
+            month = c.get(Calendar.MONTH) + 1;
+            day = c.get(Calendar.DATE);
+
+            final int hour = Integer.valueOf(dates[1].split(":")[0]);
+            final int minute = Integer.valueOf(dates[1].split(":")[1]);
+
+            DatePickerDialog dpd = new DatePickerDialog(getActivity(),
+                    new DatePickerDialog.OnDateSetListener() {
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+                            // 完成選擇，顯示日期
+                            editText.setText(year + "/" + (monthOfYear + 1) + "/"
+                                    + dayOfMonth);
+
+
+                            TimePickerDialog tpd = new TimePickerDialog(getContext(),
+                                    new TimePickerDialog.OnTimeSetListener() {
+                                        public void onTimeSet(TimePicker view, int hourOfDay,
+                                                              int minute) {
+                                            // 完成選擇，顯示時間
+                                            editText.setText(editText.getText().toString() + " " + hourOfDay + ":" + minute);
+                                        }
+                                    }, hour, minute, false);
+                            tpd.show();
+
+                        }
+                    }, year, --month, day);
+            dpd.show();
+        }
     }
 }

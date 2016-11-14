@@ -31,4 +31,7 @@ public class ConstantDef {
 
     // Network status
     public static final String NETWORK_FAIL = "com.moana.carsharing.NETWORK_FAIL";
+
+    // Constance
+    public static final int HOUR = 3600 * 1000;
 }

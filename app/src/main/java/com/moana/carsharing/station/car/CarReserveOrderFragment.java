@@ -107,7 +107,7 @@ public class CarReserveOrderFragment extends BaseSettingFragment {
                     info.startTime = TimeUtils.getYYYYMMDDTimeStamp(getContext(), mStartTime.getText().toString());
                     int usage = mDay.getSelectedItemPosition() * 24 + mHour.getSelectedItemPosition() + 1;
                     info.usage = usage;
-                    info.endTime = info.startTime + usage * 3600 * 1000;
+                    info.endTime = info.startTime + usage * ConstantDef.HOUR;
 
                     getContext().getContentResolver().insert(mUri, info.getContentValues());
                     getContext().getContentResolver().notifyChange(mUri, null);
