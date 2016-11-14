@@ -93,4 +93,6 @@
     <string name="error_incorrect_password">密碼格式錯誤</string>
     <string name="error_field_required">此欄位為必填</string>
 
+    <string name="text_crash">App當掉了，傳送錯誤報告給開發者協助除錯？</string>
+
 </resources>

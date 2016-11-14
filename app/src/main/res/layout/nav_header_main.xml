@@ -47,7 +47,7 @@
 
         <TextView
             android:id="@+id/query_order"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="@string/title_query_order"
             android:textColor="@android:color/white"

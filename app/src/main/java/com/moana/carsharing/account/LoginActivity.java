@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    
+
     private void attemptLogin() {
         if (mAuthTask != null) {
             return;
