@@ -16,9 +16,15 @@ import java.util.Comparator;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
 
+    public interface OrderAdapterListener {
+        void onCarOrderClick(String serial);
+        void onPlugOrderClick(String serial);
+    }
+
     Context mContext;
     ArrayList<OrderItem> mItems = new ArrayList<>();
     LayoutInflater mInflater;
+    OrderAdapterListener mListener;
 
     public OrderAdapter(Context context) {
         mContext = context;
@@ -33,10 +39,20 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
     @Override
     public void onBindViewHolder(OrderViewHolder holder, int position) {
-        OrderItem item = mItems.get(position);
+        final OrderItem item = mItems.get(position);
         holder.serial.setText(item.mSerial);
         holder.time.setText(item.mOrderTime);
         holder.status.setText(item.mStatus);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mListener != null) {
+                    if (item.isCar) mListener.onCarOrderClick(item.mSerial);
+                    else mListener.onPlugOrderClick(item.mSerial);
+                }
+            }
+        });
     }
 
     @Override
@@ -56,6 +72,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             time = (TextView) itemView.findViewById(R.id.reserve_time);
             status = (TextView) itemView.findViewById(R.id.status);
         }
+    }
+
+    public void setOnClickListener(OrderAdapterListener listener) {
+        mListener = listener;
     }
 
     public void reset() {
@@ -85,7 +105,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         mItems.add(item);
     }
 
-
     public class OrderItem {
         public String mSerial;
         public String mOrderTime;
@@ -96,7 +115,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             mSerial = serial;
             mOrderTime = orderTime;
             mStatus = status;
-
             this.isCar = isCar;
         }
     }

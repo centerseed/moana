@@ -76,7 +76,10 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity android:name=".CarIntroduceActivity" />
-        <activity android:name=".order.OrderListActivity"></activity>
+        <activity android:name=".order.OrderListActivity" />
+        <activity
+            android:name=".order.OrderDetailActivity"
+            android:parentActivityName="com.moana.carsharing.MainActivity"></activity>
     </application>
 
 </manifest>

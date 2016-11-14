@@ -20,6 +20,7 @@ public class ConstantDef {
     public static final String ARG_LOCATION = "com.moana.carsharing.ARG_LOCATION";
     public static final String ARG_LATLNG = "com.moana.carsharing.ARG_LATLNG";
     public static final String ARG_STRING = "com.moana.carsharing.ARG_STRING";
+    public static final String ARG_BOOLEAN = "com.moana.carsharing.ARG_BOOLEAN";
     public static final String ARG_INT = "com.moana.carsharing.ARG_INT";
     public static final String ARG_START_POSITION = "com.moana.carsharing.ARG_START_POSITION";
     public static final String ARG_END_POSITION = "com.moana.carsharing.ARG_END_POSITION";

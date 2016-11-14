@@ -1,5 +1,6 @@
 package com.moana.carsharing.order;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,10 +13,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 
 import com.moana.carsharing.R;
+import com.moana.carsharing.base.ConstantDef;
 import com.moana.carsharing.station.StationProvider;
 import com.moana.carsharing.utils.TimeUtils;
 
-public class OrderListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class OrderListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>, OrderAdapter.OrderAdapterListener {
 
     final int LOADER_CAR_ORDER = 0;
     final int LOADER_PLUG_ORDER = 1;
@@ -43,6 +45,7 @@ public class OrderListActivity extends AppCompatActivity implements LoaderManage
         mRecycler.setLayoutManager(manager);
 
         mAdapter = new OrderAdapter(this);
+        mAdapter.setOnClickListener(this);
         mRecycler.setAdapter(mAdapter);
 
         getSupportLoaderManager().initLoader(LOADER_CAR_ORDER, null, this);
@@ -106,5 +109,22 @@ public class OrderListActivity extends AppCompatActivity implements LoaderManage
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
+    }
+
+    @Override
+    public void onCarOrderClick(String serial) {
+        toOrderDetail(serial, true);
+    }
+
+    @Override
+    public void onPlugOrderClick(String serial) {
+        toOrderDetail(serial, false);
+    }
+
+    private void toOrderDetail(String serial, boolean isCar) {
+        Intent intent = new Intent(this, OrderDetailActivity.class);
+        intent.putExtra(ConstantDef.ARG_ORDER_TEMP_SERIAL, serial);
+        intent.putExtra(ConstantDef.ARG_BOOLEAN, isCar);
+        startActivity(intent);
     }
 }
