@@ -35,15 +35,16 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.AsyncCallback;
 import com.moana.carsharing.base.ConstantDef;
 import com.moana.carsharing.base.PositionFragment;
 import com.moana.carsharing.station.StationActivity;
-import com.moana.carsharing.station.StationProvider;
-import com.moana.carsharing.station.StationPlugSyncer;
 import com.moana.carsharing.station.StationCarSyncer;
+import com.moana.carsharing.station.StationPlugSyncer;
+import com.moana.carsharing.station.StationProvider;
 import com.moana.carsharing.utils.IconUtils;
 import com.moana.carsharing.utils.PreferenceUtils;
 
@@ -66,6 +67,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
     LocationManager mLocationManager;
 
     ArrayList<Marker> mMarkerList;
+    Polyline mPolyline;
     Marker mReserveMarker;
 
     int mFunction = -1;
@@ -116,8 +118,12 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                if (mPolyline != null) {
+                                    mPolyline.remove();
+                                    mPolyline = null;
+                                }
                                 if (mMap != null) {
-                                    mMap.addPolyline(options);
+                                    mPolyline = mMap.addPolyline(options);
                                     mMap.moveCamera(cu);
                                 }
                             }

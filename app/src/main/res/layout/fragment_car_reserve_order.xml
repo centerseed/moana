@@ -71,7 +71,7 @@
                             app:cpb_background_progressbar_color="@color/colorLightGrey"
                             app:cpb_background_progressbar_width="10dp"
                             app:cpb_progressbar_color="@color/colorPlugAvailable"
-                            app:cpb_progressbar_width="10dp"
+                            app:cpb_progressbar_width="8dp"
                             android:layout_height="100dp" />
 
                         <TextView
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="12dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:orientation="horizontal">
 
                 <TextView
