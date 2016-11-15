@@ -97,39 +97,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
             @Override
             public void onClick(View view) {
                 if (mCurrPosition == null || mMarker == null) return;
-
-                LatLng dest = mMarker.getPosition();
-                String url = getDirectionsUrl(mCurrPosition, dest);
-
-                Request request = new Request.Builder()
-                        .url(url)
-                        .build();
-                Call call = mClient.newCall(request);
-                call.enqueue(new AsyncCallback(getContext()) {
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        String json = response.body().string();
-
-                        MapDirectionBuilder.MapDirectionResult result = new MapDirectionBuilder().build(getContext(), json);
-
-                        final PolylineOptions options = result.getPolyline();
-                        final CameraUpdate cu = result.getCameraUpdate();
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (mPolyline != null) {
-                                    mPolyline.remove();
-                                    mPolyline = null;
-                                }
-                                if (mMap != null) {
-                                    mPolyline = mMap.addPolyline(options);
-                                    mMap.animateCamera(cu);
-                                }
-                            }
-                        });
-                    }
-                });
+                startNavigate(mCurrPosition, mMarker.getPosition());
             }
         });
 
@@ -294,6 +262,10 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
             removeReserveMarker();
             mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         }
+
+        if (ConstantDef.ACTION_START_NAVIGATION.equals(action) && mCurrPosition != null) {
+            startNavigate(mCurrPosition, mReserveMarker.getPosition());
+        }
     }
 
     private void moveToDummyPosition() {
@@ -440,5 +412,39 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         intent.putExtra(ConstantDef.ARG_STRING, mMarker.getSnippet());
         intent.putExtra(ConstantDef.ARG_INT, mFunction);
         getActivity().startActivity(intent);
+    }
+
+    private void startNavigate(LatLng ori, LatLng dest) {
+        String url = getDirectionsUrl(ori, dest);
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        Call call = mClient.newCall(request);
+        call.enqueue(new AsyncCallback(getContext()) {
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String json = response.body().string();
+
+                MapDirectionBuilder.MapDirectionResult result = new MapDirectionBuilder().build(getContext(), json);
+
+                final PolylineOptions options = result.getPolyline();
+                final CameraUpdate cu = result.getCameraUpdate();
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mPolyline != null) {
+                            mPolyline.remove();
+                            mPolyline = null;
+                        }
+                        if (mMap != null) {
+                            mPolyline = mMap.addPolyline(options);
+                            mMap.animateCamera(cu);
+                        }
+                    }
+                });
+            }
+        });
     }
 }

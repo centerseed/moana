@@ -13,6 +13,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -69,8 +70,21 @@ public class StationActivity extends BroadcastActivity implements AppBarLayout.O
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(400);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        Intent intent = new Intent();
+                        intent.setAction(ConstantDef.ACTION_START_NAVIGATION);
+                        LocalBroadcastManager.getInstance(StationActivity.this).sendBroadcast(intent);
+                    }
+                }).start();
+
+                finish();
             }
         });
     }
@@ -146,6 +160,7 @@ public class StationActivity extends BroadcastActivity implements AppBarLayout.O
     private Handler handler = new Handler()  { // handler for commiting fragment after data is loaded
         @Override
         public void handleMessage(Message msg) {
+            if (isFinishing()) return;
             if(msg.what == 2) {
                 if (mFunction == ConstantDef.FUNC_RENT)
                     mFragment = CarListFragment.newInstance("", mCollapsingBar.getTitle().toString(), mAddress.getText().toString());
