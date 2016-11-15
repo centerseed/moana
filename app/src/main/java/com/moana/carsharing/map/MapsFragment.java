@@ -124,7 +124,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
                                 }
                                 if (mMap != null) {
                                     mPolyline = mMap.addPolyline(options);
-                                    mMap.moveCamera(cu);
+                                    mMap.animateCamera(cu);
                                 }
                             }
                         });
