@@ -14,6 +14,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MapDirectionBuilder {
     static PolylineOptions mOptions;
     static LatLngBounds mBounds;
@@ -38,7 +41,15 @@ public class MapDirectionBuilder {
 
             try {
                 JSONObject jsonObject = new JSONObject(json);
-                JSONArray array = jsonObject.getJSONArray("routes").getJSONObject(0).getJSONArray("legs").getJSONObject(0).getJSONArray("steps");
+                JSONObject overviewPolylines = jsonObject.getJSONArray("routes").getJSONObject(0).getJSONObject("overview_polyline");
+                String encodedString = overviewPolylines.getString("points");
+
+                List<LatLng> list = decodePoly(encodedString);
+                mOptions.addAll(list);
+                for (LatLng latLng : list) {
+                    builder.include(latLng);
+                }
+                /* JSONArray array = jsonObject.getJSONArray("routes").getJSONObject(0).getJSONArray("legs").getJSONObject(0).getJSONArray("steps");
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject object = array.getJSONObject(i);
                     LatLng start = new LatLng(object.getJSONObject("start_location").getDouble("lat"), object.getJSONObject("start_location").getDouble("lng"));
@@ -47,6 +58,7 @@ public class MapDirectionBuilder {
                     builder.include(start);
                     builder.include(end);
                 }
+                */
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -59,6 +71,40 @@ public class MapDirectionBuilder {
 
         public CameraUpdate getCameraUpdate() {
             return CameraUpdateFactory.newLatLngBounds(mBounds, (int) (120 * mDpi));
+        }
+
+        private List<LatLng> decodePoly(String encoded) {
+
+            List<LatLng> poly = new ArrayList<LatLng>();
+            int index = 0, len = encoded.length();
+            int lat = 0, lng = 0;
+
+            while (index < len) {
+                int b, shift = 0, result = 0;
+                do {
+                    b = encoded.charAt(index++) - 63;
+                    result |= (b & 0x1f) << shift;
+                    shift += 5;
+                } while (b >= 0x20);
+                int dlat = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+                lat += dlat;
+
+                shift = 0;
+                result = 0;
+                do {
+                    b = encoded.charAt(index++) - 63;
+                    result |= (b & 0x1f) << shift;
+                    shift += 5;
+                } while (b >= 0x20);
+                int dlng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+                lng += dlng;
+
+                LatLng p = new LatLng( (((double) lat / 1E5)),
+                        (((double) lng / 1E5) ));
+                poly.add(p);
+            }
+
+            return poly;
         }
     }
 }
