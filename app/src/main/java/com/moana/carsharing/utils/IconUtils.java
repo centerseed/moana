@@ -16,6 +16,8 @@ public class IconUtils {
         canvas.setBitmap(bitmap);
         drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
         drawable.draw(canvas);
-        return BitmapDescriptorFactory.fromBitmap(bitmap);
+        BitmapDescriptor descriptor = BitmapDescriptorFactory.fromBitmap(bitmap);
+
+        return descriptor;
     }
 }

@@ -29,6 +29,7 @@ import com.moana.carsharing.utils.TimeUtils;
 import com.weiwangcn.betterspinner.library.BetterSpinner;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class CarReserveOrderFragment extends BaseSettingFragment {
 
@@ -153,6 +154,7 @@ public class CarReserveOrderFragment extends BaseSettingFragment {
                         public void onDateSet(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
                             // 完成選擇，顯示日期
+                            c.set(year, monthOfYear, dayOfMonth);
                             editText.setText(year + "/" + (monthOfYear + 1) + "/"
                                     + dayOfMonth);
 
@@ -162,7 +164,9 @@ public class CarReserveOrderFragment extends BaseSettingFragment {
                                         public void onTimeSet(TimePicker view, int hourOfDay,
                                                               int minute) {
                                             // 完成選擇，顯示時間
-                                            editText.setText(editText.getText().toString() + " " + hourOfDay + ":" + minute);
+                                            c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                                            c.set(Calendar.MINUTE, minute);
+                                            editText.setText(TimeUtils.getYYYYMMDDStr(getContext(), c.getTimeInMillis()));
                                         }
                                     }, hour, minute, false);
                             tpd.show();

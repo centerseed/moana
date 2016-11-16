@@ -18,6 +18,7 @@ public class OrderDetailActivity extends AppCompatActivity implements BaseSettin
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(getString(R.string.title_order_detail));
 
         String serial = getIntent().getStringExtra(ConstantDef.ARG_ORDER_TEMP_SERIAL);
         boolean isCar = getIntent().getBooleanExtra(ConstantDef.ARG_BOOLEAN, true);
