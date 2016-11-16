@@ -20,7 +20,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_margin="8dp"
-            app:srcCompat="@mipmap/ic_directions_car_white_24dp" />
+            app:srcCompat="@mipmap/icon_carinfo_no_green" />
 
         <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
             android:id="@+id/progressBar"

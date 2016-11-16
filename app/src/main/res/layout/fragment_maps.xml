@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         app:fabSize="normal"
-        app:srcCompat="@mipmap/ic_directions_car_white_24dp"
+        app:srcCompat="@mipmap/btn_index_navigation"
         app:layout_anchor="@id/bottom_sheet"
         app:layout_anchorGravity="right|top"
         app:useCompatPadding="true"

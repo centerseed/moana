@@ -322,8 +322,12 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
                 String name = data.getString(data.getColumnIndex(StationProvider.FIELD_STATION_NAME));
                 String address = data.getString(data.getColumnIndex(StationProvider.FIELD_STATION_ADDRESS));
 
-                Drawable drawable = getResources().getDrawable(R.mipmap.ic_person_pin_circle_white_36dp);
-                drawable.setColorFilter(Color.BLUE, PorterDuff.Mode.MULTIPLY);
+                Drawable drawable = null;
+                if (mFunction == ConstantDef.FUNC_RENT) {
+                    drawable = getResources().getDrawable(R.mipmap.icon_index_cartag_green);
+                } else {
+                    drawable = getResources().getDrawable(R.mipmap.icon_index_evtag_green);
+                }
                 Marker marker = mMap.addMarker(new MarkerOptions()
                         .position(latLng)
                         .title(name).snippet(address)
@@ -391,8 +395,7 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
     }
 
     private Marker addReserveMarker(Marker oriMarker) {
-        Drawable drawable = getResources().getDrawable(R.mipmap.ic_person_pin_white_48dp);
-        drawable.setColorFilter(Color.BLUE, PorterDuff.Mode.MULTIPLY);
+        Drawable drawable = getResources().getDrawable(R.mipmap.icon_index_cartag_reservation);
         Marker marker = mMap.addMarker(new MarkerOptions()
                 .position(oriMarker.getPosition())
                 .title(oriMarker.getTitle()).snippet(oriMarker.getSnippet())

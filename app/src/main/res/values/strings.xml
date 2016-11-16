@@ -1,17 +1,17 @@
 <resources>
     <string name="app_name">RoadPro</string>
     <string name="title_activity_maps">Map</string>
-
+    
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
+    
     <string name="action_settings">Settings</string>
     <string name="action_search">Search</string>
     <string name="action_next">Next</string>
     <string name="action_back">Back</string>
     <string name="action_loading">Loading...</string>
     <string name="action_sending_order">Sedning Order...</string>
-
+    
     <string name="title_map">Home</string>
     <string name="title_account">Account</string>
     <string name="title_member">Member</string>
@@ -25,7 +25,7 @@
     <string name="title_search_parking">Search Parking...</string>
     <string name="title_search_plug">Search Plug...</string>
     <string name="title_query_order">Query Order</string>
-
+    
     <!-- Register -->
     <string name="title_register">Register</string>
     <string name="title_register_personal">Add Member</string>
@@ -44,7 +44,7 @@
     <string name="title_birthday">Birthday</string>
     <string name="title_phone">Phone</string>
     <string name="title_same_as_contact_address">Same as contact address</string>
-
+    
     <!-- Rent -->
     <string name="title_rent_reserve">Rent - Reserve</string>
     <string name="title_plug_reserve">Plug - Reserve</string>
@@ -64,7 +64,7 @@
     <string name="title_rent_site">Rent Site</string>
     <string name="title_return_site">Return Site</string>
     <string name="title_cancel_order">Cancel Order</string>
-
+    
     <!-- Order Detail -->
     <string name="title_order_detail">Order Detail</string>
     <string name="title_order_serial">Order Serial</string>
@@ -72,7 +72,7 @@
     <string name="title_payment_status">Payment Status</string>
     <string name="title_order_status">Status</string>
     <string name="title_plug_id">Plug ID</string>
-
+    
     <!-- Car Detail -->
     <string name="title_car_size">SIZE L*W*H(mm)</string>
     <string name="title_car_wheelbase">Wheelbase(mm)</string>
@@ -81,12 +81,12 @@
     <string name="title_car_capacity">Trunk Capacity</string>
     <string name="title_car_wheel">Wheel</string>
     <string name="title_car_weight">Weight</string>
-
+    
     <string name="hint_search_region">Enter region or address</string>
-
+    
     <string name="title_activity_plug_info">PlugInfoActivity</string>
     <string name="title_activity_login">Sign in</string>
-
+    
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
@@ -101,5 +101,5 @@
     </string>
     <string name="title_activity_base_pager">BasePagerActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
-
+    
 </resources>
