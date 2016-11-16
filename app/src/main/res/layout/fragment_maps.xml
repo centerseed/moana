@@ -63,7 +63,7 @@
         app:fabSize="normal"
         app:srcCompat="@mipmap/btn_index_navigation"
         app:layout_anchor="@id/bottom_sheet"
-        app:layout_anchorGravity="right|top"
+        app:layout_anchorGravity="right|center_vertical"
         app:useCompatPadding="true"
         app:elevation="16dp"
         android:id="@+id/fabNavigation" />
