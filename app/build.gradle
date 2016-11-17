@@ -17,6 +17,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    signingConfigs {
+        debug {
+            storeFile file("../keystore.jks")
+            storePassword "123456-s"
+            keyAlias "carsharing"
+            keyPassword "123456-s"
+        }
+        release {
+            storeFile file("../keystore.jks")
+            storePassword "123456-s"
+            keyAlias "carsharing"
+            keyPassword "123456-s"
+        }
+    }
 }
 
 dependencies {

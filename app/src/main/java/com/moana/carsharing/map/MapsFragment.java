@@ -88,8 +88,10 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        if (mMap == null) {
+            SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+            mapFragment.getMapAsync(this);
+        }
 
         mFab = (FloatingActionButton) view.findViewById(R.id.fabNavigation);
         mFab.setVisibility(View.GONE);
