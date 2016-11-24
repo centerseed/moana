@@ -52,7 +52,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".account.personal.RegisterPersonalActivity"
-            android:label="@string/title_activity_base_pager"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />

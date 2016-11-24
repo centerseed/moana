@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="title_kgate6_size">4560x1822x1645</string>
-    <string name="title_kgate6_wheelbase">2830</string>
-    <string name="title_kgate6_track">1585/1560</string>
-    <string name="title_kgate6_min_turn_radius">6</string>
-    <string name="title_kgate6_capacity">450</string>
-    <string name="title_kgate6_wheel">235/65 R17</string>
-    <string name="title_kgate6_weight">2380</string>
+    <string name="title_kgate6_size" translatable="false">4560x1822x1645</string>
+    <string name="title_kgate6_wheelbase" translatable="false">2830</string>
+    <string name="title_kgate6_track" translatable="false">1585/1560</string>
+    <string name="title_kgate6_min_turn_radius" translatable="false">6</string>
+    <string name="title_kgate6_capacity" translatable="false">450</string>
+    <string name="title_kgate6_wheel" translatable="false">235/65 R17</string>
+    <string name="title_kgate6_weight" translatable="false">2380</string>
 </resources>

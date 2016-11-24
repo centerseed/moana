@@ -4,9 +4,10 @@ import android.app.Application;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
-public class LogApplication extends Application {
+public class LogApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {

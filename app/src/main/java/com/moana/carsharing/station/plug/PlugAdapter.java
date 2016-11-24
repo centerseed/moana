@@ -38,7 +38,7 @@ public class PlugAdapter extends AbstractRecyclerCursorAdapter {
         int status = cursor.getInt(cursor.getColumnIndex(StationProvider.FIELD_PLUG_STATUS));
         holder.tvStatus.setText(mPlugStatus[status]);
         holder.tvStatus.setTextColor(getStatusTextColor(status));
-        holder.plug.setColorFilter(getStatusColor(status), PorterDuff.Mode.MULTIPLY);
+        holder.plug.setImageResource(getStatusResource(status));
     }
 
     @Override
@@ -68,14 +68,14 @@ public class PlugAdapter extends AbstractRecyclerCursorAdapter {
         }
     }
 
-    private int getStatusColor(int status) {
+    private int getStatusResource(int status) {
         switch (status) {
             case StationProvider.PLUG_STATUS_AVAILABLE:
-                return m_context.getResources().getColor(R.color.colorPlugAvailable);
+                return R.mipmap.icon_evinfo_no_green;
             case StationProvider.PLUG_STATUS_IN_USAGE:
-                return m_context.getResources().getColor(R.color.colorInUsage);
+                return R.mipmap.icon_evinfo_no_red;
             default:
-                return m_context.getResources().getColor(R.color.colorFail);
+                return R.mipmap.bk_evinfo_ev_gray;
         }
     }
 

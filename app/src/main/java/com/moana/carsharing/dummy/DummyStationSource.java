@@ -138,12 +138,13 @@ public class DummyStationSource {
         values.put(StationProvider.FIELD_ID, "plug1".hashCode());
         values.put(StationProvider.FIELD_STATION_NAME, "都會南");
         values.put(StationProvider.FIELD_STATION_ADDRESS, "台中市龍井區都會南街151號");
-        values.put(StationProvider.FIELD_LAT, 24.112473);
-        values.put(StationProvider.FIELD_LNG, 120.35908);
+        values.put(StationProvider.FIELD_LAT, 24.1900696);
+        values.put(StationProvider.FIELD_LNG, 120.5839046);
         values.put(StationProvider.FIELD_STATION_PHOTO, "");
         values.put(StationProvider.FIELD_TOTAL, 18);
         values.put(StationProvider.FIELD_USAGE, 5);
         values.put(StationProvider.FIELD_IS_RENT, 0);
+        arrayList.add(values);
 
         // Dummy 2
         values = new ContentValues();
