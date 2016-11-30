@@ -5,7 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 
 import com.moana.carsharing.base.BaseParser;
-import com.moana.carsharing.dummy.DummyStationSource;
+import com.moana.carsharing.dummy.DummyRentSource;
 
 import org.json.JSONObject;
 
@@ -28,13 +28,5 @@ public class StationPlugParser extends BaseParser {
 
     @Override
     public void parseDummy() {
-        mContext.getContentResolver().delete(mUri, StationProvider.FIELD_ID + "!=? AND "  + StationProvider.FIELD_IS_RENT + "=?", new String[]{"0", "0"});
-
-        ArrayList<ContentValues> arrayList = DummyStationSource.getPlugList();
-        for (ContentValues values : arrayList) {
-            mContext.getContentResolver().insert(mUri, values);
-        }
-
-        mContext.getContentResolver().notifyChange(mUri, null);
     }
 }

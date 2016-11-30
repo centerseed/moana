@@ -10,12 +10,14 @@ import android.util.Log;
 public class LogApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
-        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-            @Override
-            public void uncaughtException(Thread thread, Throwable e) {
-                handleUncaughtException(thread, e);
-            }
-        });
+        if (!BuildConfig.DEBUG) {
+            Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+                @Override
+                public void uncaughtException(Thread thread, Throwable e) {
+                    handleUncaughtException(thread, e);
+                }
+            });
+        }
     }
 
     public boolean isUIThread() {

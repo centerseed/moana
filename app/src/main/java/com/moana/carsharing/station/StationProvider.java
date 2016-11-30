@@ -14,6 +14,8 @@ public class StationProvider extends BaseContentProvider {
     public final static String TABLE_CAR_ORDER = "_table_car_order";
     public final static String TABLE_PLUG_ORDER = "_table_plug_order";
 
+    public final static String FIELD_DISTANCE = "_distance";
+
     public final static String FIELD_STATION_NAME = "_station_name";
     public final static String FIELD_STATION_ADDRESS = "_station_address";
     public final static String FIELD_STATION_PHOTO = "_station_photo";
@@ -59,7 +61,7 @@ public class StationProvider extends BaseContentProvider {
 
     private class PlugDatabase extends SQLiteOpenHelper {
 
-        private final static int _DBVersion = 1;
+        private final static int _DBVersion = 3;
         private final static String _DBName = "plug.db";
 
         public PlugDatabase(Context context) {
@@ -76,7 +78,8 @@ public class StationProvider extends BaseContentProvider {
                     + FIELD_LAT + " TEXT, "
                     + FIELD_LNG + " TEXT, "
                     + FIELD_USAGE + " INTEGER, "
-                    + FIELD_TOTAL + " INTEGER, "
+                    + FIELD_TOTAL + " INTEGER,"
+                    + FIELD_DISTANCE + " FLOAT, "
                     + FIELD_IS_RENT + " INTEGER "
                     + ");");
 

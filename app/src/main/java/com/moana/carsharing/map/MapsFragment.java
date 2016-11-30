@@ -176,8 +176,8 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         super.onResume();
 
         if (mMap != null) {
-            StationPlugSyncer.with(getContext()).getPlugInfos();
-            StationCarSyncer.with(getContext()).getRentInfos();
+            StationPlugSyncer.with(getContext()).getDummyPlugInfos(mCurrPosition);
+            StationCarSyncer.with(getContext()).getDummyRentInfos(mCurrPosition);
             if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
@@ -221,8 +221,8 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
-        StationPlugSyncer.with(getContext()).getPlugInfos();
-        StationCarSyncer.with(getContext()).getRentInfos();
+        StationPlugSyncer.with(getContext()).getDummyPlugInfos(mCurrPosition);
+        StationCarSyncer.with(getContext()).getDummyRentInfos(mCurrPosition);
     }
 
     @Override

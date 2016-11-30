@@ -2,12 +2,14 @@ package com.moana.carsharing.dummy;
 
 import android.content.ContentValues;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.moana.carsharing.station.StationProvider;
+import com.moana.carsharing.utils.DistanceUtils;
 
 import java.util.ArrayList;
 
-public class DummyStationSource {
-    public static ArrayList<ContentValues> getRentList() {
+public class DummyRentSource {
+    public static ArrayList<ContentValues> getRentList(LatLng latLng) {
         ArrayList<ContentValues> arrayList = new ArrayList<>();
 
         // Dummy 1
@@ -21,6 +23,7 @@ public class DummyStationSource {
         values.put(StationProvider.FIELD_TOTAL, 10);
         values.put(StationProvider.FIELD_USAGE, 5);
         values.put(StationProvider.FIELD_IS_RENT, 1);
+        values.put(StationProvider.FIELD_DISTANCE, DistanceUtils.haversine(22.6204309, 120.3098272, latLng.latitude, latLng.longitude));
         arrayList.add(values);
 
         // Dummy 2
@@ -34,6 +37,7 @@ public class DummyStationSource {
         values.put(StationProvider.FIELD_TOTAL, 10);
         values.put(StationProvider.FIELD_USAGE, 5);
         values.put(StationProvider.FIELD_IS_RENT, 1);
+        values.put(StationProvider.FIELD_DISTANCE, DistanceUtils.haversine(22.6299537, 120.3415605, latLng.latitude, latLng.longitude));
         arrayList.add(values);
 
         // Dummy 3
@@ -47,6 +51,7 @@ public class DummyStationSource {
         values.put(StationProvider.FIELD_TOTAL, 10);
         values.put(StationProvider.FIELD_USAGE, 5);
         values.put(StationProvider.FIELD_IS_RENT, 1);
+        values.put(StationProvider.FIELD_DISTANCE, DistanceUtils.haversine(22.6873814, 120.30588, latLng.latitude, latLng.longitude));
         arrayList.add(values);
 
         // Dummy 4
@@ -60,6 +65,7 @@ public class DummyStationSource {
         values.put(StationProvider.FIELD_TOTAL, 10);
         values.put(StationProvider.FIELD_USAGE, 5);
         values.put(StationProvider.FIELD_IS_RENT, 1);
+        values.put(StationProvider.FIELD_DISTANCE, DistanceUtils.haversine(22.6397615, 120.2999183, latLng.latitude, latLng.longitude));
         arrayList.add(values);
 
         // Dummy 5
@@ -73,6 +79,7 @@ public class DummyStationSource {
         values.put(StationProvider.FIELD_TOTAL, 10);
         values.put(StationProvider.FIELD_USAGE, 5);
         values.put(StationProvider.FIELD_IS_RENT, 1);
+        values.put(StationProvider.FIELD_DISTANCE, DistanceUtils.haversine(22.631386, 120.2997623, latLng.latitude, latLng.longitude));
         arrayList.add(values);
 
         // Dummy 6
@@ -86,6 +93,7 @@ public class DummyStationSource {
         values.put(StationProvider.FIELD_TOTAL, 10);
         values.put(StationProvider.FIELD_USAGE, 5);
         values.put(StationProvider.FIELD_IS_RENT, 1);
+        values.put(StationProvider.FIELD_DISTANCE, DistanceUtils.haversine(22.6215405, 120.2723397, latLng.latitude, latLng.longitude));
         arrayList.add(values);
 
         // Dummy 7
@@ -99,6 +107,7 @@ public class DummyStationSource {
         values.put(StationProvider.FIELD_TOTAL, 10);
         values.put(StationProvider.FIELD_USAGE, 5);
         values.put(StationProvider.FIELD_IS_RENT, 1);
+        values.put(StationProvider.FIELD_DISTANCE, DistanceUtils.haversine(22.5969, 120.3131243, latLng.latitude, latLng.longitude));
         arrayList.add(values);
 
         // Dummy 8
@@ -112,6 +121,7 @@ public class DummyStationSource {
         values.put(StationProvider.FIELD_TOTAL, 10);
         values.put(StationProvider.FIELD_USAGE, 5);
         values.put(StationProvider.FIELD_IS_RENT, 1);
+        values.put(StationProvider.FIELD_DISTANCE, DistanceUtils.haversine(22.6563565, 120.2943339, latLng.latitude, latLng.longitude));
         arrayList.add(values);
 
         // Dummy 9
@@ -125,12 +135,13 @@ public class DummyStationSource {
         values.put(StationProvider.FIELD_TOTAL, 10);
         values.put(StationProvider.FIELD_USAGE, 5);
         values.put(StationProvider.FIELD_IS_RENT, 1);
+        values.put(StationProvider.FIELD_DISTANCE, DistanceUtils.haversine(22.5648119, 120.3516634, latLng.latitude, latLng.longitude));
         arrayList.add(values);
 
         return arrayList;
     }
 
-    public static ArrayList<ContentValues> getPlugList() {
+    public static ArrayList<ContentValues> getPlugList(LatLng latLng) {
         ArrayList<ContentValues> arrayList = new ArrayList<>();
 
         // Dummy 1
@@ -144,6 +155,7 @@ public class DummyStationSource {
         values.put(StationProvider.FIELD_TOTAL, 18);
         values.put(StationProvider.FIELD_USAGE, 5);
         values.put(StationProvider.FIELD_IS_RENT, 0);
+        values.put(StationProvider.FIELD_DISTANCE, DistanceUtils.haversine(24.1900696, 120.5839046, latLng.latitude, latLng.longitude));
         arrayList.add(values);
 
         // Dummy 2
@@ -157,6 +169,7 @@ public class DummyStationSource {
         values.put(StationProvider.FIELD_TOTAL, 13);
         values.put(StationProvider.FIELD_USAGE, 4);
         values.put(StationProvider.FIELD_IS_RENT, 0);
+        values.put(StationProvider.FIELD_DISTANCE, DistanceUtils.haversine(23.6969719, 120.5338262, latLng.latitude, latLng.longitude));
         arrayList.add(values);
 
         // Dummy 3
@@ -170,6 +183,7 @@ public class DummyStationSource {
         values.put(StationProvider.FIELD_TOTAL, 10);
         values.put(StationProvider.FIELD_USAGE, 4);
         values.put(StationProvider.FIELD_IS_RENT, 0);
+        values.put(StationProvider.FIELD_DISTANCE, DistanceUtils.haversine(23.8943519, 121.5411446, latLng.latitude, latLng.longitude));
         arrayList.add(values);
 
         // Dummy 4
@@ -183,6 +197,7 @@ public class DummyStationSource {
         values.put(StationProvider.FIELD_TOTAL, 15);
         values.put(StationProvider.FIELD_USAGE, 4);
         values.put(StationProvider.FIELD_IS_RENT, 0);
+        values.put(StationProvider.FIELD_DISTANCE, DistanceUtils.haversine(24.8669494, 121.2645276, latLng.latitude, latLng.longitude));
         arrayList.add(values);
 
         // Dummy 5
@@ -196,6 +211,7 @@ public class DummyStationSource {
         values.put(StationProvider.FIELD_TOTAL, 8);
         values.put(StationProvider.FIELD_USAGE, 0);
         values.put(StationProvider.FIELD_IS_RENT, 0);
+        values.put(StationProvider.FIELD_DISTANCE, DistanceUtils.haversine(23.458967, 120.3207159, latLng.latitude, latLng.longitude));
         arrayList.add(values);
 
         // Dummy 6
@@ -209,6 +225,7 @@ public class DummyStationSource {
         values.put(StationProvider.FIELD_TOTAL, 5);
         values.put(StationProvider.FIELD_USAGE, 4);
         values.put(StationProvider.FIELD_IS_RENT, 0);
+        values.put(StationProvider.FIELD_DISTANCE, DistanceUtils.haversine(24.1310352, 121.6431411, latLng.latitude, latLng.longitude));
         arrayList.add(values);
 
         // Dummy 7
@@ -222,6 +239,7 @@ public class DummyStationSource {
         values.put(StationProvider.FIELD_TOTAL, 42);
         values.put(StationProvider.FIELD_USAGE, 0);
         values.put(StationProvider.FIELD_IS_RENT, 0);
+        values.put(StationProvider.FIELD_DISTANCE, DistanceUtils.haversine(24.2568513, 120.7101598, latLng.latitude, latLng.longitude));
         arrayList.add(values);
 
         // Dummy 8
@@ -235,6 +253,7 @@ public class DummyStationSource {
         values.put(StationProvider.FIELD_TOTAL, 10);
         values.put(StationProvider.FIELD_USAGE, 0);
         values.put(StationProvider.FIELD_IS_RENT, 0);
+        values.put(StationProvider.FIELD_DISTANCE, DistanceUtils.haversine(23.453725, 120.3190169, latLng.latitude, latLng.longitude));
         arrayList.add(values);
 
         // Dummy 9
@@ -248,6 +267,7 @@ public class DummyStationSource {
         values.put(StationProvider.FIELD_TOTAL, 5);
         values.put(StationProvider.FIELD_USAGE, 0);
         values.put(StationProvider.FIELD_IS_RENT, 0);
+        values.put(StationProvider.FIELD_DISTANCE, DistanceUtils.haversine(22.6945, 120.3192946, latLng.latitude, latLng.longitude));
         arrayList.add(values);
 
         // Dummy 10
@@ -261,6 +281,7 @@ public class DummyStationSource {
         values.put(StationProvider.FIELD_TOTAL, 3);
         values.put(StationProvider.FIELD_USAGE, 0);
         values.put(StationProvider.FIELD_IS_RENT, 0);
+        values.put(StationProvider.FIELD_DISTANCE, DistanceUtils.haversine(24.561156, 120.8195553, latLng.latitude, latLng.longitude));
         arrayList.add(values);
 
         // Dummy 11
@@ -274,6 +295,7 @@ public class DummyStationSource {
         values.put(StationProvider.FIELD_TOTAL, 3);
         values.put(StationProvider.FIELD_USAGE, 0);
         values.put(StationProvider.FIELD_IS_RENT, 0);
+        values.put(StationProvider.FIELD_DISTANCE, DistanceUtils.haversine(24.5409306, 120.8091391, latLng.latitude, latLng.longitude));
         arrayList.add(values);
 
         // Dummy 11
@@ -287,6 +309,7 @@ public class DummyStationSource {
         values.put(StationProvider.FIELD_TOTAL, 10);
         values.put(StationProvider.FIELD_USAGE, 0);
         values.put(StationProvider.FIELD_IS_RENT, 0);
+        values.put(StationProvider.FIELD_DISTANCE, DistanceUtils.haversine(25.0139465, 121.4670474, latLng.latitude, latLng.longitude));
         arrayList.add(values);
 
         return arrayList;

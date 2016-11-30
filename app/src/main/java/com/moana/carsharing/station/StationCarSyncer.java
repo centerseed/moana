@@ -1,5 +1,6 @@
 package com.moana.carsharing.station;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
@@ -7,8 +8,10 @@ import android.util.Log;
 import com.google.android.gms.maps.model.LatLng;
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.AsyncCallback;
+import com.moana.carsharing.dummy.DummyRentSource;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
@@ -48,8 +51,17 @@ public class StationCarSyncer {
         });
     }
 
-    public void getRentInfos() {
+    public void getDummyRentInfos(LatLng latLng) {
         // TODO: okhttp, we use fake data
-        StationCarParser.with(mContext, mUri).parseDummy();
+        // StationCarParser.with(mContext, mUri).parseDummy();
+
+        mContext.getContentResolver().delete(mUri, StationProvider.FIELD_ID + "!=? AND "  + StationProvider.FIELD_IS_RENT + "=?", new String[]{"0", "1"});
+
+        ArrayList<ContentValues> arrayList = DummyRentSource.getRentList(latLng);
+        for (ContentValues values : arrayList) {;
+            mContext.getContentResolver().insert(mUri, values);
+        }
+
+        mContext.getContentResolver().notifyChange(mUri, null);
     }
 }

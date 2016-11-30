@@ -3,6 +3,8 @@
     package="com.moana.carsharing">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".LogApplication"
@@ -71,6 +73,16 @@
         <activity
             android:name=".order.OrderDetailActivity"
             android:parentActivityName="com.moana.carsharing.order.OrderListActivity"></activity>
+        <activity
+            android:name=".LogSenderActivity"
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.AppCompat.Dialog">
+            <intent-filter>
+                <action android:name="com.moana.carsharing.SEND_LOG" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

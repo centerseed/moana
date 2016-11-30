@@ -18,10 +18,15 @@ import com.moana.carsharing.base.BroadcastFragment;
 import com.moana.carsharing.base.ConstantDef;
 import com.moana.carsharing.station.StationProvider;
 
+import java.text.DecimalFormat;
+
 public class BottomSheetFragment extends BroadcastFragment{
     String mSnippet = "";
     TextView mName;
     TextView mAddress;
+    TextView mDistance;
+
+    DecimalFormat mDecimalFormat = new DecimalFormat("#.##");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,6 +39,7 @@ public class BottomSheetFragment extends BroadcastFragment{
         super.onViewCreated(view, savedInstanceState);
         mName = (TextView) view.findViewById(R.id.name);
         mAddress = (TextView) view.findViewById(R.id.address);
+        mDistance = (TextView) view.findViewById(R.id.distance);
     }
 
     @Override
@@ -54,6 +60,7 @@ public class BottomSheetFragment extends BroadcastFragment{
         if (data != null && data.moveToFirst()) {
             mName.setText(data.getString(data.getColumnIndex(StationProvider.FIELD_STATION_NAME)));
             mAddress.setText(data.getString(data.getColumnIndex(StationProvider.FIELD_STATION_ADDRESS)));
+            mDistance.setText(mDecimalFormat.format(data.getFloat(data.getColumnIndex(StationProvider.FIELD_DISTANCE))) + " km");
         }
     }
 
