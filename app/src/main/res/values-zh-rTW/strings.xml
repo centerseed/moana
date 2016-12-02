@@ -2,9 +2,6 @@
     <string name="app_name">路得寶租賃</string>
     <string name="title_activity_maps">首頁</string>
 
-    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
-    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
-
     <string name="action_settings">設定</string>
     <string name="action_search">搜尋</string>
     <string name="action_next">下一步</string>

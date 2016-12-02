@@ -44,6 +44,7 @@
                             app:srcCompat="@color/colorAlphaDark" />
 
                         <TextView
+                            android:id="@+id/order_serial"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -122,6 +123,7 @@
                             app:srcCompat="@color/colorAlphaDark" />
 
                         <TextView
+                            android:id="@+id/order_time"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"

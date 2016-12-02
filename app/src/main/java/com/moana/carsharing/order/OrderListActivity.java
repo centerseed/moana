@@ -48,13 +48,20 @@ public class OrderListActivity extends AppCompatActivity implements LoaderManage
         mAdapter.setOnClickListener(this);
         mRecycler.setAdapter(mAdapter);
 
-        getSupportLoaderManager().initLoader(LOADER_CAR_ORDER, null, this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        OrderSyncer.with(this).getOrderList();
+        getSupportLoaderManager().initLoader(LOADER_CAR_ORDER, null, this);
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        getSupportLoaderManager().destroyLoader(LOADER_CAR_ORDER);
+        getSupportLoaderManager().destroyLoader(LOADER_PLUG_ORDER);
     }
 
     @Override
@@ -85,9 +92,10 @@ public class OrderListActivity extends AppCompatActivity implements LoaderManage
 
                 while (!data.isAfterLast()) {
                     String serial = data.getString(data.getColumnIndex(StationProvider.FIELD_CAR_ORDER_SERIAL));
-                    String time = TimeUtils.getYYYYMMDDStr(this, data.getLong(data.getColumnIndex(StationProvider.FIELD_CAR_ORDER_TIME)));
+                    long timestamp = data.getLong(data.getColumnIndex(StationProvider.FIELD_CAR_ORDER_TIME));
+                    String time = TimeUtils.getYYYYMMDDStr(this, timestamp);
                     String status = data.getString(data.getColumnIndex(StationProvider.FIELD_CAR_ORDER_STATUS));
-                    mAdapter.addCarItem(serial, time, status);
+                    mAdapter.addCarItem(serial, time, timestamp, status);
 
                     data.moveToNext();
                 }
@@ -95,9 +103,10 @@ public class OrderListActivity extends AppCompatActivity implements LoaderManage
             } else {
                 while (!data.isAfterLast()) {
                     String serial = data.getString(data.getColumnIndex(StationProvider.FIELD_PLUG_ORDER_SERIAL));
-                    String time = TimeUtils.getYYYYMMDDStr(this, data.getLong(data.getColumnIndex(StationProvider.FIELD_PLUG_ORDER_TIME)));
+                    long timestamp = data.getLong(data.getColumnIndex(StationProvider.FIELD_PLUG_ORDER_TIME));
+                    String time = TimeUtils.getYYYYMMDDStr(this, timestamp);
                     String status = data.getString(data.getColumnIndex(StationProvider.FIELD_PLUG_ORDER_STATUS));
-                    mAdapter.addPlugItem(serial, time, status);
+                    mAdapter.addPlugItem(serial, time, timestamp, status);
 
                     data.moveToNext();
                 }

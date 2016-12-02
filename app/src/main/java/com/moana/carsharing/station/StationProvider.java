@@ -45,6 +45,7 @@ public class StationProvider extends BaseContentProvider {
     public final static String FIELD_CAR_ORDER_STATUS = "_car_order_status";
 
     public final static String FIELD_PLUG_ORDER_SERIAL = "_plug_order_serial";
+    public final static String FIELD_PLUG_START_TIME = "_plug_start_time";
     public final static String FIELD_PLUG_ORDER_TIME = "_plug_order_time";
     public final static String FIELD_PLUG_ORDER_SITE = "_plug_order_site";
     public final static String FIELD_PLUG_ORDER_STATUS = "_plug_order_status";
@@ -61,7 +62,7 @@ public class StationProvider extends BaseContentProvider {
 
     private class PlugDatabase extends SQLiteOpenHelper {
 
-        private final static int _DBVersion = 3;
+        private final static int _DBVersion = 5;
         private final static String _DBName = "plug.db";
 
         public PlugDatabase(Context context) {
@@ -116,6 +117,7 @@ public class StationProvider extends BaseContentProvider {
                     + FIELD_PLUG_ORDER_SERIAL + " TEXT, "
                     + FIELD_PLUG_ORDER_SITE + " TEXT, "
                     + FIELD_PLUG_ORDER_STATUS + " TEXT, "
+                    + FIELD_PLUG_START_TIME + " INTEGER, "
                     + FIELD_PLUG_ORDER_TIME + " INTEGER "
                     + ");");
         }

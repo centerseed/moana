@@ -1,6 +1,5 @@
 package com.moana.carsharing.station.car;
 
-import android.app.ProgressDialog;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,25 +9,28 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.moana.carsharing.R;
-import com.moana.carsharing.base.BaseSettingFragment;
 import com.moana.carsharing.base.ConstantDef;
+import com.moana.carsharing.base.ContentFragment;
 import com.moana.carsharing.station.StationProvider;
-import com.moana.carsharing.station.plug.PlugReserveActivity;
-import com.moana.carsharing.station.plug.PlugReserveInfo;
 import com.moana.carsharing.utils.TimeUtils;
 
-public class CarReserveDetailFragment extends BaseSettingFragment {
+public class CarReserveDetailFragment extends ContentFragment {
 
     static CarReserveDetailFragment mInstance;
     TextView mName;
     TextView mTimeStart;
     TextView mTimeEnd;
+    TextView mOrderSerial;
+    TextView mOrderTime;
+    TextView mOrderStatus;
     CarReserveInfo mInfo;
+
+    Button mDone;
+    Button mCancel;
 
     public static CarReserveDetailFragment newInstance(Bundle bundle) {
         mInstance = new CarReserveDetailFragment();
@@ -45,26 +47,31 @@ public class CarReserveDetailFragment extends BaseSettingFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mNext.setText(getString(R.string.title_fee_confirm));
-
         mName = (TextView) view.findViewById(R.id.name);
-        mName.setText(getArguments().getString(ConstantDef.ARG_SITE_NAME));
 
         mTimeStart = (TextView) view.findViewById(R.id.time_start);
         mTimeEnd = (TextView) view.findViewById(R.id.time_end);
+        mOrderSerial = (TextView) view.findViewById(R.id.order_serial);
+        mOrderStatus = (TextView) view.findViewById(R.id.order_status);
+        mOrderTime = (TextView) view.findViewById(R.id.order_time);
 
-        mNext.setOnClickListener(new View.OnClickListener() {
+        mDone = (Button) view.findViewById(R.id.next);
+        mDone.setText(R.string.title_fee_confirm);
+        mDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                getActivity().finish();
             }
         });
 
-        mBack.setText(getString(R.string.title_cancel_order));
-        mBack.setOnClickListener(new View.OnClickListener() {
+        mCancel = (Button) view.findViewById(R.id.back);
+        mCancel.setText(R.string.title_cancel_order);
+        mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                getContext().getContentResolver().delete(mUri,
+                        StationProvider.FIELD_CAR_ORDER_SERIAL + "=?", new String[]{getArguments().getString(ConstantDef.ARG_ORDER_TEMP_SERIAL)});
+                getActivity().finish();
             }
         });
     }
@@ -86,8 +93,12 @@ public class CarReserveDetailFragment extends BaseSettingFragment {
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (data != null && data.moveToFirst()) {
             mInfo = new CarReserveInfo(data);
+            mOrderSerial.setText(mInfo.orderSerial);
+            mOrderTime.setText(TimeUtils.getYYYYMMDDStr(getContext(), mInfo.orderTime));
+            mOrderStatus.setText(mInfo.status);
             mTimeStart.setText(TimeUtils.getYYYYMMDDStr(getContext(), mInfo.startTime));
             mTimeEnd.setText(TimeUtils.getYYYYMMDDStr(getContext(), mInfo.endTime));
+            mName.setText(mInfo.rentSite);
         }
     }
 

@@ -24,6 +24,8 @@ public class PlugReserveDetailFragment extends BaseSettingFragment {
     TextView mName;
     TextView mTimeStart;
     TextView mPlugId;
+    TextView mOrderSerial;
+    TextView mOrderTime;
     PlugReserveInfo mInfo;
 
     public static PlugReserveDetailFragment newInstance(Bundle bundle) {
@@ -44,15 +46,15 @@ public class PlugReserveDetailFragment extends BaseSettingFragment {
         mNext.setText(getString(R.string.title_fee_confirm));
 
         mName = (TextView) view.findViewById(R.id.name);
-        mName.setText(getArguments().getString(ConstantDef.ARG_SITE_NAME));
-
         mTimeStart = (TextView) view.findViewById(R.id.time_start);
         mPlugId = (TextView) view.findViewById(R.id.plug_id);
+        mOrderSerial = (TextView) view.findViewById(R.id.order_serial);
+        mOrderTime = (TextView) view.findViewById(R.id.order_time);
 
         mNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                getActivity().finish();
             }
         });
 
@@ -60,7 +62,9 @@ public class PlugReserveDetailFragment extends BaseSettingFragment {
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                getContext().getContentResolver().delete(mUri, StationProvider.FIELD_PLUG_ORDER_SERIAL + "=?",
+                        new String[]{getArguments().getString(ConstantDef.ARG_ORDER_TEMP_SERIAL)});
+                getActivity().finish();
             }
         });
     }
@@ -83,7 +87,10 @@ public class PlugReserveDetailFragment extends BaseSettingFragment {
         if (data != null && data.moveToFirst()) {
             mInfo = new PlugReserveInfo(data);
             mTimeStart.setText(TimeUtils.getYYYYMMDDStr(getContext(), mInfo.time));
-            mPlugId.setText(mInfo.serial + "");
+            mPlugId.setText(mInfo.id + "");
+            mName.setText(mInfo.site);
+            mOrderSerial.setText(mInfo.serial);
+            mOrderTime.setText(TimeUtils.getYYYYMMDDStr(getContext(), mInfo.orderTime));
         }
     }
 

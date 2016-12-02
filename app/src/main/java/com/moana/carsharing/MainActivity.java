@@ -32,6 +32,7 @@ import com.moana.carsharing.base.ConstantDef;
 import com.moana.carsharing.base.ContentActivity;
 import com.moana.carsharing.map.MapsFragment;
 import com.moana.carsharing.order.OrderListActivity;
+import com.moana.carsharing.order.OrderSyncer;
 import com.moana.carsharing.station.StationProvider;
 import com.moana.carsharing.utils.PreferenceUtils;
 
@@ -140,6 +141,9 @@ public class MainActivity extends ContentActivity
                 startActivity(intent);
             }
         });
+
+        // TODO: for demo purpose
+        OrderSyncer.with(this).getOrderList();
     }
 
     @Override

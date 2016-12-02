@@ -1,9 +1,11 @@
 package com.moana.carsharing.station.car;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.BaseSettingFragment;
 import com.moana.carsharing.base.ConstantDef;
+import com.moana.carsharing.order.OrderDetailActivity;
 import com.moana.carsharing.station.StationProvider;
 import com.moana.carsharing.station.plug.PlugReserveActivity;
 import com.moana.carsharing.station.plug.PlugReserveInfo;
@@ -111,18 +114,23 @@ public class CarReserveConfirmFragment extends BaseSettingFragment {
                 try {
                     Thread.sleep(1500);
                     // TODO: place tmp order to real order
+                    mInfo.orderTime = System.currentTimeMillis() + 8000000;
+                    mInfo.status = "處理中";
+                    mInfo.orderSerial = "Car " + mInfo.orderTime /1000000;
+                    mInfo.id = mInfo.orderSerial.hashCode();
                     getContext().getContentResolver().insert(mUri, mInfo.getContentValues());
                     getContext().getContentResolver().notifyChange(mUri, null);
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
                     dialog.dismiss();
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (mListener != null) mListener.toNextFragment();
-                        }
-                    });
+
+                    Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
+                    intent.putExtra(ConstantDef.ARG_ORDER_TEMP_SERIAL, mInfo.orderSerial);
+                    intent.putExtra(ConstantDef.ARG_BOOLEAN, true);
+                    startActivity(intent);
+
+                    getActivity().finish();
                 }
             }
         }).start();

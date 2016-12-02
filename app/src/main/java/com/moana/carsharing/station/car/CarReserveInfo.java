@@ -20,6 +20,7 @@ public class CarReserveInfo implements Serializable {
     public int usage;
     public String fee;
     public String payment;
+    public String status;
 
     public CarReserveInfo() {
     }
@@ -54,6 +55,7 @@ public class CarReserveInfo implements Serializable {
         mContentValues.put(StationProvider.FIELD_CAR_ORDER_USAGE, usage);
         mContentValues.put(StationProvider.FIELD_CAR_ORDER_FEE, fee);
         mContentValues.put(StationProvider.FIELD_CAR_ORDER_PAYMENT, payment);
+        mContentValues.put(StationProvider.FIELD_CAR_ORDER_STATUS, status);
 
         return mContentValues;
     }

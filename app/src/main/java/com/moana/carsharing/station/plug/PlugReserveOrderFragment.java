@@ -3,6 +3,7 @@ package com.moana.carsharing.station.plug;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.TimePicker;
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.BaseSettingFragment;
 import com.moana.carsharing.base.ConstantDef;
+import com.moana.carsharing.order.OrderDetailActivity;
 import com.moana.carsharing.station.StationProvider;
 import com.moana.carsharing.station.car.CarReserveOrderFragment;
 import com.moana.carsharing.utils.TimeUtils;
@@ -34,6 +36,7 @@ public class PlugReserveOrderFragment extends BaseSettingFragment {
     TextView mSite;
     TextView mPlugSerial;
     EditText mStartTime;
+    PlugReserveInfo mInfo;
 
     public static PlugReserveOrderFragment newInstance(Bundle bundle) {
         PlugReserveOrderFragment f = new PlugReserveOrderFragment();
@@ -70,13 +73,15 @@ public class PlugReserveOrderFragment extends BaseSettingFragment {
             public void onClick(View view) {
                 // TODO: Delete this temp order, open new activity to show result
                 // use dummy data
-                PlugReserveInfo info = new PlugReserveInfo();
-                info.serial = getArguments().getString(ConstantDef.ARG_ORDER_TEMP_SERIAL);
-                info.id = mPlugId;
-                info.site = mSiteName;
-                info.time = TimeUtils.getYYYYMMDDTimeStamp(getContext(), mStartTime.getText().toString());;
+                mInfo = new PlugReserveInfo();
+                mInfo.orderTime = System.currentTimeMillis() + 8000000;
+                mInfo.serial =  "Plug " + mInfo.orderTime /1000000;
+                mInfo.id = mInfo.serial.hashCode();
+                mInfo.site = mSiteName;
+                mInfo.status = "處理中";
+                mInfo.time = TimeUtils.getYYYYMMDDTimeStamp(getContext(), mStartTime.getText().toString());;
 
-                getContext().getContentResolver().insert(mUri, info.getContentValues());
+                getContext().getContentResolver().insert(mUri, mInfo.getContentValues());
                 getContext().getContentResolver().notifyChange(mUri, null);
                 dummySendOrder();
             }
@@ -99,12 +104,13 @@ public class PlugReserveOrderFragment extends BaseSettingFragment {
                     e.printStackTrace();
                 } finally {
                     dialog.dismiss();
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (mListener != null) mListener.toNextFragment();
-                        }
-                    });
+
+                    Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
+                    intent.putExtra(ConstantDef.ARG_ORDER_TEMP_SERIAL, mInfo.serial);
+                    intent.putExtra(ConstantDef.ARG_BOOLEAN, false);
+                    startActivity(intent);
+
+                    getActivity().finish();
                 }
             }
         }).start();

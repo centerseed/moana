@@ -14,6 +14,8 @@ public class PlugReserveInfo implements Serializable {
     public String serial;
     public String site;
     public long time;
+    public long orderTime;
+    public String status;
 
     public PlugReserveInfo() {
     }
@@ -21,7 +23,9 @@ public class PlugReserveInfo implements Serializable {
     public PlugReserveInfo(Cursor cursor) {
         serial = cursor.getString(cursor.getColumnIndex(StationProvider.FIELD_PLUG_ORDER_SERIAL));
         site = cursor.getString(cursor.getColumnIndex(StationProvider.FIELD_PLUG_ORDER_SITE));
-        time = cursor.getLong(cursor.getColumnIndex(StationProvider.FIELD_PLUG_ORDER_TIME));
+        time = cursor.getLong(cursor.getColumnIndex(StationProvider.FIELD_PLUG_START_TIME));
+        orderTime = cursor.getLong(cursor.getColumnIndex(StationProvider.FIELD_PLUG_ORDER_TIME));
+        status = cursor.getString(cursor.getColumnIndex(StationProvider.FIELD_PLUG_ORDER_STATUS));
     }
 
     public ContentValues getContentValues() {
@@ -33,7 +37,9 @@ public class PlugReserveInfo implements Serializable {
 
         mContentValues.put(StationProvider.FIELD_PLUG_ORDER_SERIAL, serial);
         mContentValues.put(StationProvider.FIELD_PLUG_ORDER_SITE, site);
-        mContentValues.put(StationProvider.FIELD_PLUG_ORDER_TIME, time);
+        mContentValues.put(StationProvider.FIELD_PLUG_START_TIME, time);
+        mContentValues.put(StationProvider.FIELD_PLUG_ORDER_TIME, orderTime);
+        mContentValues.put(StationProvider.FIELD_PLUG_ORDER_STATUS, status);
 
         return mContentValues;
     }

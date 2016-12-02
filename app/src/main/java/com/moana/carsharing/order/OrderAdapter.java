@@ -86,22 +86,29 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         Collections.sort(mItems, new Comparator<OrderItem>() {
             @Override
             public int compare(OrderItem orderItem, OrderItem t1) {
+                return orderItem.mTimeStamp > t1.mTimeStamp ? 1 : -1;
+            }
+        });
+
+        Collections.sort(mItems, new Comparator<OrderItem>() {
+            @Override
+            public int compare(OrderItem orderItem, OrderItem t1) {
                 return orderItem.mStatus.equals("完成") ? 1 : -1;
             }
         });
         notifyDataSetChanged();
     }
 
-    public void addCarItem(String serial, String orderTime, String status) {
-        addOrderItem(serial, orderTime, status, true);
+    public void addCarItem(String serial, String orderTime, long timestamp, String status) {
+        addOrderItem(serial, orderTime, status, timestamp, true);
     }
 
-    public void addPlugItem(String serial, String orderTime, String status) {
-        addOrderItem(serial, orderTime, status, false);
+    public void addPlugItem(String serial, String orderTime, long timestamp, String status) {
+        addOrderItem(serial, orderTime, status, timestamp, false);
     }
 
-    private void addOrderItem(String serial, String orderTime, String status, boolean isCar) {
-        OrderItem item = new OrderItem(serial, orderTime, status, isCar);
+    private void addOrderItem(String serial, String orderTime, String status, long timestamp, boolean isCar) {
+        OrderItem item = new OrderItem(serial, orderTime, status, timestamp, isCar);
         mItems.add(item);
     }
 
@@ -109,12 +116,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         public String mSerial;
         public String mOrderTime;
         public String mStatus;
+        long mTimeStamp;
         boolean isCar;
 
-        public OrderItem(String serial, String orderTime, String status, boolean isCar) {
+        public OrderItem(String serial, String orderTime, String status, long timestamp, boolean isCar) {
             mSerial = serial;
             mOrderTime = orderTime;
             mStatus = status;
+            mTimeStamp = timestamp;
             this.isCar = isCar;
         }
     }
