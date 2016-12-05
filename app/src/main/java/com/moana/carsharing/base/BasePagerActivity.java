@@ -92,7 +92,7 @@ public abstract class BasePagerActivity extends AppCompatActivity implements Vie
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_base_pager, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getArguments().getInt(ARG_SECTION_NUMBER));
+            textView.setText("Section: " + getArguments().getInt(ARG_SECTION_NUMBER));
             return rootView;
         }
     }

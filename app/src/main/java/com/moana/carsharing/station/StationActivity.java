@@ -179,13 +179,13 @@ public class StationActivity extends BroadcastActivity implements AppBarLayout.O
 
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-        if (mFragment != null && mFragment.isResumed())
-            if (mCollapsingBar.getHeight() + verticalOffset < 2 * ViewCompat.getMinimumHeight(mCollapsingBar)) {
+       /*if (mFragment != null && mFragment.isResumed())
+            if (verticalOffset >= 0) {
                 mFragment.enableRefresh(false);
             } else {
                 mFragment.enableRefresh(true);
             }
-
+ */
         float percentage = (1 - (float) Math.abs(verticalOffset) / appBarLayout.getTotalScrollRange());
         mLabel.setAlpha(percentage);
         mFab.setAlpha(percentage);
