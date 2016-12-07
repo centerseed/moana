@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 import com.moana.carsharing.R;
@@ -64,7 +65,11 @@ public class CarAdapter extends AbstractRecyclerCursorAdapter {
                 public void onClick(View view) {
                     if (mListener != null) {
                         Cursor cursor = (Cursor) getItem(getAdapterPosition());
-                        mListener.onCarClick(cursor);
+                        int charge = cursor.getInt(cursor.getColumnIndex(StationProvider.FIELD_CAR_CHARGE));
+                        if (charge > 30)
+                            mListener.onCarClick(cursor);
+                        else
+                            Toast.makeText(m_context, "該車輛電量過低，暫時不開放租借", Toast.LENGTH_LONG).show();
                     }
                 }
             });

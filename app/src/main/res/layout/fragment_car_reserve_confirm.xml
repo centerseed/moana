@@ -43,7 +43,8 @@
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:layout_margin="8dp"
-                    app:srcCompat="@mipmap/ic_directions_car_white_24dp" />
+                    app:srcCompat="@mipmap/ic_directions_car_white_24dp"
+                    android:tint="@android:color/black"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -58,24 +59,44 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="kget-e6"
+                        android:text="凱勝-e6"
                         android:textSize="18sp" />
 
-                    <TextView
-                        android:id="@+id/car_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="ID: 9527"
-                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginRight="12dp"
-                    app:srcCompat="@drawable/cast_ic_notification_play" />
+                    app:srcCompat="@drawable/cast_ic_notification_play"
+                    android:tint="@android:color/black"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="8dp"
+                    android:text="@string/title_car_id"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/car_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="8dp"
+                    android:text="RP111-01"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -127,7 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="24dp"
-    >
+                android:layout_marginTop="8dp">
 
                 <TextView
                     android:layout_width="80dp"

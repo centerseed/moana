@@ -21,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -52,6 +53,7 @@ public class MainActivity extends ContentActivity
     LinearLayout mMember;
     TextView mOrder;
     TextView mAddMember;
+    Button mLogout;
 
     String mSearchText = "";
 
@@ -142,6 +144,15 @@ public class MainActivity extends ContentActivity
             }
         });
 
+        mLogout = (Button) headerView.findViewById(R.id.logout);
+        mLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AccountUtils.with(getApplicationContext()).clearAcconut();
+                onResume();
+            }
+        });
+
         // TODO: for demo purpose
         OrderSyncer.with(this).getOrderList();
     }
@@ -214,11 +225,6 @@ public class MainActivity extends ContentActivity
         if (id == R.id.nav_map) {
             f = new MapsFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_main, f).commit();
-        }
-
-        if (id == R.id.nav_logout) {
-            AccountUtils.with(this).clearAcconut();
-            onResume();
         }
 
         if (id == R.id.nav_car_intro) {

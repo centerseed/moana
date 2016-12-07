@@ -60,6 +60,7 @@
     <string name="title_no_day">0 Day</string>
     <string name="title_fee_confirm">Confirm</string>
     <string name="title_fee_type">Fee Type</string>
+    <string name="title_car_id">Car ID</string>
     <string name="title_car_type">Car Type</string>
     <string name="title_rent_site">Rent Site</string>
     <string name="title_return_site">Return Site</string>

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">路得寶租賃</string>
-    <string name="title_activity_maps">首頁</string>
+    <string name="title_activity_maps">站點</string>
 
     <string name="action_settings">設定</string>
     <string name="action_search">搜尋</string>
@@ -57,6 +57,7 @@
     <string name="title_no_day">0 天</string>
     <string name="title_fee_confirm">確認</string>
     <string name="title_fee_type">計費方式</string>
+    <string name="title_car_id">車輛編號</string>
     <string name="title_car_type">車型</string>
     <string name="title_rent_site">租賃點</string>
     <string name="title_return_site">還車點</string>

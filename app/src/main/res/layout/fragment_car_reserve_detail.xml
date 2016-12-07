@@ -266,7 +266,6 @@
                         android:background="@android:color/white">
 
                         <TextView
-                            android:id="@+id/order_status"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -280,6 +279,7 @@
                             app:srcCompat="@color/colorAlphaDark" />
 
                         <TextView
+                            android:id="@+id/order_status"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"

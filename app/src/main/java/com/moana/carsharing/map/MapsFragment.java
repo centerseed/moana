@@ -213,7 +213,10 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
             }
         });
 
-        moveToDummyPosition();
+        if (mFunction == ConstantDef.FUNC_RENT)
+            moveToKH();
+        else
+            moveToDummyPosition();
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
@@ -253,10 +256,12 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
 
         if (ConstantDef.ACTION_SHOW_PLUG_POSITION.equals(action)) {
             mFunction = ConstantDef.FUNC_PLUG;
+            moveToDummyPosition();
         }
 
         if (ConstantDef.ACTION_SHOW_RENT_POSITION.equals(action)) {
             mFunction = ConstantDef.FUNC_RENT;
+            moveToKH();
         }
 
         if (ConstantDef.ACTION_SHOW_PLUG_POSITION.equals(action) || ConstantDef.ACTION_SHOW_RENT_POSITION.equals(action)) {
@@ -268,6 +273,13 @@ public class MapsFragment extends PositionFragment implements OnMapReadyCallback
         if (ConstantDef.ACTION_START_NAVIGATION.equals(action) && mCurrPosition != null) {
             startNavigate(mCurrPosition, mReserveMarker.getPosition());
         }
+    }
+
+    private void moveToKH() {
+        Location location = new Location("");
+        location.setLatitude(22.6381039);
+        location.setLongitude(120.3032935);
+        moveCamera(11.23f, location);
     }
 
     private void moveToDummyPosition() {

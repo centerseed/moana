@@ -13,9 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.moana.carsharing.CarIntroduceActivity;
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.BaseSettingFragment;
 import com.moana.carsharing.base.ConstantDef;
@@ -31,6 +33,7 @@ public class CarReserveConfirmFragment extends BaseSettingFragment {
     TextView mName;
     TextView mTimeStart;
     TextView mTimeEnd;
+    ImageView mMore;
     CarReserveInfo mInfo;
     Spinner mFee;
 
@@ -74,6 +77,15 @@ public class CarReserveConfirmFragment extends BaseSettingFragment {
                 Uri uri = StationProvider.getProviderUri(getString(R.string.auth_provider_plug), StationProvider.TABLE_CAR_ORDER);
                 getContext().getContentResolver().delete(uri, StationProvider.FIELD_CAR_ORDER_SERIAL + "=?", new String[]{getArguments().getString(ConstantDef.ARG_ORDER_TEMP_SERIAL)});
                 if (mListener != null) mListener.toBackFragment();
+            }
+        });
+
+        mMore = (ImageView) view.findViewById(R.id.more);
+        mMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), CarIntroduceActivity.class);
+                getActivity().startActivity(intent);
             }
         });
     }

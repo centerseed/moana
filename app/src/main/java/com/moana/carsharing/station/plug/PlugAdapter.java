@@ -2,16 +2,14 @@ package com.moana.carsharing.station.plug;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.moana.carsharing.R;
-import com.moana.carsharing.SiteSearchResultAdapter;
 import com.moana.carsharing.base.AbstractRecyclerCursorAdapter;
 import com.moana.carsharing.station.StationProvider;
 
@@ -61,7 +59,10 @@ public class PlugAdapter extends AbstractRecyclerCursorAdapter {
                 public void onClick(View view) {
                     if (mListener != null) {
                         Cursor cursor = (Cursor) getItem(getAdapterPosition());
-                        mListener.onPlugClick(cursor);
+                        if (cursor.getInt(cursor.getColumnIndex(StationProvider.FIELD_PLUG_STATUS)) == StationProvider.PLUG_STATUS_AVAILABLE)
+                            mListener.onPlugClick(cursor);
+                        else
+                            Toast.makeText(m_context, "該充電樁暫時無法使用", Toast.LENGTH_LONG).show();
                     }
                 }
             });
