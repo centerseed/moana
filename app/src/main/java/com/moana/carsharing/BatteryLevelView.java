@@ -59,11 +59,13 @@ public class BatteryLevelView extends FrameLayout {
                 BatteryLevelView.this.getViewTreeObserver().removeGlobalOnLayoutListener(this);
 
                 mHintW = BatteryLevelView.this.getMeasuredWidth();
-                int hintW = (int) ((mHintW - 120) / 10);
+                int paddingR = (int) (mHintW * 0.07);
+                int margin = (int) (mHintW * 0.005);
+                int hintW = (int) ((mHintW * 0.74) / 10);
                 final LinearLayout linearLayout = new LinearLayout(getContext());
                 linearLayout.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                 linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-                linearLayout.setPadding(25, 5, 25, 5);
+                linearLayout.setPadding(0, 5, paddingR, 5);
 
                 View dummy = new View(getContext());
                 LinearLayout.LayoutParams dummyParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -73,7 +75,7 @@ public class BatteryLevelView extends FrameLayout {
                 linearLayout.addView(dummy);
                 for (int i = 0; i < mLevel; i++) {
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(hintW, ViewGroup.LayoutParams.MATCH_PARENT);
-                    params.setMargins(2, (int) (7.5 * mDpi), 3, (int) (7.5 * mDpi));
+                    params.setMargins(margin, (int) (7.5 * mDpi), margin, (int) (7.5 * mDpi));
                     ImageView hint = new ImageView(getContext());
                     if (mLevel > 2)
                         hint.setImageResource(R.mipmap.bk_carinfo_battery_green);
