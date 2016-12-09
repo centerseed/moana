@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
+import com.moana.carsharing.BatteryLevelView;
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.AbstractRecyclerCursorAdapter;
 import com.moana.carsharing.station.StationProvider;
@@ -36,9 +37,7 @@ public class CarAdapter extends AbstractRecyclerCursorAdapter {
         CarViewHolder holder = (CarViewHolder) viewHolder;
         int charge = cursor.getInt(cursor.getColumnIndex(StationProvider.FIELD_CAR_CHARGE));
         holder.car.setColorFilter(getProgressColor(m_context, charge));
-        holder.progressBar.invalidate();
-        holder.progressBar.setProgress(charge);
-        holder.progressBar.setProgressColor(getProgressColor(m_context, charge));
+        holder.mBattery.setLevel(charge);
 
         holder.charge.setText(charge + "%");
         holder.charge.setTextColor(getProgressColor(m_context, charge));
@@ -53,13 +52,13 @@ public class CarAdapter extends AbstractRecyclerCursorAdapter {
     public class CarViewHolder extends RecyclerView.ViewHolder {
         TextView charge;
         ImageView car;
-        IconRoundCornerProgressBar progressBar;
+        BatteryLevelView mBattery;
 
         public CarViewHolder(View itemView) {
             super(itemView);
             charge = (TextView) itemView.findViewById(R.id.charge);
             car = (ImageView) itemView.findViewById(R.id.car);
-            progressBar = (IconRoundCornerProgressBar) itemView.findViewById(R.id.progressBar);
+            mBattery = (BatteryLevelView) itemView.findViewById(R.id.battery);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

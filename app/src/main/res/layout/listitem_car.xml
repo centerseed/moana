@@ -22,25 +22,11 @@
             android:layout_marginLeft="8dp"
             app:srcCompat="@mipmap/icon_carinfo_no_green" />
 
-        <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="0dp"
-            android:layout_height="28dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="8dp"
-            android:layout_weight="3"
-            app:rcBackgroundColor="@color/colorLightGrey"
-            app:rcBackgroundPadding="2dp"
-            app:rcIconBackgroundColor="@color/colorAlphaDark"
-            app:rcIconPadding="2dp"
-            app:rcIconSize="24dp"
-            app:rcIconSrc="@mipmap/ic_flash_on_white_24dp"
-            app:rcMax="100"
-            app:rcProgress="100"
-            app:rcProgressColor="@color/colorPlugAvailable"
-            app:rcRadius="6dp"
-            app:rcReverse="true" />
-
+        <com.moana.carsharing.BatteryLevelView
+            android:id="@+id/battery"
+            android:layout_gravity="center_vertical"
+            android:layout_width="160dp"
+            android:layout_height="44dp"></com.moana.carsharing.BatteryLevelView>
         <TextView
             android:id="@+id/charge"
             android:layout_width="0dp"

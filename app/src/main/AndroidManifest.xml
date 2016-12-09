@@ -67,9 +67,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
-        <activity android:name=".CarIntroduceActivity" />
+        <activity android:name=".CarIntroduceActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".order.OrderListActivity"
-            android:parentActivityName="com.moana.carsharing.MainActivity"/>
+            android:parentActivityName="com.moana.carsharing.MainActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".order.OrderDetailActivity"
             android:parentActivityName="com.moana.carsharing.order.OrderListActivity"></activity>

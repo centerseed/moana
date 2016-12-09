@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
+import com.moana.carsharing.BatteryLevelView;
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.BaseSettingFragment;
 import com.moana.carsharing.base.ConstantDef;
@@ -41,6 +42,7 @@ public class CarReserveOrderFragment extends BaseSettingFragment {
     Spinner mHour;
     CircularProgressBar mProgressBar;
     TextView mCharge;
+    BatteryLevelView mBattery;
 
     ContentValues mOrder;
     public static CarReserveOrderFragment newInstance(Bundle bundle) {
@@ -66,7 +68,10 @@ public class CarReserveOrderFragment extends BaseSettingFragment {
 
         mCharge = (TextView) view.findViewById(R.id.charge);
         mCharge.setText(charge + "%");
-        mCharge.setTextColor(CarAdapter.getProgressColor(getContext(), charge));
+
+        mBattery = (BatteryLevelView) view.findViewById(R.id.battery);
+        mBattery.setLevel(charge);
+        // mCharge.setTextColor(CarAdapter.getProgressColor(getContext(), charge));
 
         mRemainTime = (TextView) view.findViewById(R.id.remain_time);
         if (charge != 100)

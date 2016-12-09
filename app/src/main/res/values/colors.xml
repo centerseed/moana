@@ -10,7 +10,7 @@
     <color name="colorAlphaWhite">#EDffffff</color>
     <color name="colorAlphaDark">#88333333</color>
 
-    <color name="colorPlugAvailable">#78d251</color>
+    <color name="colorPlugAvailable">#66d137</color>
     <color name="colorInUsage">#d62626</color>
     <color name="colorFail">#ffffff</color>
 
