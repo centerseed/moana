@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -23,8 +22,6 @@ import com.moana.carsharing.base.BaseSettingFragment;
 import com.moana.carsharing.base.ConstantDef;
 import com.moana.carsharing.order.OrderDetailActivity;
 import com.moana.carsharing.station.StationProvider;
-import com.moana.carsharing.station.plug.PlugReserveActivity;
-import com.moana.carsharing.station.plug.PlugReserveInfo;
 import com.moana.carsharing.utils.TimeUtils;
 
 public class CarReserveConfirmFragment extends BaseSettingFragment {

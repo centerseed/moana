@@ -28,9 +28,10 @@ import android.widget.TextView;
 
 import com.moana.carsharing.account.AccountUtils;
 import com.moana.carsharing.account.LoginActivity;
-import com.moana.carsharing.account.personal.RegisterPersonalActivity;
+import com.moana.carsharing.account.personal.RegisterPersonalActivitySetting;
 import com.moana.carsharing.base.ConstantDef;
 import com.moana.carsharing.base.ContentActivity;
+import com.moana.carsharing.guideline.GuideActivity;
 import com.moana.carsharing.map.MapsFragment;
 import com.moana.carsharing.order.OrderListActivity;
 import com.moana.carsharing.order.OrderSyncer;
@@ -129,7 +130,7 @@ public class MainActivity extends ContentActivity
         mAddMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, RegisterPersonalActivity.class);
+                Intent i = new Intent(MainActivity.this, RegisterPersonalActivitySetting.class);
                 startActivity(i);
             }
         });
@@ -229,6 +230,11 @@ public class MainActivity extends ContentActivity
 
         if (id == R.id.nav_car_intro) {
             Intent intent = new Intent(this, CarIntroduceActivity.class);
+            startActivity(intent);
+        }
+
+        if (id == R.id.nav_rent_guildline) {
+            Intent intent = new Intent(this, GuideActivity.class);
             startActivity(intent);
         }
 

@@ -4,18 +4,12 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
-import android.view.View;
 
 import com.moana.carsharing.R;
 import com.moana.carsharing.base.AbstractRecyclerCursorAdapter;
 import com.moana.carsharing.base.ConstantDef;
 import com.moana.carsharing.base.RecyclerFragment;
 import com.moana.carsharing.station.StationProvider;
-import com.moana.carsharing.station.plug.PlugAdapter;
-import com.moana.carsharing.station.plug.PlugReserveActivity;
-import com.moana.carsharing.station.plug.PlugSyncer;
 
 public class CarListFragment extends RecyclerFragment implements CarAdapter.ResultAdapterListener {
 
@@ -64,7 +58,7 @@ public class CarListFragment extends RecyclerFragment implements CarAdapter.Resu
 
     @Override
     public void onCarClick(Cursor cursor) {
-        Intent intent = new Intent(getActivity(), CarReserveActivity.class);
+        Intent intent = new Intent(getActivity(), CarReserveActivitySetting.class);
         intent.putExtra(ConstantDef.ARG_SITE_NAME, getArguments().getString(ConstantDef.ARG_SITE_NAME));
         intent.putExtra(ConstantDef.ARG_SITE_ADDRESS, getArguments().getString(ConstantDef.ARG_SITE_ADDRESS));
         intent.putExtra(ConstantDef.ARG_CHARGE, cursor.getInt(cursor.getColumnIndex(StationProvider.FIELD_CAR_CHARGE)));

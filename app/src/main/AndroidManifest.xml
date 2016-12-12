@@ -53,28 +53,34 @@
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".account.personal.RegisterPersonalActivity"
+            android:name=".account.personal.RegisterPersonalActivitySetting"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".station.plug.PlugReserveActivity"
+            android:name=".station.plug.PlugReserveActivitySetting"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
-            android:name=".station.car.CarReserveActivity"
+            android:name=".station.car.CarReserveActivitySetting"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
-        <activity android:name=".CarIntroduceActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".order.OrderListActivity"
-            android:parentActivityName="com.moana.carsharing.MainActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".CarIntroduceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".order.OrderListActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".order.OrderDetailActivity"
-            android:parentActivityName="com.moana.carsharing.order.OrderListActivity"></activity>
+            android:parentActivityName=".order.OrderListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".guideline.RentCarGuideActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".LogSenderActivity"
             android:launchMode="singleInstance"
@@ -85,6 +91,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".guideline.GuideActivity" />
+        <activity android:name=".guideline.SimpleGuideActivity"></activity>
     </application>
 
 </manifest>

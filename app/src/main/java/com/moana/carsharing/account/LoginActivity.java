@@ -3,7 +3,6 @@ package com.moana.carsharing.account;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,7 +19,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.moana.carsharing.R;
-import com.moana.carsharing.account.personal.RegisterPersonalActivity;
 
 public class LoginActivity extends AppCompatActivity {
 

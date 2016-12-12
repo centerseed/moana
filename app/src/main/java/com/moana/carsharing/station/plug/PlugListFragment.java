@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.moana.carsharing.R;
@@ -14,10 +13,6 @@ import com.moana.carsharing.base.AbstractRecyclerCursorAdapter;
 import com.moana.carsharing.base.ConstantDef;
 import com.moana.carsharing.base.RecyclerFragment;
 import com.moana.carsharing.station.StationProvider;
-import com.moana.carsharing.station.car.CarListFragment;
-import com.moana.carsharing.station.car.CarSyncer;
-
-import static com.moana.carsharing.station.plug.PlugReserveActivity.*;
 
 public class PlugListFragment extends RecyclerFragment implements PlugAdapter.ResultAdapterListener {
 
@@ -58,7 +53,7 @@ public class PlugListFragment extends RecyclerFragment implements PlugAdapter.Re
 
     @Override
     public void onPlugClick(Cursor cursor) {
-        Intent intent = new Intent(getActivity(), PlugReserveActivity.class);
+        Intent intent = new Intent(getActivity(), PlugReserveActivitySetting.class);
         intent.putExtra(ConstantDef.ARG_SITE_NAME, getArguments().getString(ConstantDef.ARG_SITE_NAME));
         intent.putExtra(ConstantDef.ARG_SITE_ADDRESS, getArguments().getString(ConstantDef.ARG_SITE_ADDRESS));
         intent.putExtra(ConstantDef.ARG_INT, cursor.getInt(cursor.getColumnIndex(StationProvider.FIELD_ID)));

@@ -15,25 +15,27 @@ import android.widget.TextView;
 
 import com.moana.carsharing.R;
 
-public abstract class BasePagerActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, BaseSettingFragment.OnFragmentInteractionListener {
+import github.chenupt.springindicator.SpringIndicator;
+
+public abstract class BasePagerActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
     protected ViewPager mViewPager;
+    SpringIndicator mIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base_pager);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(getActivityTitle());
 
         FragmentPagerAdapter sectionsPagerAdapter = getPagerAdapter(getSupportFragmentManager());
 
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(sectionsPagerAdapter);
         mViewPager.addOnPageChangeListener(this);
-        String title = getActivityTitle() + "(1/" + mViewPager.getAdapter().getCount() + ")";
-        getSupportActionBar().setTitle(title);
+
+        mIndicator = (SpringIndicator) findViewById(R.id.indicator);
+        mIndicator.setViewPager(mViewPager);
     }
 
     @Override
@@ -53,57 +55,10 @@ public abstract class BasePagerActivity extends AppCompatActivity implements Vie
 
     @Override
     public void onPageSelected(int position) {
-        String title = getActivityTitle() + "(" + ++position + "/" + mViewPager.getAdapter().getCount() + ")";
-        getSupportActionBar().setTitle(title);
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {
-    }
-
-    @Override
-    public void toBackFragment() {
-        if (mViewPager.getCurrentItem() > 0)
-            mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1, true);
-    }
-
-    @Override
-    public void toNextFragment() {
-        if (mViewPager.getCurrentItem() < mViewPager.getAdapter().getCount() - 1)
-            mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1, true);
-    }
-
-    public static class PlaceholderFragment extends Fragment {
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        public PlaceholderFragment() {
-        }
-
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_base_pager, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText("Section: " + getArguments().getInt(ARG_SECTION_NUMBER));
-            return rootView;
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (mViewPager.getCurrentItem() == 0) {
-            finish();
-        } else {
-            mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1, true);
-        }
     }
 
     protected abstract FragmentPagerAdapter getPagerAdapter(FragmentManager fm);
