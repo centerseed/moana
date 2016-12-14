@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="guide_add_member" translatable="false">(1)資料建檔：事前使用手機或電腦至平台進行個資建檔(個資，付款方式) \n
+                                                            (2)指紋建檔：於智慧機台進行指紋建檔 \n
+                                                            (3)證件建檔：將身分證，汽車駕照放置於智慧機台掃瞄建檔</string>
+
+    <string name="guide_reserve_car" translatable="false">(1)於電腦，手機上預約車輛，或是到租賃站的智慧機台預約車輛 \n(2)輸入租借日期，使用時數，借車租賃站 \n(3)預約完成</string>
+
+    <string name="guide_rent_car" translatable="false">(1)至智慧機台選取訂單，認證身份 \n(2)身份認證完成，取得車輛感應卡 \n(3)使用感應卡解鎖，啟動車輛</string>
+
+    <string name="guide_return_car" translatable="false">(1)將車輛開至停車位內，以感應卡上鎖車門 \n(2)將充電槍插上充電孔，啟動送電 \n(3)至智慧機台輸入車牌，完成付款</string>
+
+    <string name="guide_use_plug" translatable="false">(1)將車輛停妥，接上充電槍\n(2)在智慧機台指紋認證身份\n(3)輸入充電樁號碼，開始充電</string>
+
+</resources>
