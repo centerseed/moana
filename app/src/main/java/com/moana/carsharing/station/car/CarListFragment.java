@@ -58,7 +58,7 @@ public class CarListFragment extends RecyclerFragment implements CarAdapter.Resu
 
     @Override
     public void onCarClick(Cursor cursor) {
-        Intent intent = new Intent(getActivity(), CarReserveActivitySetting.class);
+        Intent intent = new Intent(getActivity(), CarReserveActivity.class);
         intent.putExtra(ConstantDef.ARG_SITE_NAME, getArguments().getString(ConstantDef.ARG_SITE_NAME));
         intent.putExtra(ConstantDef.ARG_SITE_ADDRESS, getArguments().getString(ConstantDef.ARG_SITE_ADDRESS));
         intent.putExtra(ConstantDef.ARG_CHARGE, cursor.getInt(cursor.getColumnIndex(StationProvider.FIELD_CAR_CHARGE)));

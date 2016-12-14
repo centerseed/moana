@@ -10,7 +10,7 @@ import com.moana.carsharing.account.RegisterSection1Fragment;
 import com.moana.carsharing.account.RegisterSection2Fragment;
 import com.moana.carsharing.base.BaseSettingPagerActivity;
 
-public class RegisterPersonalActivitySetting extends BaseSettingPagerActivity {
+public class RegisterPersonalActivity extends BaseSettingPagerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

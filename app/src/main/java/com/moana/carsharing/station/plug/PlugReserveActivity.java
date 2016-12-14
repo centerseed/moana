@@ -1,4 +1,4 @@
-package com.moana.carsharing.station.car;
+package com.moana.carsharing.station.plug;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,18 +11,20 @@ import com.moana.carsharing.base.BaseSettingPagerActivity;
 import com.moana.carsharing.base.ConstantDef;
 import com.moana.carsharing.station.StationProvider;
 
-public class CarReserveActivitySetting extends BaseSettingPagerActivity {
-    String mSiteName;
-    String mSiteAddress;
+public class PlugReserveActivity extends BaseSettingPagerActivity {
+
+    String mName;
+    String mAddress;
     String mOrderTmpSerial;
-    int mCharge;
+    int mPlugID;
+    public PlugReserveInfo mInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSiteName = getIntent().getStringExtra(ConstantDef.ARG_SITE_NAME);
-        mSiteAddress = getIntent().getStringExtra(ConstantDef.ARG_SITE_ADDRESS);
-        mCharge = getIntent().getIntExtra(ConstantDef.ARG_CHARGE, 0);
+        mName = getIntent().getStringExtra(ConstantDef.ARG_SITE_NAME);
+        mAddress = getIntent().getStringExtra(ConstantDef.ARG_SITE_ADDRESS);
+        mPlugID = getIntent().getIntExtra(ConstantDef.ARG_INT, 0);
 
         mOrderTmpSerial = System.currentTimeMillis() + "";
     }
@@ -31,9 +33,10 @@ public class CarReserveActivitySetting extends BaseSettingPagerActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        Uri uri = StationProvider.getProviderUri(getString(R.string.auth_provider_plug), StationProvider.TABLE_CAR_ORDER);
-        getContentResolver().delete(uri, StationProvider.FIELD_CAR_ORDER_SERIAL + "=?", new String[]{mOrderTmpSerial});
+        Uri uri = StationProvider.getProviderUri(getString(R.string.auth_provider_plug), StationProvider.TABLE_PLUG_ORDER);
+        getContentResolver().delete(uri, StationProvider.FIELD_PLUG_ORDER_SERIAL + "=?", new String[]{mOrderTmpSerial});
     }
+
     @Override
     protected FragmentPagerAdapter getPagerAdapter(FragmentManager fm) {
         return new SectionsPagerAdapter(fm);
@@ -41,12 +44,7 @@ public class CarReserveActivitySetting extends BaseSettingPagerActivity {
 
     @Override
     protected String getActivityTitle() {
-        return getResources().getString(R.string.title_rent_reserve);
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-        super.onPageSelected(position);
+        return getResources().getString(R.string.title_plug_reserve);
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -59,21 +57,21 @@ public class CarReserveActivitySetting extends BaseSettingPagerActivity {
         public Fragment getItem(int position) {
             Bundle bundle = new Bundle();
             bundle.putString(ConstantDef.ARG_ORDER_TEMP_SERIAL, mOrderTmpSerial);
-            bundle.putString(ConstantDef.ARG_SITE_NAME, mSiteName);
-            bundle.putString(ConstantDef.ARG_SITE_ADDRESS, mSiteAddress);
-            bundle.putInt(ConstantDef.ARG_CHARGE, mCharge);
+            bundle.putInt(ConstantDef.ARG_INT, mPlugID);
+            bundle.putString(ConstantDef.ARG_SITE_NAME, mName);
+            bundle.putString(ConstantDef.ARG_SITE_ADDRESS, mAddress);
             switch (position) {
                 case 0:
-                    return CarReserveOrderFragment.newInstance(bundle);
+                    return PlugReserveOrderFragment.newInstance(bundle);
                 case 1:
-                    return CarReserveConfirmFragment.newInstance(bundle);
+                    return PlugReserveDetailFragment.newInstance(bundle);
             }
-            return CarReserveDetailFragment.newInstance(bundle);
+            return null;
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return 1;
         }
 
         @Override
